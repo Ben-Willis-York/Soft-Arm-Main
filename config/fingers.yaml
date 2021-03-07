@@ -1,0 +1,146 @@
+type: "effort_controllers/JointGroupPositionController"
+joints:
+ - palm_LTseg1_joint
+ - LTseg1_LTseg2_joint
+ - LTseg2_LTseg3_joint
+ - LTseg3_LTseg4_joint
+ - LTseg4_LTseg5_joint
+ - LTseg5_LTseg6_joint
+ - LTseg6_LTseg7_joint
+ - LTseg7_LTseg8_joint
+ - LTseg8_LTseg9_joint
+ - LTseg9_LTseg10_joint
+ - LTseg10_LTseg11_joint
+ - LTseg11_LTseg12_joint
+ - palm_RTseg1_joint
+ - RTseg1_RTseg2_joint
+ - RTseg2_RTseg3_joint
+ - RTseg3_RTseg4_joint
+ - RTseg4_RTseg5_joint
+ - RTseg5_RTseg6_joint
+ - RTseg6_RTseg7_joint
+ - RTseg7_RTseg8_joint
+ - RTseg8_RTseg9_joint
+ - RTseg9_RTseg10_joint
+ - RTseg10_RTseg11_joint
+ - RTseg11_RTseg12_joint
+ - palm_LBseg1_joint
+ - LBseg1_LBseg2_joint
+ - LBseg2_LBseg3_joint
+ - LBseg3_LBseg4_joint
+ - LBseg4_LBseg5_joint
+ - LBseg5_LBseg6_joint
+ - LBseg6_LBseg7_joint
+ - LBseg7_LBseg8_joint
+ - LBseg8_LBseg9_joint
+ - LBseg9_LBseg10_joint
+ - LBseg10_LBseg11_joint
+ - LBseg11_LBseg12_joint
+ - palm_RBseg1_joint
+ - RBseg1_RBseg2_joint
+ - RBseg2_RBseg3_joint
+ - RBseg3_RBseg4_joint
+ - RBseg4_RBseg5_joint
+ - RBseg5_RBseg6_joint
+ - RBseg6_RBseg7_joint
+ - RBseg7_RBseg8_joint
+ - RBseg8_RBseg9_joint
+ - RBseg9_RBseg10_joint
+ - RBseg10_RBseg11_joint
+ - RBseg11_RBseg12_joint
+palm_LTseg1_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg1_LTseg2_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg2_LTseg3_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg3_LTseg4_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg4_LTseg5_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg5_LTseg6_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg6_LTseg7_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg7_LTseg8_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg8_LTseg9_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg9_LTseg10_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg10_LTseg11_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LTseg11_LTseg12_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+palm_RTseg1_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg1_RTseg2_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg2_RTseg3_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg3_RTseg4_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg4_RTseg5_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg5_RTseg6_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg6_RTseg7_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg7_RTseg8_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg8_RTseg9_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg9_RTseg10_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg10_RTseg11_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RTseg11_RTseg12_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+palm_LBseg1_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg1_LBseg2_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg2_LBseg3_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg3_LBseg4_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg4_LBseg5_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg5_LBseg6_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg6_LBseg7_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg7_LBseg8_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg8_LBseg9_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg9_LBseg10_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg10_LBseg11_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+LBseg11_LBseg12_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+palm_RBseg1_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg1_RBseg2_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg2_RBseg3_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg3_RBseg4_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg4_RBseg5_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg5_RBseg6_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg6_RBseg7_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg7_RBseg8_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg8_RBseg9_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg9_RBseg10_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg10_RBseg11_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}
+RBseg11_RBseg12_joint:
+ pid: {p: 0.20, i: 0.10, d: 0.0}

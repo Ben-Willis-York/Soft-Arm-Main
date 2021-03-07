@@ -1,0 +1,16 @@
+type: "effort_controllers/JointGroupPositionController"
+joints:
+ - anchor
+ - base_link
+ - Joint2
+ - Joint3
+
+anchor:
+  pid: {p : 200.0, i : 10.0, d : 0.0}
+base_link:
+  pid: {p : 60.0, i : 20.0, d : 2.0}
+Joint2:
+  pid: {p : 50.0, i : 30.0, d : 0.0}
+Joint3:
+  pid: {p : 30.0, i : 6.0, d : 1.0}
+

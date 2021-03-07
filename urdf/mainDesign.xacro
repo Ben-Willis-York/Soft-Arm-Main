@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<robot name="Design" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--<xacro:include filename="$(find gripper_description)/urdf/materials.xacro" />-->
+<!--<xacro:include filename="$(find gripper_description)/urdf/Design.gazebo" />-->
+
+<xacro:include filename="$(find main_description)/urdf/macros2.xacro" />
+<xacro:include filename="$(find main_description)/urdf/arm.xacro" />
+
+<xacro:property name="PI" value="3.14159"/>
+
+<link name="world"/>
+
+<link name="palm">
+	<visual>
+		<geometry>
+			<box size="0.15 0.05 0.02"/>
+		</geometry>
+	</visual>
+	<inertial>
+		<mass value="0.1"/>
+		<inertia ixx="0.001" ixy="0.001" ixz="0.001" iyy="0.001" iyz="0.001" izz="0.001"/>
+	</inertial>
+	<collision>
+		<geometry>
+			<box size="0.15 0.05 0.02"/>
+		</geometry>
+		</collision>
+</link>
+
+<gazebo reference="palm">
+	<mu1>2000</mu1>
+	<mu2>2000</mu2>
+	<selfCollide>true</selfCollide>
+	<gravity>true</gravity>
+</gazebo>
+
+<joint name="palm_world_joint" type="fixed">
+    <parent link="arm3_1"/>
+    <child link="palm"/>
+	<origin xyz="0.1 0 0" rpy="0 ${3.14/2} 0"/>
+</joint>
+
+<finger name="LT">
+	<segments value="12"/> 
+	<base name="palm"/>
+	<length value="0.15"/>
+	<origin xyz="0.05 0.05 0" rpy="-0 0 0"/>
+</finger>
+
+<finger name="RT">
+	<segments value="12"/> 
+	<base name="palm"/>
+	<length value="0.15"/>
+	<origin xyz="0.05 -0.05 0" rpy="-0 0 3.14159"/>
+</finger>
+
+<finger name="LB">
+	<segments value="12"/> 
+	<base name="palm"/>
+	<length value="0.15"/>
+	<origin xyz="-0.05 0.05 0" rpy="-0 0 0"/>
+</finger>
+
+<finger name="RB">
+	<segments value="12"/> 
+	<base name="palm"/>
+	<length value="0.15"/>
+	<origin xyz="-0.05 -0.05 0" rpy="-0 0 3.14159"/>
+</finger>
+
+
+
+
+
+<gazebo>
+  <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+	<robotNamespace></robotNamespace>
+  </plugin>
+</gazebo>
+
+</robot>
+
+
+
+

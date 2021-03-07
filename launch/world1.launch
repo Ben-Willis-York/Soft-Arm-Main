@@ -1,0 +1,53 @@
+<launch>
+
+
+
+  <arg name="modelmain" default="$(find main_description)urdf/output.xacro"/>
+
+  <param command="$(find xacro)/xacro $(find main_description)/urdf/output.xacro" name="robot_description"/>
+  <node args="-param robot_description -urdf  -J base_link -0.5 -model Design" name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value = "$(find main_description)/worlds/world6.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+    <arg name="verbose" value="true"/>
+  </include>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+
+   
+
+  <rosparam command="load"
+  file= "config/joints.yaml"
+  ns="joint_state_controller" />
+
+  <rosparam command="load"
+  file="config/fingers.yaml"
+  ns="hand_controller" />
+
+  <rosparam command="load"
+  file = "config/arm.yaml"
+  ns="arm_controller" />
+
+  <node pkg="main_description" name="tester" type="tester.py"/>
+
+  <!--<node pkg="prototyping_description" name="controller" type="controller.py"/>-->
+
+  <!--<node pkg="prototyping_description" name="hand_control_script" type="hand_control_script.py" />-->
+    
+  <!--<node pkg="prototyping_description" name="arm_control_script" type="arm_control_script.py" />-->
+
+  <node pkg="main_description" name="description_logger" type="description_logger.py"/>
+
+  <node name="base_joint_controller_spawner" pkg="controller_manager" type="spawner"
+  args="joint_state_controller
+        hand_controller
+        arm_controller
+              --shutdown-timeout 3" />
+
+</launch>
