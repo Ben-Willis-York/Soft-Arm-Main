@@ -1,0 +1,117 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Design">
+
+
+
+
+<xacro:include filename="$(find main_description)/urdf/macros2.xacro" />
+<xacro:include filename="$(find main_description)/urdf/arm.xacro" />
+
+<xacro:property name="PI" value="3.14159" />
+
+<link name="world" />
+
+<link name="palm">
+	<visual>
+		<geometry>
+			<box size="0.15 0.05 0.02" />
+		</geometry>
+	</visual>
+	<inertial>
+		<mass value="0.1" />
+		<inertia ixx="0.001" ixy="0.001" ixz="0.001" iyy="0.001" iyz="0.001" izz="0.001" />
+	</inertial>
+	<collision>
+		<geometry>
+			<box size="0.15 0.05 0.02" />
+		</geometry>
+		</collision>
+</link>
+
+<gazebo reference="palm">
+	<mu1>2000</mu1>
+	<mu2>2000</mu2>
+	<selfCollide>true</selfCollide>
+	<gravity>true</gravity>
+</gazebo>
+
+<joint name="palm_world_joint" type="fixed">
+    <parent link="arm3_1" />
+    <child link="palm" />
+	<origin rpy="0 ${3.14/2} 0" xyz="0.1 0 0" />
+</joint>
+
+<gazebo>
+  <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+	<robotNamespace />
+  </plugin>
+</gazebo>
+
+
+ <!--  MACROS FOR FINGER: LT-->
+
+<xacro:seg name="LTseg1" length="0.0125"/>
+<xacro:seg_joint_offset seg1="palm" seg2="LTseg1" length="0.0125" offset="0.05 0.05 0" rotation="-0 0 0" />
+<xacro:seg_trans seg1="palm" seg2="LTseg1"/>
+<xacro:segment name="LTseg2" parent="LTseg1" length="0.0125"/>
+<xacro:segment name="LTseg3" parent="LTseg2" length="0.0125"/>
+<xacro:segment name="LTseg4" parent="LTseg3" length="0.0125"/>
+<xacro:segment name="LTseg5" parent="LTseg4" length="0.0125"/>
+<xacro:segment name="LTseg6" parent="LTseg5" length="0.0125"/>
+<xacro:segment name="LTseg7" parent="LTseg6" length="0.0125"/>
+<xacro:segment name="LTseg8" parent="LTseg7" length="0.0125"/>
+<xacro:segment name="LTseg9" parent="LTseg8" length="0.0125"/>
+<xacro:segment name="LTseg10" parent="LTseg9" length="0.0125"/>
+<xacro:segment name="LTseg11" parent="LTseg10" length="0.0125"/>
+<xacro:segment name="LTseg12" parent="LTseg11" length="0.0125"/>
+
+ <!--  MACROS FOR FINGER: RT-->
+
+<xacro:seg name="RTseg1" length="0.0125"/>
+<xacro:seg_joint_offset seg1="palm" seg2="RTseg1" length="0.0125" offset="0.05 -0.05 0" rotation="-0 0 3.14159" />
+<xacro:seg_trans seg1="palm" seg2="RTseg1"/>
+<xacro:segment name="RTseg2" parent="RTseg1" length="0.0125"/>
+<xacro:segment name="RTseg3" parent="RTseg2" length="0.0125"/>
+<xacro:segment name="RTseg4" parent="RTseg3" length="0.0125"/>
+<xacro:segment name="RTseg5" parent="RTseg4" length="0.0125"/>
+<xacro:segment name="RTseg6" parent="RTseg5" length="0.0125"/>
+<xacro:segment name="RTseg7" parent="RTseg6" length="0.0125"/>
+<xacro:segment name="RTseg8" parent="RTseg7" length="0.0125"/>
+<xacro:segment name="RTseg9" parent="RTseg8" length="0.0125"/>
+<xacro:segment name="RTseg10" parent="RTseg9" length="0.0125"/>
+<xacro:segment name="RTseg11" parent="RTseg10" length="0.0125"/>
+<xacro:segment name="RTseg12" parent="RTseg11" length="0.0125"/>
+
+ <!--  MACROS FOR FINGER: LB-->
+
+<xacro:seg name="LBseg1" length="0.0125"/>
+<xacro:seg_joint_offset seg1="palm" seg2="LBseg1" length="0.0125" offset="-0.05 0.05 0" rotation="-0 0 0" />
+<xacro:seg_trans seg1="palm" seg2="LBseg1"/>
+<xacro:segment name="LBseg2" parent="LBseg1" length="0.0125"/>
+<xacro:segment name="LBseg3" parent="LBseg2" length="0.0125"/>
+<xacro:segment name="LBseg4" parent="LBseg3" length="0.0125"/>
+<xacro:segment name="LBseg5" parent="LBseg4" length="0.0125"/>
+<xacro:segment name="LBseg6" parent="LBseg5" length="0.0125"/>
+<xacro:segment name="LBseg7" parent="LBseg6" length="0.0125"/>
+<xacro:segment name="LBseg8" parent="LBseg7" length="0.0125"/>
+<xacro:segment name="LBseg9" parent="LBseg8" length="0.0125"/>
+<xacro:segment name="LBseg10" parent="LBseg9" length="0.0125"/>
+<xacro:segment name="LBseg11" parent="LBseg10" length="0.0125"/>
+<xacro:segment name="LBseg12" parent="LBseg11" length="0.0125"/>
+
+ <!--  MACROS FOR FINGER: RB-->
+
+<xacro:seg name="RBseg1" length="0.0125"/>
+<xacro:seg_joint_offset seg1="palm" seg2="RBseg1" length="0.0125" offset="-0.05 -0.05 0" rotation="-0 0 3.14159" />
+<xacro:seg_trans seg1="palm" seg2="RBseg1"/>
+<xacro:segment name="RBseg2" parent="RBseg1" length="0.0125"/>
+<xacro:segment name="RBseg3" parent="RBseg2" length="0.0125"/>
+<xacro:segment name="RBseg4" parent="RBseg3" length="0.0125"/>
+<xacro:segment name="RBseg5" parent="RBseg4" length="0.0125"/>
+<xacro:segment name="RBseg6" parent="RBseg5" length="0.0125"/>
+<xacro:segment name="RBseg7" parent="RBseg6" length="0.0125"/>
+<xacro:segment name="RBseg8" parent="RBseg7" length="0.0125"/>
+<xacro:segment name="RBseg9" parent="RBseg8" length="0.0125"/>
+<xacro:segment name="RBseg10" parent="RBseg9" length="0.0125"/>
+<xacro:segment name="RBseg11" parent="RBseg10" length="0.0125"/>
+<xacro:segment name="RBseg12" parent="RBseg11" length="0.0125"/>
+</robot>
