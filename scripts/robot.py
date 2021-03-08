@@ -343,7 +343,7 @@ class Robot(object):
             state.append(degrees(j.angle))
         return state
 
-    def getPathToTarget(self, worldTarget, steps = 70):
+    def getPathToTarget(self, worldTarget, steps =30):
         startAngles = [degrees(self.baseAngle)]
         
         for j in self.joints:

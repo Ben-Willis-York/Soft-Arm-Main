@@ -228,14 +228,15 @@ class ControlPanel():
         print(e.x, e.y)
         horizontal, vertical = self.horizontalDisplay.pixelToCoord(e.x, e.y)
 
-        x = sin(self.solver.baseAngle)*horizontal
-        y = cos(self.solver.baseAngle)*horizontal
-        z = vertical
+
 
         angles = self.controller.getJointStatesWithBase()
-
-        #self.controller.setSetpoints(newAngles)
         self.solver.setJointState(angles)
+
+        x = cos(self.solver.baseAngle)*horizontal
+        y = sin(self.solver.baseAngle)*horizontal
+        z = vertical
+
         path = self.solver.getPathToTarget(VectorClass.Vector3(x, y, z))
         self.controller.setPath(path)
 
@@ -243,9 +244,7 @@ class ControlPanel():
         newAngles = self.solver.solveForTarget2(VectorClass.Vector3(x, y, z))
         self.controlBars.setTargets(newAngles)
         end = self.solver.links[-1].end
-        x = end.x * cos(self.solver.baseAngle)
-        y = end.x * sin(self.solver.baseAngle)
-        z = end.y
+        
         self.controlBars.setCoords(x, y, z)
 
     def setup(self):
@@ -255,7 +254,11 @@ class ControlPanel():
 
         self.controller = controller.Controller()
         self.controller.update()
-        angles = self.controller.getJointStates()
+        angles = self.controller.getJointStatesWithBase()
+        angles = [0, 90, -90, 0]
+
+        self.controller.setSetpointsWithBase(angles)
+        self.controller.setSetpointsWithBase(angles)
 
         self.horizontalDisplay = display.Display(self.root, h=300,w=600, pos=VectorClass.Vector2(0,400))
         self.horizontalDisplay.canvas.bind("<Button-1>", self.goToClick)
@@ -274,6 +277,8 @@ class ControlPanel():
             self.solver.addLink(l[0], l[1])
             self.preview.addLink(l[0], l[1])
         self.solver.setEffectorAngle(0)
+
+        #self.controller.setJointStatesWithBase([0,0,0,0])
         
 
     def grasp(self):

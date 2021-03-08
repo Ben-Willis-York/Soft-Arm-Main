@@ -31,7 +31,7 @@ class Controller():
         self.setJointStates([0,0,0,0])
 
     def setGrasp(self, strength):
-        val = float(strength)
+        val = float(strength)/20
         
         fingerNames = rospy.get_param("/hand_controller/joints")
         jointNum = len(fingerNames)
