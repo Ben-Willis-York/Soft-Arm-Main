@@ -23,8 +23,6 @@ def generateYAML(name, jointNames):
     file.write(string)
     file.close()
 
-
-
 def convertFingers(root):
 
     addedLines = []

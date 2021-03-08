@@ -68,8 +68,9 @@ class Robot(object):
         return self.joints[index].angle
 
     def setJointState(self, angles):
-        for a in range(len(angles)):
-            self.joints[a].setAngle(angles[a])
+        self.baseAngle = angles[0]
+        for a in range(len(angles)-1):
+            self.joints[a].setAngle(angles[a+1])
         self.update()
 
     def setEffectorAngle(self, angle):
@@ -291,10 +292,12 @@ class Robot(object):
 
     def solveForTarget2(self, worldTarget):
         target = Vector2(Vector2(worldTarget.x, worldTarget.y).Mag(), worldTarget.z)  # TargetVector
-        self.baseAngle = asin(worldTarget.x/target.x)
-        originalAngles = []
+        
+
+        originalAngles = [self.baseAngle]
         for j in self.joints:
             originalAngles.append(degrees(j.angle))
+
 
         #Check its within limits
         if(self.isOutsideLimits(target)):
@@ -302,7 +305,7 @@ class Robot(object):
             print("Out of bounds")
             return originalAngles
 
-
+        self.baseAngle = atan2(worldTarget.y, worldTarget.x)
         effectorTarget = Vector2(target.x - self.links[-1].length * cos(self.effectorAngle),
                                  target.y - self.links[-1].length * sin(self.effectorAngle))  # EffectorTarget
 
@@ -330,21 +333,27 @@ class Robot(object):
 
         if (dist > 100):
             print("out of range")
-            for j in range(len(originalAngles)):
+            self.baseAngle = originalAngles[0]
+            for j in range(1,len(originalAngles)):
                 self.joints[j].setAngle(originalAngles[j])
             self.update()
 
-        state = []
+        state = [degrees(self.baseAngle)]
         for j in self.joints:
             state.append(degrees(j.angle))
         return state
 
-    def getPathToTarget(self, worldTarget, dis, steps = 70):
-        startAngles = []
+    def getPathToTarget(self, worldTarget, steps = 70):
+        startAngles = [degrees(self.baseAngle)]
+        
         for j in self.joints:
             startAngles.append(degrees(j.angle))
 
+        print(startAngles)
+
         endAngles = self.solveForTarget2(worldTarget)
+
+        print(endAngles)
 
         intervals = []
         path = []
@@ -360,10 +369,11 @@ class Robot(object):
             path.append(position)
 
         for i in range(len(path)):
-            self.joints[0].setAngle(radians(path[i][0]))
-            self.joints[1].setAngle(radians(path[i][1]))
+            self.baseAngle = path[i][0]
+            self.joints[0].setAngle(radians(path[i][1]))
+            self.joints[1].setAngle(radians(path[i][2]))
             self.update()
-            path[i][2] = degrees(self.effectorAngle - self.links[-2].angle)
+            path[i][-1] = degrees(self.effectorAngle - self.links[-2].angle)
 
         path.append(endAngles)
 

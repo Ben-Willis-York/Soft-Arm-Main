@@ -80,19 +80,19 @@ class CoordinateControls(object):
         self.axisLabels = []
 
         #Coord inputs
-        Label(self.root, text="X").place(x=position.x+35, y=position.y+180)
+        Label(self.root, text="X").place(x=position.x+35, y=position.y+240)
         self.entries.append(Entry(self.root, width=7))
-        self.entries[-1].place(x=position.x+20, y = position.y+200)
-        Label(self.root, text="Y").place(x=position.x+105, y=position.y+180)
+        self.entries[-1].place(x=position.x+20, y = position.y+260)
+        Label(self.root, text="Y").place(x=position.x+105, y=position.y+240)
         self.entries.append(Entry(self.root, width=7))
-        self.entries[-1].place(x=position.x+90, y=position.y+200)
-        Label(self.root, text="Z").place(x=position.x+185, y=position.y+180)
+        self.entries[-1].place(x=position.x+90, y=position.y+260)
+        Label(self.root, text="Z").place(x=position.x+185, y=position.y+240)
         self.entries.append(Entry(self.root, width=7))
-        self.entries[-1].place(x=position.x+170, y=position.y+200)
+        self.entries[-1].place(x=position.x+170, y=position.y+260)
 
         #Go button
         b = Button(self.root, text="Go", command=self.goToCoords)
-        b.place(x=position.x+220, y=position.y+200)
+        b.place(x=position.x+220, y=position.y+260)
 
         print(joints)
         for j in joints:
@@ -100,24 +100,33 @@ class CoordinateControls(object):
 
     def goToCoords(self):
         try:
-            c = self.coords[0].get()
+            c = self.entries[0].get()
             x = float(c)
         except:
             x = 0
         try:
-            y = float(self.coords[1].get())
+            y = float(self.entries[1].get())
         except:
             y = 0
         try:
-            z = float(self.coords[2].get())
+            z = float(self.entries[2].get())
         except:
             z = 0
 
-        angles = self.controller.getJointStates()
-        self.solver.setJointStates(angles)
-        newAngles = self.solver.solveForTarget2(Vector3(x, y, z))
-        self.controller.setSetpoints(newAngles)
-        self.controlBars.setTargets(newAngles)
+        print("Going to: ", x, y, z)
+
+        angles = self.controller.getJointStatesWithBase()
+
+        #self.controller.setSetpoints(newAngles)
+        self.solver.setJointState(angles)
+        path = self.solver.getPathToTarget(VectorClass.Vector3(x, y, z))
+        self.controller.setPath(path)
+
+        self.solver.setJointState(angles)
+        newAngles = self.solver.solveForTarget2(VectorClass.Vector3(x, y, z))
+        self.setTargets(newAngles)
+
+
 
 
     def addVisualiser(self, joint):
@@ -157,7 +166,7 @@ class CoordinateControls(object):
             self.targets[i] = self.lowers[i]
         elif(self.targets[i] > self.uppers[i]):
             self.targets[i] = self.uppers[i]
-        self.controller.setSetpoints(self.getTargets())
+        self.controller.setSetpointsWithBase(self.getTargets())
 
     def setTargets(self, angles):
         for i in range(len(angles)):
@@ -183,7 +192,7 @@ class CoordinateControls(object):
         self.entries[2].insert(0, str(round(z,1)))
 
     def update(self):
-        angles = self.controller.getJointStates()
+        angles = self.controller.getJointStatesWithBase()
         self.setValues(angles)
         for i in range(len(self.backgrounds)):
             self.backgrounds[i].delete(ALL)
@@ -202,7 +211,7 @@ class CoordinateControls(object):
 class ControlPanel():
     def __init__(self):
         self.root = Tk()
-        self.root.geometry("600x600")
+        self.root.geometry("600x800")
 
         self.solver = robot.Robot()
         self.preview = robot.Robot()
@@ -212,6 +221,9 @@ class ControlPanel():
         self.effectorControls = None
         self.controller = None
 
+        self.graspControl = None
+
+
     def goToClick(self, e):
         print(e.x, e.y)
         horizontal, vertical = self.horizontalDisplay.pixelToCoord(e.x, e.y)
@@ -220,26 +232,32 @@ class ControlPanel():
         y = cos(self.solver.baseAngle)*horizontal
         z = vertical
 
-        angles = self.controller.getJointStates()
+        angles = self.controller.getJointStatesWithBase()
 
         #self.controller.setSetpoints(newAngles)
         self.solver.setJointState(angles)
-        path = self.solver.getPathToTarget(VectorClass.Vector3(x, y, z), self.horizontalDisplay)
+        path = self.solver.getPathToTarget(VectorClass.Vector3(x, y, z))
         self.controller.setPath(path)
 
         self.solver.setJointState(angles)
         newAngles = self.solver.solveForTarget2(VectorClass.Vector3(x, y, z))
         self.controlBars.setTargets(newAngles)
+        end = self.solver.links[-1].end
+        x = end.x * cos(self.solver.baseAngle)
+        y = end.x * sin(self.solver.baseAngle)
+        z = end.y
+        self.controlBars.setCoords(x, y, z)
 
     def setup(self):
         links = self.GetLinks()
+        linksNoBase = links[1:]
         print("LINKS:", links)
 
         self.controller = controller.Controller()
         self.controller.update()
         angles = self.controller.getJointStates()
 
-        self.horizontalDisplay = display.Display(self.root, h=300,w=600, pos=VectorClass.Vector2(0,300))
+        self.horizontalDisplay = display.Display(self.root, h=300,w=600, pos=VectorClass.Vector2(0,400))
         self.horizontalDisplay.canvas.bind("<Button-1>", self.goToClick)
         self.horizontalDisplay.setScreenOrigin(0.25, 0.8)
 
@@ -249,11 +267,18 @@ class ControlPanel():
 
         self.angleControl = RadialDisplay(self.root, self.solver, VectorClass.Vector2(300,10))
 
-        for l in links:
+        self.graspControl = Scale(self.root, from_=-1, to=1, resolution=0.01, label = "Grasp", command = lambda x: self.controller.setGrasp(x))
+        self.graspControl.place(x=500, y=20)
+
+        for l in linksNoBase:
             self.solver.addLink(l[0], l[1])
             self.preview.addLink(l[0], l[1])
         self.solver.setEffectorAngle(0)
         
+
+    def grasp(self):
+        print("yo")
+
     def GetLinks(self):
         jointNames = rospy.get_param("/arm_controller/joints")
         robot = URDF.from_xml_string(rospy.get_param("/robot_description"))
@@ -327,7 +352,7 @@ class ControlPanel():
                 l1.length = trans.transform.translation.x * 1000
         links[-1].length = 65
 
-        links = links[2:]
+        links = links[1:]
 
         arr = []
         for l in links:
@@ -347,7 +372,7 @@ class ControlPanel():
         self.angleControl.update()
         self.horizontalDisplay.clear()
 
-        self.preview.setJointState(self.controller.getJointStates())
+        self.preview.setJointState(self.controller.getJointStatesWithBase())
         self.preview.update()
 
         self.solver.draw(self.horizontalDisplay)
