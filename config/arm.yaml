@@ -8,9 +8,9 @@ joints:
 anchor:
   pid: {p : 200.0, i : 10.0, d : 0.0}
 base_link:
-  pid: {p : 200.0, i : 1.0, d : 2.0}
+  pid: {p : 400.0, i : 200.0, d : 0.0}
 Joint2:
-  pid: {p : 100.0, i : 1.0, d : 0.0}
+  pid: {p : 200.0, i : 200.0, d : 0.0}
 Joint3:
-  pid: {p : 50.0, i : 1.0, d : 1.0}
+  pid: {p : 200.0, i : 100.0, d : 0.0}
 

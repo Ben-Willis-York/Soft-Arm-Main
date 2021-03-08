@@ -76,30 +76,6 @@ class Robot(object):
         self.effectorAngle = angle
         self.getLimits()
 
-    def calcBs(self, dis):
-        total = 0
-        for l in range(len(self.links)-1, 0, -1):
-            print(total)
-            self.links[l].B = total
-            total += self.links[l].length
-
-        for j in self.joints:
-            j.setAngle(j.min)
-        self.update()
-
-        print("Mins")
-
-        end = Vector2(self.links[-1].end.x, self.links[-1].end.y)
-        for l in range(len(self.links)-1, 0, -1):
-            link = self.links[l]
-            vec = end - Vector2(link.end.x, link.end.y)
-            link.minB = vec.Mag()
-            print(link.minB)
-
-        for j in self.joints:
-            j.setAngle(0)
-        self.update()
-
     def update(self):
         totalAngle = 0
         for j in self.joints:
@@ -363,6 +339,38 @@ class Robot(object):
             state.append(degrees(j.angle))
         return state
 
+    def getPathToTarget(self, worldTarget, dis, steps = 70):
+        startAngles = []
+        for j in self.joints:
+            startAngles.append(degrees(j.angle))
+
+        endAngles = self.solveForTarget2(worldTarget)
+
+        intervals = []
+        path = []
+        path.append(startAngles)
+        
+        for a in range(len(startAngles)):
+            intervals.append((endAngles[a]-startAngles[a])/steps) 
+
+        for i in range(1,steps):
+            position = []
+            for a in range(len(startAngles)):
+                position.append(startAngles[a]+intervals[a]*i)
+            path.append(position)
+
+        for i in range(len(path)):
+            self.joints[0].setAngle(radians(path[i][0]))
+            self.joints[1].setAngle(radians(path[i][1]))
+            self.update()
+            path[i][2] = degrees(self.effectorAngle - self.links[-2].angle)
+
+        path.append(endAngles)
+
+        return path
+
+
+    '''
     def solveForTarget(self, worldTarget):
         #baseAngle = tan(worldTarget.x / worldTarget.y)
         target = Vector2(Vector2(worldTarget.x, worldTarget.y).Mag(), worldTarget.z)  # TargetVector
@@ -492,14 +500,14 @@ class Robot(object):
             self.update()
 
             #time.sleep(0.01)
-            '''
-            display.clear()
-            self.draw(display)
-            display.drawCircle(effectorTarget.x, effectorTarget.y, 10)
-            display.display()
+            
+            #display.clear()
+            #self.draw(display)
+            #display.drawCircle(effectorTarget.x, effectorTarget.y, 10)
+            #display.display()
 
-            print(difference, dist)
-            '''
+            #print(difference, dist)
+            
         if(dist > tolerance):
             print("out of range")
             for j in range(len(originalAngles)):
@@ -616,24 +624,24 @@ class Robot(object):
                 joint.angle += -theta
                 self.update()
 
-            '''
-            elif(a2+b2-c2 > 0 and a != 0 and b != 0):
+            
+            # elif(a2+b2-c2 > 0 and a != 0 and b != 0):
 
-                print("beyond")
-                phiB = acos((a2 + c2 - b2) / (2 * a * c))
-                phiC = acos((a2 + b2 - c2) / (2 * a * b))
-                betaI = theta - phiB
-                betaT = pi - phiC
+            #     print("beyond")
+            #     phiB = acos((a2 + c2 - b2) / (2 * a * c))
+            #     phiC = acos((a2 + b2 - c2) / (2 * a * b))
+            #     betaI = theta - phiB
+            #     betaT = pi - phiC
 
-                if(betaT > omegaI):
-                    phiB = phiB-radians(10)
-                else:
-                    phiB = phiB+radians(10)
+            #     if(betaT > omegaI):
+            #         phiB = phiB-radians(10)
+            #     else:
+            #         phiB = phiB+radians(10)
 
-                betaI = theta + phiB
-                joint.angle += betaI
-            self.update()
-            '''
+            #     betaI = theta + phiB
+            #     joint.angle += betaI
+            # self.update()    
+    '''
 
     def drawArm(self, dis, fill="black"):
         for l in self.links:

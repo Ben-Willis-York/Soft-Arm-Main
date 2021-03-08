@@ -222,9 +222,13 @@ class ControlPanel():
 
         angles = self.controller.getJointStates()
 
+        #self.controller.setSetpoints(newAngles)
+        self.solver.setJointState(angles)
+        path = self.solver.getPathToTarget(VectorClass.Vector3(x, y, z), self.horizontalDisplay)
+        self.controller.setPath(path)
+
         self.solver.setJointState(angles)
         newAngles = self.solver.solveForTarget2(VectorClass.Vector3(x, y, z))
-        self.controller.setSetpoints(newAngles)
         self.controlBars.setTargets(newAngles)
 
     def setup(self):

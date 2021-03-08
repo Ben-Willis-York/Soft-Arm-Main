@@ -17,16 +17,22 @@ class Controller():
         self.names = []
         self.setpoints = []
         self.currentSetpoints = []
+        self.path = []
 
         self.state = []
 
-        self.speed = 4
+        self.speed = [3,3,3]
 
         self.names = rospy.get_param("/arm_controller/joints")
         for n in self.names:
             self.setpoints.append(0)
             self.currentSetpoints.append(0)
         
+    def setPath(self, path):
+        #self.path = path
+        self.setpoints = path[0]
+        self.path = path[1:]
+
     def setJointStates(self, angles):
         pub = rospy.Publisher("arm_controller/command", Float64MultiArray, queue_size=10)
         armNames = rospy.get_param("/arm_controller/joints")
@@ -47,8 +53,6 @@ class Controller():
         for a in range(len(angles)):
             self.currentSetpoints[a] = angles[a]
 
-        
-
     def getJointStates(self):
         return self.state
 
@@ -58,7 +62,6 @@ class Controller():
     def setSetpoints(self, angles):
         for a in range(len(angles)):
             self.setpoints[a] = angles[a]
-
 
     def update(self):
         armNames = rospy.get_param("/arm_controller/joints")
@@ -70,19 +73,36 @@ class Controller():
                     arr.append(-data.position[d])
         arr = arr[1:]
         self.state = arr
-
+        '''
         nextStep = []
         for a in range(len(self.state)):
             nextStep.append(0)
             difference = self.currentSetpoints[a] - self.setpoints[a]
             #print(difference)
-            if(difference > 2):
-                nextStep[a] = self.currentSetpoints[a] - self.speed
-            elif(difference < -2):
-                nextStep[a] = self.currentSetpoints[a] + self.speed
+            if(difference > 5):
+                nextStep[a] = self.currentSetpoints[a] - self.speed[a]
+            elif(difference < -5):
+                nextStep[a] = self.currentSetpoints[a] + self.speed[a]
             else:
                 nextStep[a] = self.setpoints[a]
         self.setJointStates(nextStep)
+        '''
+
+        ready = True
+        for a in range(len(self.state)):
+            difference = abs(degrees(self.state[a]) - self.setpoints[a])
+            if(difference >= 20):
+                print("NOT READY:", degrees(self.state[a]), self.setpoints[a])
+                ready = False
+        if(ready):
+            if(len(self.path) > 0):
+                self.setSetpoints(self.path[0])
+                self.setJointStates(self.setpoints)
+                self.path = self.path[1:]
+            else:
+                pass
+                #nextStep[a] = self.setpoints[a]
+
                 
 
 
