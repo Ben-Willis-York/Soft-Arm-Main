@@ -29,7 +29,7 @@ class Joint(object):
             val = self.min
             pass
         if(val > self.max):
-            #print("Too high")
+            #print("Too high, max = ", self.max, " val = ", val)
             val = self.max
             pass
 
@@ -56,6 +56,7 @@ class Robot(object):
         self.baseAngle = 0
 
     def addLink(self, length, limits=[-150,150]):
+        print(length, limits)
         self.links.append(Link(length, self.links[-1]))
         self.joints.append(Joint(self.links[-2], self.links[-1], limits=limits))
         self.totalLength += length
