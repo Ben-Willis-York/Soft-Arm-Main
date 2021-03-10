@@ -73,10 +73,10 @@
   <!--  LINKS  -->
   <joint name="anchor" type="continuous">
     <axis xyz="0 0 1"/>
-    <origin rpy="0 0 0" xyz="0.0 0.0 0.02"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.1"/>
     <parent link="world"/>
     <child link="base_link"/>
-    <limit effort="2000" lower="0" upper="6.28318" velocity="1"/>
+    <limit effort="1000" lower="0" upper="6.28318" velocity="1"/>
     <dynamics damping="0.01" friction="0"/>
   </joint>
   <link name="base_link">
@@ -207,7 +207,7 @@
     <parent link="base_link"/>
     <child link="arm1_1"/>
     <axis xyz="0.0 1.0 0.0"/>
-    <limit effort="2000" lower="-3.04" upper="-0.1" velocity="0.01"/>
+    <limit effort="1000" lower="-3.04" upper="-0.1" velocity="0.01"/>
     <dynamics damping="0" friction="0.0"/>
   </joint>
   <joint name="Joint2" type="revolute">
@@ -215,7 +215,7 @@
     <parent link="arm1_1"/>
     <child link="arm2_1"/>
     <axis xyz="0.0 1.0 0.0"/>
-    <limit effort="2000" lower="-1.570796" upper="1.570796" velocity="0.01"/>
+    <limit effort="1000" lower="-1.570796" upper="1.570796" velocity="0.01"/>
     <dynamics damping="0" friction="0.0"/>
   </joint>
   <joint name="Joint3" type="revolute">
@@ -223,7 +223,7 @@
     <parent link="arm2_1"/>
     <child link="arm3_1"/>
     <axis xyz="0.0 1.0 0.0"/>
-    <limit effort="2000" lower="-1.570796" upper="1.570796" velocity="0.01"/>
+    <limit effort="1000" lower="-1.570796" upper="1.570796" velocity="0.01"/>
     <dynamics damping="0" friction="0.0"/>
   </joint>
   <!--
@@ -312,6 +312,7 @@
   <joint name="palm_LTseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <!--<dynamics damping="0.05" friction="0.0"/>-->
     <origin rpy="-0 0 0" xyz="0.05 0.05 0"/>
     <parent link="palm"/>
     <child link="LTseg1"/>
@@ -368,7 +369,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg1"/>
     <child link="LTseg2"/>
   </joint>
@@ -427,7 +428,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg2"/>
     <child link="LTseg3"/>
   </joint>
@@ -486,7 +487,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg3"/>
     <child link="LTseg4"/>
   </joint>
@@ -545,7 +546,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg4"/>
     <child link="LTseg5"/>
   </joint>
@@ -604,7 +605,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg5"/>
     <child link="LTseg6"/>
   </joint>
@@ -663,7 +664,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg6"/>
     <child link="LTseg7"/>
   </joint>
@@ -722,7 +723,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg7"/>
     <child link="LTseg8"/>
   </joint>
@@ -781,7 +782,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg8"/>
     <child link="LTseg9"/>
   </joint>
@@ -840,7 +841,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg9"/>
     <child link="LTseg10"/>
   </joint>
@@ -899,7 +900,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg10"/>
     <child link="LTseg11"/>
   </joint>
@@ -958,7 +959,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LTseg11"/>
     <child link="LTseg12"/>
   </joint>
@@ -1017,6 +1018,7 @@
   <joint name="palm_RTseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <!--<dynamics damping="0.05" friction="0.0"/>-->
     <origin rpy="-0 0 3.14159" xyz="0.05 -0.05 0"/>
     <parent link="palm"/>
     <child link="RTseg1"/>
@@ -1073,7 +1075,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg1"/>
     <child link="RTseg2"/>
   </joint>
@@ -1132,7 +1134,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg2"/>
     <child link="RTseg3"/>
   </joint>
@@ -1191,7 +1193,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg3"/>
     <child link="RTseg4"/>
   </joint>
@@ -1250,7 +1252,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg4"/>
     <child link="RTseg5"/>
   </joint>
@@ -1309,7 +1311,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg5"/>
     <child link="RTseg6"/>
   </joint>
@@ -1368,7 +1370,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg6"/>
     <child link="RTseg7"/>
   </joint>
@@ -1427,7 +1429,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg7"/>
     <child link="RTseg8"/>
   </joint>
@@ -1486,7 +1488,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg8"/>
     <child link="RTseg9"/>
   </joint>
@@ -1545,7 +1547,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg9"/>
     <child link="RTseg10"/>
   </joint>
@@ -1604,7 +1606,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg10"/>
     <child link="RTseg11"/>
   </joint>
@@ -1663,7 +1665,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RTseg11"/>
     <child link="RTseg12"/>
   </joint>
@@ -1722,6 +1724,7 @@
   <joint name="palm_LBseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <!--<dynamics damping="0.05" friction="0.0"/>-->
     <origin rpy="-0 0 0" xyz="-0.05 0.05 0"/>
     <parent link="palm"/>
     <child link="LBseg1"/>
@@ -1778,7 +1781,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg1"/>
     <child link="LBseg2"/>
   </joint>
@@ -1837,7 +1840,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg2"/>
     <child link="LBseg3"/>
   </joint>
@@ -1896,7 +1899,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg3"/>
     <child link="LBseg4"/>
   </joint>
@@ -1955,7 +1958,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg4"/>
     <child link="LBseg5"/>
   </joint>
@@ -2014,7 +2017,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg5"/>
     <child link="LBseg6"/>
   </joint>
@@ -2073,7 +2076,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg6"/>
     <child link="LBseg7"/>
   </joint>
@@ -2132,7 +2135,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg7"/>
     <child link="LBseg8"/>
   </joint>
@@ -2191,7 +2194,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg8"/>
     <child link="LBseg9"/>
   </joint>
@@ -2250,7 +2253,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg9"/>
     <child link="LBseg10"/>
   </joint>
@@ -2309,7 +2312,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg10"/>
     <child link="LBseg11"/>
   </joint>
@@ -2368,7 +2371,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="LBseg11"/>
     <child link="LBseg12"/>
   </joint>
@@ -2427,6 +2430,7 @@
   <joint name="palm_RBseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <!--<dynamics damping="0.05" friction="0.0"/>-->
     <origin rpy="-0 0 3.14159" xyz="-0.05 -0.05 0"/>
     <parent link="palm"/>
     <child link="RBseg1"/>
@@ -2483,7 +2487,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg1"/>
     <child link="RBseg2"/>
   </joint>
@@ -2542,7 +2546,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg2"/>
     <child link="RBseg3"/>
   </joint>
@@ -2601,7 +2605,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg3"/>
     <child link="RBseg4"/>
   </joint>
@@ -2660,7 +2664,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg4"/>
     <child link="RBseg5"/>
   </joint>
@@ -2719,7 +2723,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg5"/>
     <child link="RBseg6"/>
   </joint>
@@ -2778,7 +2782,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg6"/>
     <child link="RBseg7"/>
   </joint>
@@ -2837,7 +2841,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg7"/>
     <child link="RBseg8"/>
   </joint>
@@ -2896,7 +2900,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg8"/>
     <child link="RBseg9"/>
   </joint>
@@ -2955,7 +2959,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg9"/>
     <child link="RBseg10"/>
   </joint>
@@ -3014,7 +3018,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg10"/>
     <child link="RBseg11"/>
   </joint>
@@ -3073,7 +3077,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
     <parent link="RBseg11"/>
     <child link="RBseg12"/>
   </joint>

@@ -98,8 +98,6 @@ if __name__ == '__main__':
                 joint = Joint(j.name)
                 joint.limits = [j.limit.lower, j.limit.upper]
 
-                
-
                 l1 = getLink(j.parent)
                 l2 = Link(j.child)
 

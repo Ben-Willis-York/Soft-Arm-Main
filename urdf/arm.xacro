@@ -9,7 +9,7 @@
 
 <!--  PROPERTIES  -->
 
-<xacro:property name="strength" value="2000"/>
+<xacro:property name="strength" value="1000"/>
 <xacro:property name="speed" value = "0.01"/>
 <xacro:property name="damping" value = "0"/>
 
@@ -19,7 +19,7 @@
 
 <joint name="anchor" type="continuous">
   <axis xyz="0 0 1"/>
-	<origin xyz="0.0 0.0 0.02" rpy="0 0 0" />
+	<origin xyz="0.0 0.0 0.1" rpy="0 0 0" />
 	<parent link="world"/>
 	<child link="base_link"/>
   <limit effort="${strength}" lower="0" upper="6.28318" velocity="1"/>

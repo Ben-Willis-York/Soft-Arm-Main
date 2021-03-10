@@ -12,7 +12,7 @@ path = os.path.dirname(os.path.dirname(__file__))
 
 
 def generateYAML(name, jointNames):
-    string = """type: "effort_controllers/JointGroupPositionController"\njoints:"""
+    string = """type: "effort_controllers/JointGroupEffortController"\njoints:"""
     for j in jointNames:
         string += "\n - " + j 
 
@@ -22,8 +22,6 @@ def generateYAML(name, jointNames):
     file = open(path+"/config/"+name+".yaml", "w")
     file.write(string)
     file.close()
-
-
 
 def convertFingers(root):
 

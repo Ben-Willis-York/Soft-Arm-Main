@@ -8,9 +8,9 @@ joints:
 anchor:
   pid: {p : 200.0, i : 10.0, d : 0.0}
 base_link:
-  pid: {p : 60.0, i : 20.0, d : 2.0}
+  pid: {p : 400.0, i : 150.0, d : 3.0, i_clamp_min : -1000, i_clamp_max : 1000}
 Joint2:
-  pid: {p : 50.0, i : 30.0, d : 0.0}
+  pid: {p : 200.0, i : 130.0, d : 2.0, i_clamp_min : -1000, i_clamp_max : 1000}
 Joint3:
-  pid: {p : 30.0, i : 6.0, d : 1.0}
+  pid: {p : 200.0, i : 100.0, d : 0.5, i_clamp_min : -1000, i_clamp_max : 1000}
 

@@ -1,4 +1,4 @@
-type: "effort_controllers/JointGroupPositionController"
+type: "effort_controllers/JointGroupEffortController"
 joints:
  - palm_LTseg1_joint
  - LTseg1_LTseg2_joint
