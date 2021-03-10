@@ -7,7 +7,7 @@ class Display(object):
         self.root = root
         self.root.minsize(width=w, height=h)
 
-        self.canvas = Canvas(self.root, height= h, width = w)
+        self.canvas = Canvas(self.root, height= h, width = w, bg = "dark grey")
         self.canvas.place(x=pos.x, y=pos.y)
 
         self.h = h

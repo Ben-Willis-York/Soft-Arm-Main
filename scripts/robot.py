@@ -55,8 +55,9 @@ class Robot(object):
 
         self.baseAngle = 0
 
+        self.target = Vector2(0,0)
+
     def addLink(self, length, limits=[-150,150]):
-        print(length, limits)
         self.links.append(Link(length, self.links[-1]))
         self.joints.append(Joint(self.links[-2], self.links[-1], limits=limits))
         self.totalLength += length
@@ -87,25 +88,9 @@ class Robot(object):
             l2.pos.x = l1.end.x
             l2.pos.y = l1.end.y
 
-            l2.end.x = l2.pos.x + (cos(totalAngle) * l2.length)
-            l2.end.y = l2.pos.y + (sin(totalAngle) * l2.length)
+            l2.end.x = l2.pos.x + (sin(totalAngle) * l2.length)
+            l2.end.y = l2.pos.y + (cos(totalAngle) * l2.length)
             l2.angle = atan2((l2.end - l2.pos).y, (l2.end - l2.pos).x)
-
-        '''
-        for i in range(1, len(self.links)):
-            l1 = self.links[i-1]
-            l2 = self.links[i]
-            j = self.joints[i-1]
-            totalAngle = l1.angle+j.angle
-
-            l2.pos.x = l1.end.x
-            l2.pos.y = l1.end.y
-
-            l2.end.x = l2.pos.x+(cos(totalAngle) * l2.length)
-            l2.end.y = l2.pos.y+(sin(totalAngle) * l2.length)
-            l2.angle = atan2((l2.end-l2.pos).y, (l2.end-l2.pos).x)
-            #l2.angle = totalAngle
-        '''
 
     def ccd(self, x, y, display):
         searchDepth = 50
@@ -279,7 +264,6 @@ class Robot(object):
         frac = (target.x-b1.x)/(b2.x-b1.x)
         maxY = b1.y + (b2.y-b1.y)*frac
 
-        print("Between:", minY, maxY)
 
         if(target.y < minY or target.y > maxY):
             return True
@@ -292,7 +276,7 @@ class Robot(object):
 
     def solveForTarget2(self, worldTarget):
         target = Vector2(Vector2(worldTarget.x, worldTarget.y).Mag(), worldTarget.z)  # TargetVector
-        
+        self.target = target
 
         originalAngles = [self.baseAngle]
         for j in self.joints:
@@ -305,9 +289,11 @@ class Robot(object):
             print("Out of bounds")
             return originalAngles
 
-        self.baseAngle = atan2(worldTarget.y, worldTarget.x)
+        self.baseAngle = -atan2(worldTarget.y, worldTarget.x)
         effectorTarget = Vector2(target.x - self.links[-1].length * cos(self.effectorAngle),
                                  target.y - self.links[-1].length * sin(self.effectorAngle))  # EffectorTarget
+
+        self.target = effectorTarget
 
         a = self.links[2].length
         c = self.links[1].length
@@ -318,14 +304,14 @@ class Robot(object):
         c2 = c*c
 
         A = acos((b2+c2-a2)/(2*b*c))
-        B = pi - acos((a2+c2-b2)/(2*a*c))
-        A += atan2(effectorTarget.y, effectorTarget.x)
+        B = acos((a2+c2-b2)/(2*a*c)) - pi
+        A = atan2(effectorTarget.x, effectorTarget.y) - A
 
         self.joints[0].setAngle(A)
         self.joints[1].setAngle(-B)
         self.update()
 
-        self.joints[2].setAngle(self.effectorAngle - self.links[-2].angle)
+        self.joints[2].setAngle(self.effectorAngle + self.links[-2].angle)
         self.update()
         end = self.links[2].end
         difference = effectorTarget - end
@@ -349,11 +335,7 @@ class Robot(object):
         for j in self.joints:
             startAngles.append(degrees(j.angle))
 
-        print(startAngles)
-
         endAngles = self.solveForTarget2(worldTarget)
-
-        print(endAngles)
 
         intervals = []
         path = []
@@ -373,7 +355,7 @@ class Robot(object):
             self.joints[0].setAngle(radians(path[i][1]))
             self.joints[1].setAngle(radians(path[i][2]))
             self.update()
-            path[i][-1] = degrees(self.effectorAngle - self.links[-2].angle)
+            path[i][-1] = degrees(self.effectorAngle + self.links[-2].angle)
 
         path.append(endAngles)
 
@@ -668,3 +650,4 @@ class Robot(object):
         for l in self.links:
             dis.drawLine(l.pos.x, l.pos.y, l.end.x, l.end.y)
         dis.drawCircle(self.links[-1].end.x, self.links[-1].end.y,10)
+        dis.drawCircle(self.target.x, self.target.y, 5, fill="red")

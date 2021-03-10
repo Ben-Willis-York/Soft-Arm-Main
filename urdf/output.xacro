@@ -34,10 +34,10 @@
 	<gravity>true</gravity>
 </gazebo>
 
-<joint name="palm_world_joint" type="fixed">
-    <parent link="arm3_1" />
+<joint name="palm_arm_joint" type="fixed">
+    <parent link="Link4_1" />
     <child link="palm" />
-	<origin rpy="0 ${3.14/2} 0" xyz="0.1 0 0" />
+	<origin rpy="0 0 0" xyz="0.0 0 0.12" />
 </joint>
 
 <gazebo>

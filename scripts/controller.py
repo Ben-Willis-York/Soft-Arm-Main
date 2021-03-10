@@ -30,7 +30,17 @@ class Controller():
             self.currentSetpoints.append(0)
             self.reached.append(False)
         
-        #self.setJointStatesWithBase([0,0,0,0])
+
+        
+        armNames = rospy.get_param("/arm_controller/joints")
+        data = rospy.wait_for_message("joint_states", JointState)
+        arr = []
+        for n in armNames:
+            for d in range(len(data.name)):
+                if(data.name[d] == n):
+                    arr.append(-data.position[d])
+                    
+        self.state = arr
 
     def setGrasp(self, strength):
         val = float(strength)/20
@@ -151,7 +161,7 @@ class Controller():
             for d in range(len(data.name)):
                 if(data.name[d] == n):
                     arr.append(-data.position[d])
-                    break
+                    
         self.state = arr
 
         self.updateSteps()

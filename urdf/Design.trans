@@ -3,68 +3,44 @@
 
 <xacro:property name="interface_type" value="Effort"/>
 
-<transmission name="anchor_tran">
+<transmission name="Rev1_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="anchor">
+  <joint name="Rev1">
     <hardwareInterface>hardware_interface/${interface_type}JointInterface</hardwareInterface>
   </joint>
-  <actuator name="anchor_actr">
+  <actuator name="Rev1_actr">
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="base_link_tran">
+<transmission name="Rev2_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="base_link">
+  <joint name="Rev2">
     <hardwareInterface>hardware_interface/${interface_type}JointInterface</hardwareInterface>
   </joint>
-  <actuator name="base_link_actr">
+  <actuator name="Rev2_actr">
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Joint2_tran">
+<transmission name="Rev3_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Joint2">
+  <joint name="Rev3">
     <hardwareInterface>hardware_interface/${interface_type}JointInterface</hardwareInterface>
   </joint>
-  <actuator name="Joint2_actr">
+  <actuator name="Rev3_actr">
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Joint3_tran">
+<transmission name="Rev4_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Joint3">
+  <joint name="Rev4">
     <hardwareInterface>hardware_interface/${interface_type}JointInterface</hardwareInterface>
   </joint>
-  <actuator name="Joint3_actr">
+  <actuator name="Rev4_actr">
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
-<!--
-<transmission name="Joint4_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Joint4">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="Joint4_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
-
-<transmission name="FingerSlider_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="FingerSlider">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="FingerSlider_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
--->
 
 </robot>

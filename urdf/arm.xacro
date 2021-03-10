@@ -15,7 +15,171 @@
 
 <xacro:property name="offset" value="-0.05"/>
 
-<!--  LINKS  -->
+<!-- LINKS  -->
+
+<!--<xacro:include filename="$(find design2_description)/urdf/materials.xacro" />-->
+<!--<xacro:include filename="$(find design2_description)/urdf/design2.trans" />-->
+<!--<xacro:include filename="$(find design2_description)/urdf/design2.gazebo" />-->
+
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-3.054172551678278e-15 2.5451437930652316e-17 0.009826233848161996"/>
+    <mass value="2.1038693653686527"/>
+    <inertia ixx="0.002498" ixy="0.0" ixz="-0.0" iyy="0.002498" iyz="0.0" izz="0.004751"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Link1_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-6.1328821587432384e-06 0.007231132282278709 0.010400791755463774"/>
+    <mass value="0.8688143187550561"/>
+    <inertia ixx="0.000613" ixy="0.0" ixz="0.0" iyy="0.000486" iyz="-8.3e-05" izz="0.000932"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.0 -0.0 -0.025"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/Link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.0 -0.0 -0.025"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/Link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Link2_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-1.4589717024326475e-07 0.009220625083884316 0.09374198522195988"/>
+    <mass value="0.6628237762897414"/>
+    <inertia ixx="0.002038" ixy="0.0" ixz="0.0" iyy="0.001955" iyz="-0.000356" izz="0.000168"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="2.1e-05 -0.004903 -0.05"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/Link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="2.1e-05 -0.004903 -0.05"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/Link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Link3_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="1.9618427109714154e-05 0.006527757535011174 0.07498286609368165"/>
+    <mass value="0.4910812167638009"/>
+    <inertia ixx="0.001039" ixy="-0.0" ixz="-0.0" iyy="0.001007" iyz="-0.000178" izz="8.5e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="2.1e-05 -0.004903 -0.2"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/Link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="2.1e-05 -0.004903 -0.2"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/Link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Link4_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-1.842082955655732e-07 -0.004999749873264598 0.032486936025046875"/>
+    <mass value="0.16819090005804693"/>
+    <inertia ixx="0.000103" ixy="0.0" ixz="0.0" iyy="0.00011" iyz="0.0" izz="1e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-1.2e-05 -0.004903 -0.325"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/Link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-1.2e-05 -0.004903 -0.325"/>
+    <geometry>
+      <mesh filename="package://main_description/meshes/Link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+
+
+<!--  JOINTS  -->
+
+<joint name="world_joint" type="fixed">
+  <axis xyz="0 0 1"/>
+	<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	<parent link="world"/>
+	<child link="base_link"/>
+</joint>
+
+
+
+<joint name="Rev1" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.025"/>
+  <parent link="base_link"/>
+  <child link="Link1_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit effort="${strength}" lower="0.0" upper="6.283185" velocity="${speed}"/>
+  <dynamics damping="${damping}" friction="0.0"/>
+</joint>
+
+<joint name="Rev2" type="revolute">
+  <origin rpy="0 0 0" xyz="-2.1e-05 0.004903 0.025"/>
+  <parent link="Link1_1"/>
+  <child link="Link2_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit effort="${strength}" lower="-1.396263" upper="1.396263" velocity="${speed}"/>
+  <dynamics damping="${damping}" friction="0.0"/>
+</joint>
+
+<joint name="Rev3" type="revolute">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.15"/>
+  <parent link="Link2_1"/>
+  <child link="Link3_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit effort="${strength}" lower="-2.792527" upper="2.792527" velocity="${speed}"/>
+  <dynamics damping="${damping}" friction="0.0"/>
+</joint>
+
+<joint name="Rev4" type="revolute">
+  <origin rpy="0 0 0" xyz="3.3e-05 0.0 0.125"/>
+  <parent link="Link3_1"/>
+  <child link="Link4_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+  <limit effort="${strength}" lower="-2.617994" upper="2.617994" velocity="${speed}"/>
+  <dynamics damping="${damping}" friction="0.0"/>
+</joint>
+
+</robot>
+
+
+<!-- 
+  LINKS
 
 <joint name="anchor" type="continuous">
   <axis xyz="0 0 1"/>
@@ -110,8 +274,6 @@
   </collision>
 </link>
 
-
-<!--
 <link name="HandBase_1">
   <inertial>
     <origin rpy="0 0 0" xyz="0.04972800754598111 -0.04414794632836559 -6.30526010986232e-08"/>
@@ -152,9 +314,7 @@
       <mesh filename="package://version1_description/meshes/Finger_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
-</link> -->
-
-<!--- JOINTS  -->
+</link>
 
 <joint name="base_link" type="revolute">
 
@@ -184,7 +344,6 @@
   <dynamics damping="${damping}" friction="0.0"/>
 </joint>
 
-<!--
 <joint name="Joint4" type="revolute">
   <origin rpy="0 0 0" xyz="0.065 -0.015 0.0"/>
   <parent link="arm3_1"/>
@@ -200,7 +359,8 @@
   <child link="Finger_1"/>
   <axis xyz="0.0 1.0 0.0"/>
   <limit effort="${strength}" lower="-0.085" upper="0.0" velocity="100"/>
-</joint> -->
+</joint> 
 
 
 </robot>
+-->
