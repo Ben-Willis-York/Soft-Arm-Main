@@ -390,7 +390,7 @@ class ControlPanel():
 if __name__ == '__main__':
     rospy.init_node('newController', anonymous=True)
     rospy.logerr("controller starting")
-    rate = rospy.Rate(50)
+    rate = rospy.Rate(100)
     panel = ControlPanel()
     panel.setup()
 

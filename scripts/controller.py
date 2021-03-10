@@ -20,15 +20,17 @@ class Controller():
         self.path = []
 
         self.state = []
+        self.reached = []
 
-        self.speed = [3,3,3]
+        self.speed = [1,1,1,1]
 
         self.names = rospy.get_param("/arm_controller/joints")
         for n in self.names:
             self.setpoints.append(0)
             self.currentSetpoints.append(0)
+            self.reached.append(False)
         
-        self.setJointStates([0,0,0,0])
+        #self.setJointStatesWithBase([0,0,0,0])
 
     def setGrasp(self, strength):
         val = float(strength)/20
@@ -89,7 +91,7 @@ class Controller():
 
         arr = arr[1:]
         for a in range(len(angles)):
-            self.currentSetpoints[a] = angles[a]
+            self.currentSetpoints[1+a] = angles[a]
 
     def getJointStatesWithBase(self):
         return self.state
@@ -106,12 +108,40 @@ class Controller():
     def setSetpointsWithBase(self, angles):
         for a in range(len(angles)):
             self.setpoints[a] = angles[a]
-        self.setJointStatesWithBase(self.setpoints)
+        #self.setJointStatesWithBase(self.setpoints)
 
     def setSetpoints(self, angles):
         for a in range(len(angles)):
             self.setpoints[1+a] = angles[a]
-        self.setJointStatesWithBase(self.setpoints)
+        #self.setJointStatesWithBase(self.setpoints)
+
+    def updateSteps(self):
+        nextState = []
+
+        for a in range(len(self.state)):
+            difference = self.currentSetpoints[a]-self.setpoints[a]
+            if(difference < -2):
+                nextState.append(self.currentSetpoints[a] + self.speed[a])
+                self.reached[a] = False
+            elif(difference > 2):
+                nextState.append(self.currentSetpoints[a] - self.speed[a])
+                self.reached[a] = False
+            else:
+                nextState.append(self.setpoints[a])
+                self.reached[a] = True
+        self.setJointStatesWithBase(nextState)
+
+        ready = True
+        for r in self.reached:
+            if(r != True):
+                ready = False
+        
+        if(ready and len(self.path) > 0):
+            self.setSetpointsWithBase(self.path[0])
+            print("Setting setpoints to: ", self.path[0])
+            self.path = self.path[1:]
+            for r  in self.reached:
+                r = False
 
     def update(self):
         armNames = rospy.get_param("/arm_controller/joints")
@@ -123,6 +153,8 @@ class Controller():
                     arr.append(-data.position[d])
                     break
         self.state = arr
+
+        self.updateSteps()
         '''
         nextStep = []
         for a in range(len(self.state)):
@@ -136,8 +168,8 @@ class Controller():
             else:
                 nextStep[a] = self.setpoints[a]
         self.setJointStates(nextStep)
-        '''
-
+        
+        
         ready = True
         for a in range(len(self.state)):
            
@@ -153,8 +185,8 @@ class Controller():
             else:
                 pass
                 #nextStep[a] = self.setpoints[a]
-
-                
+        '''
+        
 
 
 
