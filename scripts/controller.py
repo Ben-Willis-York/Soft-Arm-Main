@@ -22,7 +22,7 @@ class Controller():
         self.state = []
         self.reached = []
 
-        self.speed = [1,1,1,1]
+        self.speed = [0.01,0.01,0.01,0.01]
 
         self.names = rospy.get_param("/arm_controller/joints")
         for n in self.names:
@@ -148,7 +148,6 @@ class Controller():
         
         if(ready and len(self.path) > 0):
             self.setSetpointsWithBase(self.path[0])
-            print("Setting setpoints to: ", self.path[0])
             self.path = self.path[1:]
             for r  in self.reached:
                 r = False

@@ -289,7 +289,7 @@ class Robot(object):
             print("Out of bounds")
             return originalAngles
 
-        self.baseAngle = -atan2(worldTarget.y, worldTarget.x)
+        self.baseAngle = atan2(worldTarget.y, worldTarget.x)
         effectorTarget = Vector2(target.x - self.links[-1].length * cos(self.effectorAngle),
                                  target.y - self.links[-1].length * sin(self.effectorAngle))  # EffectorTarget
 
@@ -311,7 +311,7 @@ class Robot(object):
         self.joints[1].setAngle(-B)
         self.update()
 
-        self.joints[2].setAngle(self.effectorAngle + self.links[-2].angle)
+        self.joints[2].setAngle(-(self.effectorAngle - self.links[-2].angle))
         self.update()
         end = self.links[2].end
         difference = effectorTarget - end
@@ -329,35 +329,65 @@ class Robot(object):
             state.append(degrees(j.angle))
         return state
 
-    def getPathToTarget(self, worldTarget, steps = 50):
-        startAngles = [degrees(self.baseAngle)]
-        
-        for j in self.joints:
-            startAngles.append(degrees(j.angle))
+    def getPathToTarget(self, worldTarget, steps = 70):
 
-        endAngles = self.solveForTarget2(worldTarget)
+        self.update()
 
-        intervals = []
+        startPos = self.links[-1].end
+        p1 = Vector3(startPos.x*cos(self.baseAngle), startPos.x*sin(self.baseAngle), startPos.y)
+
+        p2 = Vector3(100*cos(self.baseAngle), 100*sin(self.baseAngle), 450)
+
+        targetAngle = atan2(worldTarget.y, worldTarget.x)
+        mag = Vector2(p2.x, p2.y).Mag()
+
+        p3 = Vector3(mag*cos(targetAngle), mag*sin(targetAngle), 450)
+
+        p4 = worldTarget
+
+        self.points = []
+
+        t1 = degrees(targetAngle) % 360
+        t2 = degrees(self.baseAngle) % 360 
+
+        if( abs(t1-t2) > 10):
+            points = [p1,p2,p3,p4]
+        else:
+            points = [p1, p4]
+
+        #points = [p1,p2,p3,p4]
+
         path = []
-        path.append(startAngles)
-        
-        for a in range(len(startAngles)):
-            intervals.append((endAngles[a]-startAngles[a])/steps) 
 
-        for i in range(1,steps):
-            position = []
+        for p in range(len(points)-1):
+            #startAngles = [degrees(self.baseAngle)]
+            #for j in self.joints:
+            #    startAngles.append(degrees(j.angle))
+            #path.append(startAngles)
+            startAngles = self.solveForTarget2(points[p])
+            endAngles = self.solveForTarget2(points[p+1])
+
+            intervals = []
+
             for a in range(len(startAngles)):
-                position.append(startAngles[a]+intervals[a]*i)
-            path.append(position)
+                intervals.append((endAngles[a]-startAngles[a])/steps)
 
-        for i in range(len(path)):
-            self.baseAngle = path[i][0]
-            self.joints[0].setAngle(radians(path[i][1]))
-            self.joints[1].setAngle(radians(path[i][2]))
+            for i in range(1,steps):
+                position = []
+                for a in range(len(startAngles)):
+                    position.append(startAngles[a]+intervals[a]*i)
+                path.append(position)
+
+            for i in range(len(path)):
+                self.baseAngle = path[i][0]
+                self.joints[0].setAngle(radians(path[i][1]))
+                self.joints[1].setAngle(radians(path[i][2]))
+                self.update()
+                path[i][-1] = degrees(-(self.effectorAngle - self.links[-2].angle))
+
+            path.append(endAngles)
+            self.setJointState(endAngles)
             self.update()
-            path[i][-1] = degrees(self.effectorAngle + self.links[-2].angle)
-
-        path.append(endAngles)
 
         return path
 
