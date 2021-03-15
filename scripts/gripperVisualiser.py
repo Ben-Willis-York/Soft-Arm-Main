@@ -92,7 +92,8 @@ def getJoint(name):
 
 class Gripper(object):
     def __init__(self):
-        pass
+        self.jointLinks = []
+        
 
 root = Tk()
 d = display.Display(root)
