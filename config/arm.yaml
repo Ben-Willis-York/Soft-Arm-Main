@@ -1,16 +1,17 @@
 type: "effort_controllers/JointGroupPositionController"
+publish_rate: 100
 joints:
- - anchor
- - base_link
- - Joint2
- - Joint3
+ - Rev1
+ - Rev2
+ - Rev3
+ - Rev4
 
-anchor:
-  pid: {p : 200.0, i : 10.0, d : 0.0}
-base_link:
-  pid: {p : 400.0, i : 150.0, d : 3.0, i_clamp_min : -1000, i_clamp_max : 1000}
-Joint2:
-  pid: {p : 200.0, i : 130.0, d : 2.0, i_clamp_min : -1000, i_clamp_max : 1000}
-Joint3:
-  pid: {p : 200.0, i : 100.0, d : 0.5, i_clamp_min : -1000, i_clamp_max : 1000}
+Rev1:
+  pid: {p : 700.0, i : 30.0, d : 0.0}
+Rev2:
+  pid: {p : 1000.0, i : 10.0, d : 0.0, i_clamp_min : -1000, i_clamp_max : 1000}
+Rev3:
+  pid: {p : 700.0, i : 10.0, d : 0.0, i_clamp_min : -1000, i_clamp_max : 1000}
+Rev4:
+  pid: {p : 400.0, i : 10.0, d : 0.0, i_clamp_min : -1000, i_clamp_max : 1000}
 

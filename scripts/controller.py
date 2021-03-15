@@ -22,7 +22,8 @@ class Controller():
         self.state = []
         self.reached = []
 
-        self.speed = [1,1,1,1]
+        self.speeds = [3, 1, 1, 1]
+        self.maxSpeed = 1
 
         self.names = rospy.get_param("/arm_controller/joints")
         for n in self.names:
@@ -30,7 +31,15 @@ class Controller():
             self.currentSetpoints.append(0)
             self.reached.append(False)
         
-        #self.setJointStatesWithBase([0,0,0,0])
+        armNames = rospy.get_param("/arm_controller/joints")
+        data = rospy.wait_for_message("joint_states", JointState)
+        arr = []
+        for n in armNames:
+            for d in range(len(data.name)):
+                if(data.name[d] == n):
+                    arr.append(-data.position[d])
+                    
+        self.state = arr
 
     def setGrasp(self, strength):
         val = float(strength)/20
@@ -46,7 +55,6 @@ class Controller():
         data = Float64MultiArray(data = arr)
         finger_pub.publish(data)
         
-
     def setPath(self, path):
         #self.path = path
         self.setSetpointsWithBase(path[0])
@@ -63,6 +71,7 @@ class Controller():
                     arr.append(data.position[d])
         
         for a in range(len(angles)):
+            #arr[a] = -radians(((angles[a]+180)%360)-180)
             arr[a] = -radians(angles[a])
 
         packet = Float64MultiArray(data = arr)
@@ -70,7 +79,8 @@ class Controller():
 
         arr = arr[1:]
         for a in range(len(angles)):
-            self.currentSetpoints[a] = angles[a]
+            #self.currentSetpoints[a] = ((angles[a]+180)%360)-180
+            self.currentSetpoints[a] = (angles[a])
 
     def setJointStates(self, angles):
         pub = rospy.Publisher("arm_controller/command", Float64MultiArray, queue_size=10)
@@ -105,8 +115,32 @@ class Controller():
     def getSetpoints(self):
         return self.setpoints[1:]
     
+    def setpointReached(self, threshold = 1):
+        reached = True
+        for s in range(len(self.setpoints)):
+            angle = ((degrees(self.state[s]) + 180) % 360)-180
+            #print abs(angle - self.setpoints[s])
+            #angle = self.state[s]
+            if(abs(angle - self.setpoints[s]) > threshold):
+                reached = False
+                return False
+        return True
+
+    def setpointReachedByCurrent(self, threshold=1):
+        reached = True
+        for s in range(len(self.setpoints)):
+            angle = (((self.currentSetpoints[s]) + 180) % 360)-180
+            #print abs(angle - self.setpoints[s])
+            #angle = self.state[s]
+            if(abs(angle - self.setpoints[s]) > threshold):
+                reached = False
+                return False
+        return True
+
     def setSetpointsWithBase(self, angles):
+        
         for a in range(len(angles)):
+            self.currentSetpoints[a] = degrees(self.state[a])
             self.setpoints[a] = angles[a]
         #self.setJointStatesWithBase(self.setpoints)
 
@@ -116,32 +150,49 @@ class Controller():
         #self.setJointStatesWithBase(self.setpoints)
 
     def updateSteps(self):
+        threshold = 0.2
+
         nextState = []
+        #print self.currentSetpoints
+        #print self.setpoints
 
         for a in range(len(self.state)):
             difference = self.currentSetpoints[a]-self.setpoints[a]
-            if(difference < -2):
-                nextState.append(self.currentSetpoints[a] + self.speed[a])
+            threshold = self.speeds[a]
+            #print(difference)
+            if((difference < threshold) and (difference > -threshold)):
+                nextState.append(self.setpoints[a])
+            elif(difference >= threshold):
+                nextState.append(self.currentSetpoints[a] - self.speeds[a])
                 self.reached[a] = False
-            elif(difference > 2):
-                nextState.append(self.currentSetpoints[a] - self.speed[a])
+            elif(difference <= -threshold):
+                nextState.append(self.currentSetpoints[a] + self.speeds[a])
                 self.reached[a] = False
             else:
-                nextState.append(self.setpoints[a])
-                self.reached[a] = True
+                print "Error"
+                nextState.append(0)
+
+        #print(nextState)
         self.setJointStatesWithBase(nextState)
 
-        ready = True
-        for r in self.reached:
-            if(r != True):
-                ready = False
-        
-        if(ready and len(self.path) > 0):
+        #print self.setpointReached()
+        if(self.setpointReached() and len(self.path) > 0):
+            differences = []
+            for a in range(len(self.currentSetpoints)):
+                differences.append(abs(self.currentSetpoints[a]-self.path[0][a]))
+            maxMovement = 0
+            for d in differences:
+                if(d>maxMovement):
+                    maxMovement = d
+            for s in range(len(self.speeds)):
+                self.speeds[s] = abs(differences[s]/maxMovement) * self.maxSpeed
+            print "DIFFERENCES: ", differences
+            print("MAX:", maxMovement)
+            print("NEW SPEEDS", self.speeds)
+
             self.setSetpointsWithBase(self.path[0])
-            print("Setting setpoints to: ", self.path[0])
             self.path = self.path[1:]
-            for r  in self.reached:
-                r = False
+
 
     def update(self):
         armNames = rospy.get_param("/arm_controller/joints")
@@ -151,8 +202,13 @@ class Controller():
             for d in range(len(data.name)):
                 if(data.name[d] == n):
                     arr.append(-data.position[d])
-                    break
+        
+
         self.state = arr
+        #for s in self.state:
+        #    v = degrees(s) % 360
+        #    s = radians(v)
+
 
         self.updateSteps()
         '''

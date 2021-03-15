@@ -56,7 +56,7 @@
 		<axis xyz="1 0 0"/>
 		<limit effort="${fingerForce}" lower="-0.25" upper="0.25" velocity="0.001"/>
 		<dynamics damping="0.05" friction="0.0"/>
-		<origin xyz="0 0 ${length+0.005}" rpy="0 0 0"/>
+		<origin xyz="0 0 ${length}" rpy="0 0 0"/>
 		<parent link="${seg1}"/>
 		<child link="${seg2}"/>
 	</joint>

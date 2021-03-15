@@ -9,240 +9,186 @@
   <!-- see https://secure.wikimedia.org/wikipedia/en/wiki/List_of_moment_of_inertia_tensors -->
   <!--<xacro:include filename="$(find version1_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find version1_description)/urdf/Design.gazebo" /> -->
-  <transmission name="anchor_tran">
+  <transmission name="Rev1_tran">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="anchor">
+    <joint name="Rev1">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
-    <actuator name="anchor_actr">
+    <actuator name="Rev1_actr">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <transmission name="base_link_tran">
+  <transmission name="Rev2_tran">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="base_link">
+    <joint name="Rev2">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
-    <actuator name="base_link_actr">
+    <actuator name="Rev2_actr">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <transmission name="Joint2_tran">
+  <transmission name="Rev3_tran">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="Joint2">
+    <joint name="Rev3">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
-    <actuator name="Joint2_actr">
+    <actuator name="Rev3_actr">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <transmission name="Joint3_tran">
+  <transmission name="Rev4_tran">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="Joint3">
+    <joint name="Rev4">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
-    <actuator name="Joint3_actr">
+    <actuator name="Rev4_actr">
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <!--
-<transmission name="Joint4_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Joint4">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="Joint4_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
-
-<transmission name="FingerSlider_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="FingerSlider">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="FingerSlider_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
--->
   <!--  PROPERTIES  -->
-  <!--  LINKS  -->
-  <joint name="anchor" type="continuous">
-    <axis xyz="0 0 1"/>
-    <origin rpy="0 0 0" xyz="0.0 0.0 0.1"/>
-    <parent link="world"/>
-    <child link="base_link"/>
-    <limit effort="1000" lower="0" upper="6.28318" velocity="1"/>
-    <dynamics damping="0.01" friction="0"/>
-  </joint>
+  <!-- LINKS  -->
+  <!--<xacro:include filename="$(find design2_description)/urdf/materials.xacro" />-->
+  <!--<xacro:include filename="$(find design2_description)/urdf/design2.trans" />-->
+  <!--<xacro:include filename="$(find design2_description)/urdf/design2.gazebo" />-->
   <link name="base_link">
     <inertial>
-      <origin rpy="0 0 0" xyz="1.78052017574e-14 0.0 -0.00045069620836176485"/>
-      <mass value="1.526896640260832"/>
-      <inertia ixx="0.001401" ixy="-0.0" ixz="-0.0" iyy="0.001379" iyz="-0.0" izz="0.002082"/>
+      <origin rpy="0 0 0" xyz="-6.108345103356556e-15 5.090287586130463e-17 0.01965246769632399"/>
+      <mass value="16.83095492294922"/>
+      <inertia ixx="0.079936" ixy="0.0" ixz="-0.0" iyy="0.079936" iyz="0.0" izz="0.152021"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="-0.05 -0.05 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://version1_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://main_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.05 -0.05 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://version1_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://main_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
-  <link name="arm1_1">
+  <link name="Link1_1">
     <inertial>
-      <origin rpy="0 0 0" xyz="0.07999999999995012 0.0 -6.30526011055621e-08"/>
-      <mass value="0.6547759683129957"/>
-      <inertia ixx="6.3e-05" ixy="0.0" ixz="0.0" iyy="0.002042" iyz="-0.0" izz="0.002004"/>
+      <origin rpy="0 0 0" xyz="-1.2279118486616705e-05 0.01442476351451121 0.020602870891923072"/>
+      <mass value="0.9178712114753625"/>
+      <inertia ixx="0.002553" ixy="0.0" ixz="0.0" iyy="0.002018" iyz="-0.00035" izz="0.00387"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="-0.05 -0.05 -0.036536"/>
+      <origin rpy="0 0 0" xyz="-0.0 -0.0 -0.05"/>
       <geometry>
-        <mesh filename="package://version1_description/meshes/arm1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://main_description/meshes/Link1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.05 -0.05 -0.036536"/>
+      <origin rpy="0 0 0" xyz="-0.0 -0.0 -0.05"/>
       <geometry>
-        <mesh filename="package://version1_description/meshes/arm1_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://main_description/meshes/Link1_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
-  <link name="arm2_1">
+  <link name="Link2_1">
     <inertial>
-      <origin rpy="0 0 0" xyz="0.054999999999916255 0.015 -6.30526011055621e-08"/>
-      <mass value="0.3898384683129956"/>
-      <inertia ixx="2.9e-05" ixy="0.0" ixz="0.0" iyy="0.000669" iyz="0.0" izz="0.000655"/>
+      <origin rpy="0 0 0" xyz="-2.968335648842978e-07 0.018054267252499347 0.1868568711048091"/>
+      <mass value="0.712050673323837"/>
+      <inertia ixx="0.008737" ixy="0.0" ixz="0.0" iyy="0.008392" iyz="-0.001509" izz="0.000705"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="-0.21 -0.05 -0.036536"/>
+      <origin rpy="0 0 0" xyz="4.2e-05 -0.009807 -0.1"/>
       <geometry>
-        <mesh filename="package://version1_description/meshes/arm2_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://main_description/meshes/Link2_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.21 -0.05 -0.036536"/>
+      <origin rpy="0 0 0" xyz="4.2e-05 -0.009807 -0.1"/>
       <geometry>
-        <mesh filename="package://version1_description/meshes/arm2_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://main_description/meshes/Link2_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
-  <link name="arm3_1">
+  <link name="Link3_1">
     <inertial>
-      <origin rpy="0 0 0" xyz="0.029571233060747493 -0.014999999999999993 -6.30526011055621e-08"/>
-      <mass value="0.2426509683129957"/>
-      <inertia ixx="1.8e-05" ixy="0.0" ixz="-0.0" iyy="0.000191" iyz="0.0" izz="0.000182"/>
+      <origin rpy="0 0 0" xyz="3.894856228585856e-05 0.012744269230917583 0.14887041213898544"/>
+      <mass value="0.5352959751924613"/>
+      <inertia ixx="0.004471" ixy="-0.0" ixz="-1e-06" iyy="0.004348" iyz="-0.000747" izz="0.000361"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="-0.32 -0.065 -0.036536"/>
+      <origin rpy="0 0 0" xyz="4.2e-05 -0.009807 -0.4"/>
       <geometry>
-        <mesh filename="package://version1_description/meshes/arm3_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://main_description/meshes/Link3_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.32 -0.065 -0.036536"/>
+      <origin rpy="0 0 0" xyz="4.2e-05 -0.009807 -0.4"/>
       <geometry>
-        <mesh filename="package://version1_description/meshes/arm3_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://main_description/meshes/Link3_1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
-  <!--
-<link name="HandBase_1">
-  <inertial>
-    <origin rpy="0 0 0" xyz="0.04972800754598111 -0.04414794632836559 -6.30526010986232e-08"/>
-    <mass value="0.7824014231131748"/>
-    <inertia ixx="0.001479" ixy="-0.000442" ixz="0.0" iyy="0.000967" iyz="0.0" izz="0.002301"/>
-  </inertial>
-  <visual>
-    <origin rpy="0 0 0" xyz="-0.385 -0.05 -0.036536"/>
-    <geometry>
-      <mesh filename="package://version1_description/meshes/HandBase_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin rpy="0 0 0" xyz="-0.385 -0.05 -0.036536"/>
-    <geometry>
-      <mesh filename="package://version1_description/meshes/HandBase_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="Finger_1">
-  <inertial>
-    <origin rpy="0 0 0" xyz="0.03999974948858598 2.7755575615628914e-17 -6.30526011055621e-08"/>
-    <mass value="0.13872095061007433"/>
-    <inertia ixx="4e-06" ixy="0.0" ixz="0.0" iyy="0.000118" iyz="0.0" izz="0.000118"/>
-  </inertial>
-  <visual>
-    <origin rpy="0 0 0" xyz="-0.415346 -0.0195 -0.036536"/>
-    <geometry>
-      <mesh filename="package://version1_description/meshes/Finger_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin rpy="0 0 0" xyz="-0.415346 -0.0195 -0.036536"/>
-    <geometry>
-      <mesh filename="package://version1_description/meshes/Finger_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link> -->
-  <!--- JOINTS  -->
-  <joint name="base_link" type="revolute">
-    <origin rpy="0 0 0" xyz="0.0 0.0 0.036536"/>
+  <link name="Link4_1">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-3.684166078735014e-07 -0.010000499675700233 0.06497387205009375"/>
+      <mass value="0.18168902324741887"/>
+      <inertia ixx="0.000446" ixy="0.0" ixz="0.0" iyy="0.000477" iyz="0.0" izz="4.3e-05"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="-2.4e-05 -0.009807 -0.65"/>
+      <geometry>
+        <mesh filename="package://main_description/meshes/Link4_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="-2.4e-05 -0.009807 -0.65"/>
+      <geometry>
+        <mesh filename="package://main_description/meshes/Link4_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <!--  JOINTS  -->
+  <joint name="world_joint" type="fixed">
+    <axis xyz="0 0 1"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+  <joint name="Rev1" type="continuous">
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.05"/>
     <parent link="base_link"/>
-    <child link="arm1_1"/>
-    <axis xyz="0.0 1.0 0.0"/>
-    <limit effort="1000" lower="-3.04" upper="-0.1" velocity="0.01"/>
+    <child link="Link1_1"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit effort="1000" lower="-6.283185" upper="6.283185" velocity="0.01"/>
     <dynamics damping="0" friction="0.0"/>
   </joint>
-  <joint name="Joint2" type="revolute">
-    <origin rpy="0 0 0" xyz="0.16 0.0 0.0"/>
-    <parent link="arm1_1"/>
-    <child link="arm2_1"/>
-    <axis xyz="0.0 1.0 0.0"/>
-    <limit effort="1000" lower="-1.570796" upper="1.570796" velocity="0.01"/>
+  <joint name="Rev2" type="revolute">
+    <origin rpy="0 0 0" xyz="-4.2e-05 0.009807 0.05"/>
+    <parent link="Link1_1"/>
+    <child link="Link2_1"/>
+    <axis xyz="0.0 -1.0 0.0"/>
+    <limit effort="1000" lower="-1.396263" upper="1.396263" velocity="0.01"/>
     <dynamics damping="0" friction="0.0"/>
   </joint>
-  <joint name="Joint3" type="revolute">
-    <origin rpy="0 0 0" xyz="0.11 0.015 0.0"/>
-    <parent link="arm2_1"/>
-    <child link="arm3_1"/>
-    <axis xyz="0.0 1.0 0.0"/>
-    <limit effort="1000" lower="-1.570796" upper="1.570796" velocity="0.01"/>
+  <joint name="Rev3" type="revolute">
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.3"/>
+    <parent link="Link2_1"/>
+    <child link="Link3_1"/>
+    <axis xyz="0.0 -1.0 0.0"/>
+    <limit effort="1000" lower="-2.792527" upper="2.792527" velocity="0.01"/>
     <dynamics damping="0" friction="0.0"/>
   </joint>
-  <!--
-<joint name="Joint4" type="revolute">
-  <origin rpy="0 0 0" xyz="0.065 -0.015 0.0"/>
-  <parent link="arm3_1"/>
-  <child link="HandBase_1"/>
-  <axis xyz="0.0 1.0 0.0"/>
-  <limit effort="${strength}" lower="-1.570796" upper="1.570796" velocity="100"/>
-</joint>
-
-
-<joint name="FingerSlider" type="prismatic">
-  <origin rpy="0 0 0" xyz="0.030346 -0.0305 0.0"/>
-  <parent link="HandBase_1"/>
-  <child link="Finger_1"/>
-  <axis xyz="0.0 1.0 0.0"/>
-  <limit effort="${strength}" lower="-0.085" upper="0.0" velocity="100"/>
-</joint> -->
+  <joint name="Rev4" type="revolute">
+    <origin rpy="0 0 0" xyz="6.6e-05 0.0 0.25"/>
+    <parent link="Link3_1"/>
+    <child link="Link4_1"/>
+    <axis xyz="0.0 -1.0 0.0"/>
+    <limit effort="1000" lower="-2.617994" upper="2.617994" velocity="0.01"/>
+    <dynamics damping="0" friction="0.0"/>
+  </joint>
   <link name="world"/>
   <link name="palm">
     <visual>
@@ -266,10 +212,10 @@
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
   </gazebo>
-  <joint name="palm_world_joint" type="fixed">
-    <parent link="arm3_1"/>
+  <joint name="palm_arm_joint" type="fixed">
+    <parent link="Link4_1"/>
     <child link="palm"/>
-    <origin rpy="0 1.57 0" xyz="0.1 0 0"/>
+    <origin rpy="0 0 0" xyz="0.0 0 0.15"/>
   </joint>
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
@@ -369,7 +315,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg1"/>
     <child link="LTseg2"/>
   </joint>
@@ -428,7 +374,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg2"/>
     <child link="LTseg3"/>
   </joint>
@@ -487,7 +433,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg3"/>
     <child link="LTseg4"/>
   </joint>
@@ -546,7 +492,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg4"/>
     <child link="LTseg5"/>
   </joint>
@@ -605,7 +551,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg5"/>
     <child link="LTseg6"/>
   </joint>
@@ -664,7 +610,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg6"/>
     <child link="LTseg7"/>
   </joint>
@@ -723,7 +669,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg7"/>
     <child link="LTseg8"/>
   </joint>
@@ -782,7 +728,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg8"/>
     <child link="LTseg9"/>
   </joint>
@@ -841,7 +787,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg9"/>
     <child link="LTseg10"/>
   </joint>
@@ -900,7 +846,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg10"/>
     <child link="LTseg11"/>
   </joint>
@@ -959,7 +905,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg11"/>
     <child link="LTseg12"/>
   </joint>
@@ -1075,7 +1021,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg1"/>
     <child link="RTseg2"/>
   </joint>
@@ -1134,7 +1080,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg2"/>
     <child link="RTseg3"/>
   </joint>
@@ -1193,7 +1139,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg3"/>
     <child link="RTseg4"/>
   </joint>
@@ -1252,7 +1198,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg4"/>
     <child link="RTseg5"/>
   </joint>
@@ -1311,7 +1257,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg5"/>
     <child link="RTseg6"/>
   </joint>
@@ -1370,7 +1316,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg6"/>
     <child link="RTseg7"/>
   </joint>
@@ -1429,7 +1375,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg7"/>
     <child link="RTseg8"/>
   </joint>
@@ -1488,7 +1434,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg8"/>
     <child link="RTseg9"/>
   </joint>
@@ -1547,7 +1493,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg9"/>
     <child link="RTseg10"/>
   </joint>
@@ -1606,7 +1552,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg10"/>
     <child link="RTseg11"/>
   </joint>
@@ -1665,7 +1611,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg11"/>
     <child link="RTseg12"/>
   </joint>
@@ -1781,7 +1727,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg1"/>
     <child link="LBseg2"/>
   </joint>
@@ -1840,7 +1786,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg2"/>
     <child link="LBseg3"/>
   </joint>
@@ -1899,7 +1845,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg3"/>
     <child link="LBseg4"/>
   </joint>
@@ -1958,7 +1904,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg4"/>
     <child link="LBseg5"/>
   </joint>
@@ -2017,7 +1963,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg5"/>
     <child link="LBseg6"/>
   </joint>
@@ -2076,7 +2022,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg6"/>
     <child link="LBseg7"/>
   </joint>
@@ -2135,7 +2081,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg7"/>
     <child link="LBseg8"/>
   </joint>
@@ -2194,7 +2140,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg8"/>
     <child link="LBseg9"/>
   </joint>
@@ -2253,7 +2199,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg9"/>
     <child link="LBseg10"/>
   </joint>
@@ -2312,7 +2258,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg10"/>
     <child link="LBseg11"/>
   </joint>
@@ -2371,7 +2317,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg11"/>
     <child link="LBseg12"/>
   </joint>
@@ -2487,7 +2433,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg1"/>
     <child link="RBseg2"/>
   </joint>
@@ -2546,7 +2492,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg2"/>
     <child link="RBseg3"/>
   </joint>
@@ -2605,7 +2551,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg3"/>
     <child link="RBseg4"/>
   </joint>
@@ -2664,7 +2610,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg4"/>
     <child link="RBseg5"/>
   </joint>
@@ -2723,7 +2669,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg5"/>
     <child link="RBseg6"/>
   </joint>
@@ -2782,7 +2728,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg6"/>
     <child link="RBseg7"/>
   </joint>
@@ -2841,7 +2787,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg7"/>
     <child link="RBseg8"/>
   </joint>
@@ -2900,7 +2846,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg8"/>
     <child link="RBseg9"/>
   </joint>
@@ -2959,7 +2905,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg9"/>
     <child link="RBseg10"/>
   </joint>
@@ -3018,7 +2964,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg10"/>
     <child link="RBseg11"/>
   </joint>
@@ -3077,7 +3023,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
-    <origin rpy="0 0 0" xyz="0 0 0.0175"/>
+    <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg11"/>
     <child link="RBseg12"/>
   </joint>

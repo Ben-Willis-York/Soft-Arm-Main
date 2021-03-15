@@ -277,6 +277,13 @@ class Vector3:
             return (self.x * other.x + self.y * other.y + self.z * other.z)
         raise TypeError
 
+        '''Print'''
+    def __str__(self):
+        return str([self.x, self.y, self.z])
+
+    def __repr__(self):
+        return str([self.x, self.y, self.z])
+
 
 class BBox:
     def __init__(self, p1, p2):

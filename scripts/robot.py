@@ -55,8 +55,9 @@ class Robot(object):
 
         self.baseAngle = 0
 
+        self.target = Vector2(0,0)
+
     def addLink(self, length, limits=[-150,150]):
-        print(length, limits)
         self.links.append(Link(length, self.links[-1]))
         self.joints.append(Joint(self.links[-2], self.links[-1], limits=limits))
         self.totalLength += length
@@ -67,6 +68,12 @@ class Robot(object):
     def getJointAngle(self, index):
         return self.joints[index].angle
 
+    def getJointStates(self):
+        state = [self.baseAngle]
+        for j in self.joints:
+            state.append(degrees(j.angle))
+        return state
+
     def setJointState(self, angles):
         self.baseAngle = angles[0]
         for a in range(len(angles)-1):
@@ -74,8 +81,17 @@ class Robot(object):
         self.update()
 
     def setEffectorAngle(self, angle):
+        startAngles = self.getJointStates()
         self.effectorAngle = angle
         self.getLimits()
+        self.update()
+
+        target = self.links[-1].end
+        endAngles = self.solveForTarget2(Vector3(target.x*cos(self.baseAngle), target.x*sin(self.baseAngle), target.y))
+        
+        path = self.interpolateMovement(startAngles, endAngles)
+        
+        return path
 
     def update(self):
         totalAngle = 0
@@ -87,25 +103,9 @@ class Robot(object):
             l2.pos.x = l1.end.x
             l2.pos.y = l1.end.y
 
-            l2.end.x = l2.pos.x + (cos(totalAngle) * l2.length)
-            l2.end.y = l2.pos.y + (sin(totalAngle) * l2.length)
+            l2.end.x = l2.pos.x + (sin(totalAngle) * l2.length)
+            l2.end.y = l2.pos.y + (cos(totalAngle) * l2.length)
             l2.angle = atan2((l2.end - l2.pos).y, (l2.end - l2.pos).x)
-
-        '''
-        for i in range(1, len(self.links)):
-            l1 = self.links[i-1]
-            l2 = self.links[i]
-            j = self.joints[i-1]
-            totalAngle = l1.angle+j.angle
-
-            l2.pos.x = l1.end.x
-            l2.pos.y = l1.end.y
-
-            l2.end.x = l2.pos.x+(cos(totalAngle) * l2.length)
-            l2.end.y = l2.pos.y+(sin(totalAngle) * l2.length)
-            l2.angle = atan2((l2.end-l2.pos).y, (l2.end-l2.pos).x)
-            #l2.angle = totalAngle
-        '''
 
     def ccd(self, x, y, display):
         searchDepth = 50
@@ -279,7 +279,6 @@ class Robot(object):
         frac = (target.x-b1.x)/(b2.x-b1.x)
         maxY = b1.y + (b2.y-b1.y)*frac
 
-        print("Between:", minY, maxY)
 
         if(target.y < minY or target.y > maxY):
             return True
@@ -292,7 +291,7 @@ class Robot(object):
 
     def solveForTarget2(self, worldTarget):
         target = Vector2(Vector2(worldTarget.x, worldTarget.y).Mag(), worldTarget.z)  # TargetVector
-        
+        self.target = target
 
         originalAngles = [self.baseAngle]
         for j in self.joints:
@@ -306,8 +305,11 @@ class Robot(object):
             return originalAngles
 
         self.baseAngle = atan2(worldTarget.y, worldTarget.x)
+
         effectorTarget = Vector2(target.x - self.links[-1].length * cos(self.effectorAngle),
                                  target.y - self.links[-1].length * sin(self.effectorAngle))  # EffectorTarget
+
+        #self.target = effectorTarget
 
         a = self.links[2].length
         c = self.links[1].length
@@ -318,14 +320,14 @@ class Robot(object):
         c2 = c*c
 
         A = acos((b2+c2-a2)/(2*b*c))
-        B = pi - acos((a2+c2-b2)/(2*a*c))
-        A += atan2(effectorTarget.y, effectorTarget.x)
+        B = acos((a2+c2-b2)/(2*a*c)) - pi
+        A = atan2(effectorTarget.x, effectorTarget.y) - A
 
         self.joints[0].setAngle(A)
         self.joints[1].setAngle(-B)
         self.update()
 
-        self.joints[2].setAngle(self.effectorAngle - self.links[-2].angle)
+        self.joints[2].setAngle(-(self.effectorAngle - self.links[-2].angle))
         self.update()
         end = self.links[2].end
         difference = effectorTarget - end
@@ -344,41 +346,97 @@ class Robot(object):
         return state
 
     def getPathToTarget(self, worldTarget, steps = 50):
-        startAngles = [degrees(self.baseAngle)]
+
+        self.update()
+
+        startPos = self.links[-1].end
+        p1 = Vector3(startPos.x*cos(self.baseAngle), startPos.x*sin(self.baseAngle), startPos.y)
+
+        p2 = Vector3(100*cos(self.baseAngle), 100*sin(self.baseAngle), 450)
+
+        targetAngle = atan2(worldTarget.y, worldTarget.x)
+        mag = Vector2(p2.x, p2.y).Mag()
+
+        print(targetAngle)
+        p3 = Vector3(mag*cos(targetAngle), mag*sin(targetAngle), 450)
+
+        p4 = worldTarget
+
+        self.points = []
         
-        for j in self.joints:
-            startAngles.append(degrees(j.angle))
+        t1 = degrees(targetAngle) % 360
+        t2 = degrees(self.baseAngle) % 360 
 
-        print(startAngles)
 
-        endAngles = self.solveForTarget2(worldTarget)
+        if( abs(t1-t2) > 10):
+            points = [p1,p2,p3,p4]
 
-        print(endAngles)
+        else:
+            points = [p1, p4]
 
-        intervals = []
+        
+        #points = [p1,p2,p3,p4]
         path = []
-        path.append(startAngles)
-        
-        for a in range(len(startAngles)):
-            intervals.append((endAngles[a]-startAngles[a])/steps) 
+        for p in points:
+            path.append(self.solveForTarget2(p))
+        return path
 
-        for i in range(1,steps):
+        for a in self.interpolateMovement(self.solveForTarget2(points[0]), self.solveForTarget2(points[1]), steps = 1):
+            path.append(a)
+
+        if(len(points) > 2):
+            for a in self.interpolateMovement(self.solveForTarget2(points[1]), self.solveForTarget2(points[2]), steps = 1):
+                path.append(a)
+            for a in self.interpolateMovement(self.solveForTarget2(points[2]), self.solveForTarget2(points[3]), steps = 1):
+                path.append(a)
+        path.append(self.solveForTarget2(points[-1]))
+
+        #path.append(self.solveForTarget2(points[0]))
+        #for p in range(0, len(points)-1):
+
+            #startAngles = [degrees(self.baseAngle)]
+            #for j in self.joints:
+            #    startAngles.append(degrees(j.angle))
+            #path.append(startAngles)
+            #startAngles = self.solveForTarget2(points[p])
+            #endAngles = self.solveForTarget2(points[p+1])
+
+            #path.append(endAngles)
+
+            #interpolated = self.interpolateMovement(startAngles, endAngles, steps = steps)
+            #path.append(startAngles)
+
+        for i in range(len(path)):
+            self.baseAngle = radians(path[i][0])
+            self.joints[0].setAngle(radians(path[i][1]))
+            self.joints[1].setAngle(radians(path[i][2]))
+            self.update()
+            #path[i][-1] = degrees(-(self.effectorAngle - self.links[-2].angle))
+            path[i][-1] = degrees(-(self.effectorAngle - self.links[-2].angle))
+            #path.append(interpolated[i])
+
+        #self.setJointState(endAngles)
+        #self.update()
+
+        return path
+
+    def interpolateMovement(self, startAngles, endAngles, steps = 20):
+        path = []
+        intervals = []
+
+        for a in range(len(startAngles)):
+            intervals.append((endAngles[a]-startAngles[a])/steps)
+
+        path.append(startAngles)
+        for i in range(0,steps-1):
             position = []
             for a in range(len(startAngles)):
                 position.append(startAngles[a]+intervals[a]*i)
             path.append(position)
-
-        for i in range(len(path)):
-            self.baseAngle = path[i][0]
-            self.joints[0].setAngle(radians(path[i][1]))
-            self.joints[1].setAngle(radians(path[i][2]))
-            self.update()
-            path[i][-1] = degrees(self.effectorAngle - self.links[-2].angle)
-
-        path.append(endAngles)
+        #path.append(endAngles)
 
         return path
-
+    
 
     '''
     def solveForTarget(self, worldTarget):
@@ -668,3 +726,4 @@ class Robot(object):
         for l in self.links:
             dis.drawLine(l.pos.x, l.pos.y, l.end.x, l.end.y)
         dis.drawCircle(self.links[-1].end.x, self.links[-1].end.y,10)
+        dis.drawCircle(self.target.x, self.target.y, 5, fill="red")

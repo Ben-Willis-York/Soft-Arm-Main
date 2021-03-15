@@ -7,12 +7,12 @@ class Display(object):
         self.root = root
         self.root.minsize(width=w, height=h)
 
-        self.canvas = Canvas(self.root, height= h, width = w)
+        self.canvas = Canvas(self.root, height= h, width = w, bg = "dark grey")
         self.canvas.place(x=pos.x, y=pos.y)
 
         self.h = h
         self.w = w
-        self.scale = 0.8
+        self.scale = 0.6
         self.screenOrigin = Vector2(w/2, h/2)
 
         self.drawGround = True

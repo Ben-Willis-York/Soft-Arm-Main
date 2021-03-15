@@ -17,7 +17,7 @@ def generateYAML(name, jointNames):
         string += "\n - " + j 
 
     for j in jointNames:
-        string += "\n"+j+":\n pid: {p: 0.20, i: 0.10, d: 0.0}"
+        string += "\n"+j+":\n pid: {p: 0.20, i: 0.10, d: 0.0, i_clamp_min : -10, i_clamp_max : 10}"
 
     file = open(path+"/config/"+name+".yaml", "w")
     file.write(string)
