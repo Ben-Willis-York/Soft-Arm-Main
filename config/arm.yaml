@@ -1,4 +1,5 @@
 type: "effort_controllers/JointGroupPositionController"
+publish_rate: 100
 joints:
  - Rev1
  - Rev2
@@ -6,11 +7,11 @@ joints:
  - Rev4
 
 Rev1:
-  pid: {p : 200.0, i : 30.0, d : 0.0}
+  pid: {p : 700.0, i : 30.0, d : 0.0}
 Rev2:
-  pid: {p : 130.0, i : 70.0, d : 2.0, i_clamp_min : -1000, i_clamp_max : 1000}
+  pid: {p : 1000.0, i : 10.0, d : 0.0, i_clamp_min : -1000, i_clamp_max : 1000}
 Rev3:
-  pid: {p : 100.0, i : 60.0, d : 2.0, i_clamp_min : -1000, i_clamp_max : 1000}
+  pid: {p : 700.0, i : 10.0, d : 0.0, i_clamp_min : -1000, i_clamp_max : 1000}
 Rev4:
-  pid: {p : 100.0, i : 50.0, d : 1, i_clamp_min : -1000, i_clamp_max : 1000}
+  pid: {p : 400.0, i : 10.0, d : 0.0, i_clamp_min : -1000, i_clamp_max : 1000}
 

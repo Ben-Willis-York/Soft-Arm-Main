@@ -68,6 +68,12 @@ class Robot(object):
     def getJointAngle(self, index):
         return self.joints[index].angle
 
+    def getJointStates(self):
+        state = [self.baseAngle]
+        for j in self.joints:
+            state.append(degrees(j.angle))
+        return state
+
     def setJointState(self, angles):
         self.baseAngle = angles[0]
         for a in range(len(angles)-1):
@@ -75,8 +81,17 @@ class Robot(object):
         self.update()
 
     def setEffectorAngle(self, angle):
+        startAngles = self.getJointStates()
         self.effectorAngle = angle
         self.getLimits()
+        self.update()
+
+        target = self.links[-1].end
+        endAngles = self.solveForTarget2(Vector3(target.x*cos(self.baseAngle), target.x*sin(self.baseAngle), target.y))
+        
+        path = self.interpolateMovement(startAngles, endAngles)
+        
+        return path
 
     def update(self):
         totalAngle = 0
@@ -290,10 +305,11 @@ class Robot(object):
             return originalAngles
 
         self.baseAngle = atan2(worldTarget.y, worldTarget.x)
+
         effectorTarget = Vector2(target.x - self.links[-1].length * cos(self.effectorAngle),
                                  target.y - self.links[-1].length * sin(self.effectorAngle))  # EffectorTarget
 
-        self.target = effectorTarget
+        #self.target = effectorTarget
 
         a = self.links[2].length
         c = self.links[1].length
@@ -329,7 +345,7 @@ class Robot(object):
             state.append(degrees(j.angle))
         return state
 
-    def getPathToTarget(self, worldTarget, steps = 70):
+    def getPathToTarget(self, worldTarget, steps = 50):
 
         self.update()
 
@@ -341,56 +357,86 @@ class Robot(object):
         targetAngle = atan2(worldTarget.y, worldTarget.x)
         mag = Vector2(p2.x, p2.y).Mag()
 
+        print(targetAngle)
         p3 = Vector3(mag*cos(targetAngle), mag*sin(targetAngle), 450)
 
         p4 = worldTarget
 
         self.points = []
-
+        
         t1 = degrees(targetAngle) % 360
         t2 = degrees(self.baseAngle) % 360 
 
+
         if( abs(t1-t2) > 10):
             points = [p1,p2,p3,p4]
+
         else:
             points = [p1, p4]
 
+        
         #points = [p1,p2,p3,p4]
-
         path = []
+        for p in points:
+            path.append(self.solveForTarget2(p))
+        return path
 
-        for p in range(len(points)-1):
+        for a in self.interpolateMovement(self.solveForTarget2(points[0]), self.solveForTarget2(points[1]), steps = 1):
+            path.append(a)
+
+        if(len(points) > 2):
+            for a in self.interpolateMovement(self.solveForTarget2(points[1]), self.solveForTarget2(points[2]), steps = 1):
+                path.append(a)
+            for a in self.interpolateMovement(self.solveForTarget2(points[2]), self.solveForTarget2(points[3]), steps = 1):
+                path.append(a)
+        path.append(self.solveForTarget2(points[-1]))
+
+        #path.append(self.solveForTarget2(points[0]))
+        #for p in range(0, len(points)-1):
+
             #startAngles = [degrees(self.baseAngle)]
             #for j in self.joints:
             #    startAngles.append(degrees(j.angle))
             #path.append(startAngles)
-            startAngles = self.solveForTarget2(points[p])
-            endAngles = self.solveForTarget2(points[p+1])
+            #startAngles = self.solveForTarget2(points[p])
+            #endAngles = self.solveForTarget2(points[p+1])
 
-            intervals = []
+            #path.append(endAngles)
 
-            for a in range(len(startAngles)):
-                intervals.append((endAngles[a]-startAngles[a])/steps)
+            #interpolated = self.interpolateMovement(startAngles, endAngles, steps = steps)
+            #path.append(startAngles)
 
-            for i in range(1,steps):
-                position = []
-                for a in range(len(startAngles)):
-                    position.append(startAngles[a]+intervals[a]*i)
-                path.append(position)
-
-            for i in range(len(path)):
-                self.baseAngle = path[i][0]
-                self.joints[0].setAngle(radians(path[i][1]))
-                self.joints[1].setAngle(radians(path[i][2]))
-                self.update()
-                path[i][-1] = degrees(-(self.effectorAngle - self.links[-2].angle))
-
-            path.append(endAngles)
-            self.setJointState(endAngles)
+        for i in range(len(path)):
+            self.baseAngle = radians(path[i][0])
+            self.joints[0].setAngle(radians(path[i][1]))
+            self.joints[1].setAngle(radians(path[i][2]))
             self.update()
+            #path[i][-1] = degrees(-(self.effectorAngle - self.links[-2].angle))
+            path[i][-1] = degrees(-(self.effectorAngle - self.links[-2].angle))
+            #path.append(interpolated[i])
+
+        #self.setJointState(endAngles)
+        #self.update()
 
         return path
 
+    def interpolateMovement(self, startAngles, endAngles, steps = 20):
+        path = []
+        intervals = []
+
+        for a in range(len(startAngles)):
+            intervals.append((endAngles[a]-startAngles[a])/steps)
+
+        path.append(startAngles)
+        for i in range(0,steps-1):
+            position = []
+            for a in range(len(startAngles)):
+                position.append(startAngles[a]+intervals[a]*i)
+            path.append(position)
+        #path.append(endAngles)
+
+        return path
+    
 
     '''
     def solveForTarget(self, worldTarget):

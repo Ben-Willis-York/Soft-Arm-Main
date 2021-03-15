@@ -15,9 +15,10 @@ from urdf_parser_py.urdf import URDF
 
 
 class RadialDisplay(object):
-    def __init__(self, root, solver, position):
+    def __init__(self, root, solver, controller, position):
         self.root = root
         self.solver = solver
+        self.controller = controller
         self.position = position
         self.angle = 0
 
@@ -47,13 +48,25 @@ class RadialDisplay(object):
         offsetY = event.y-40
         angle = atan2(offsetY, offsetX)
         self.angle = degrees(angle)
-        self.solver.setEffectorAngle(-angle)
+
+        current = self.controller.getJointStatesWithBase()
+        self.solver.setJointState(current)
+
+        path = self.solver.setEffectorAngle(-angle)
+        self.controller.setPath(path)
+
         self.input.delete(0,END)
         self.input.insert(0, str(round(degrees(angle),1)))
 
     def setAngleFromEntry(self):
         self.angle = float(self.input.get())
-        self.solver.setEffectorAngle(-radians(self.angle))
+
+        current = self.controller.getJointStatesWithBase()
+        self.solver.setJointState(current)
+
+        path = self.solver.setEffectorAngle(-angle)
+        self.controller.setPath(path)
+
 
 
 class CoordinateControls(object):
@@ -218,7 +231,6 @@ class ControlPanel():
 
         self.graspControl = None
 
-
     def goToClick(self, e):
         horizontal, vertical = self.horizontalDisplay.pixelToCoord(e.x, e.y)
 
@@ -228,9 +240,11 @@ class ControlPanel():
         x = cos(self.solver.baseAngle)*horizontal
         y = sin(self.solver.baseAngle)*horizontal
         z = vertical
-
+        print(x, y, z)
         path = self.solver.getPathToTarget(VectorClass.Vector3(x, y, z))
         self.controller.setPath(path)
+
+        #print("PATH: ", path)
 
         self.solver.setJointState(angles)
         newAngles = self.solver.solveForTarget2(VectorClass.Vector3(x, y, z))
@@ -254,7 +268,9 @@ class ControlPanel():
         #angles = [0, 0, 0, 0]
 
         self.controller.setSetpointsWithBase(angles)
-        self.controller.currentSetpoints = self.controller.setpoints
+        for i in range(len(angles)):
+            self.controller.currentSetpoints[i] = angles[i]
+
         self.controller.setJointStatesWithBase(angles)
         self.controller.update()
 
@@ -267,7 +283,7 @@ class ControlPanel():
         self.controlBars.setTargets(angles)
         self.controlBars.update()
 
-        self.angleControl = RadialDisplay(self.root, self.solver, VectorClass.Vector2(300,10))
+        self.angleControl = RadialDisplay(self.root, self.solver, self.controller, VectorClass.Vector2(300,10))
 
         self.graspControl = Scale(self.root, from_=-1, to=1, resolution=0.01, label = "Grasp", command = lambda x: self.controller.setGrasp(x))
         self.graspControl.place(x=500, y=20)
@@ -279,7 +295,6 @@ class ControlPanel():
 
         #self.controller.setJointStatesWithBase([0,0,0,0])
         
-
     def grasp(self):
         print("yo")
 
