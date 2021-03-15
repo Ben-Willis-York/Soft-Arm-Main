@@ -96,7 +96,7 @@ class Gripper(object):
 
 root = Tk()
 d = display.Display(root)
-d.scale = 3
+d.scale = 2
 
 rospy.init_node('gripperController', anonymous=True)
 rospy.logerr("controller starting")
