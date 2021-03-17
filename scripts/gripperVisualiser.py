@@ -178,7 +178,7 @@ class Gripper(object):
         c = p + Vector2(-R*cos(eulers[2]), 0)
         dis.drawCircle(c.x, c.y, 5, fill = "red")
         end = Vector2(c.x+-R*cos(pi-theta), c.y+R*sin(pi-theta))
-        dis.drawCircle(end.x, end.y, 5, fill="green")
+        dis.drawCircle(end.x, end.y, 5, fill="blue")
 
     def applySpring(self, name):
         print("waiting for service")
