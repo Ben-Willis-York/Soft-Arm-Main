@@ -45,28 +45,36 @@
 	<segments value="12"/> 
 	<base name="palm"/>
 	<length value="0.15"/>
+	<geometry base = "0.02 0.02" tip = "0.01 0.01"/>
 	<origin xyz="0.05 0.05 0" rpy="-0 0 0"/>
+	<force value="2"/>
 </finger>
 
 <finger name="RT">
 	<segments value="12"/> 
 	<base name="palm"/>
 	<length value="0.15"/>
+	<geometry base = "0.02 0.02" tip = "0.01 0.01"/>
 	<origin xyz="0.05 -0.05 0" rpy="-0 0 3.14159"/>
+	<force value="2"/>
 </finger>
 
 <finger name="LB">
 	<segments value="12"/> 
 	<base name="palm"/>
 	<length value="0.15"/>
+	<geometry base = "0.02 0.02" tip = "0.01 0.01"/>
 	<origin xyz="-0.05 0.05 0" rpy="-0 0 0"/>
+	<force value="2"/>
 </finger>
 
 <finger name="RB">
 	<segments value="12"/> 
 	<base name="palm"/>
+	<geometry base = "0.02 0.02" tip = "0.01 0.01"/>
 	<length value="0.15"/>
 	<origin xyz="-0.05 -0.05 0" rpy="-0 0 3.14159"/>
+	<force value="2"/>
 </finger>
 
 

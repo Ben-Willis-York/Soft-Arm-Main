@@ -34,6 +34,10 @@
   file = "config/arm.yaml"
   ns="arm_controller" />
 
+  <!--<rosparam command="load"
+  file = "config/fingerSprings.yaml"
+  ns = "spring_controller" />-->
+
   <node pkg="main_description" name="controlPanel" type="controlPanel.py"/>
 
   <!--<node pkg="prototyping_description" name="controller" type="controller.py"/>-->
@@ -48,6 +52,7 @@
   args="joint_state_controller
         hand_controller
         arm_controller
+        spring_controller
               --shutdown-timeout 3" />
 
 </launch>
