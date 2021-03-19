@@ -194,7 +194,7 @@ class JointLink(object):
         #dis.drawCircle(self.pos.x, self.pos.y, 2)
         if(self.next != None):
             dis.drawLine(self.pos.x, self.pos.y, 
-                        jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill="green")
+                        jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill="blue")
         #dis.drawCircle(self.predictedPos.x, self.predictedPos.y, 2, fill = "blue")
         #dis.drawCircle(self.outside.x, self.outside.y, 2)
         #dis.drawCircle(self.inside.x, self.inside.y, 2)
