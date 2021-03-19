@@ -30,8 +30,9 @@ class Display(object):
         x2, y2 = self.scaleCoord(x2, y2)
         self.canvas.create_line(x1, y1, x2, y2, fill=fill)
 
-    def drawCircle(self, x, y, r, fill = None):
+    def drawCircle(self, x, y, rad, fill = None):
         x, y = self.scaleCoord(x, y)
+        r = rad*self.scale
         #print(x,y)
         self.canvas.create_oval(x-r, y-r, x+r, y+r, fill=fill)
 

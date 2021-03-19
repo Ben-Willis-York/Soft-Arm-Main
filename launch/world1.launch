@@ -5,7 +5,9 @@
   <arg name="modelmain" default="$(find main_description)urdf/output.xacro"/>
 
   <param command="$(find xacro)/xacro $(find main_description)/urdf/output.xacro" name="robot_description"/>
+
   <node args="-param robot_description -urdf -J base_link -0.8 -model Design" name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"/>
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value = "$(find main_description)/worlds/world6.world"/>
     <arg name="paused" value="true"/>
@@ -34,6 +36,10 @@
   file = "config/arm.yaml"
   ns="arm_controller" />
 
+  <rosparam command="load"
+  file = "config/strainSensors.yaml"
+  ns="strain_sensors" />
+
   <!--<rosparam command="load"
   file = "config/fingerSprings.yaml"
   ns = "spring_controller" />-->
@@ -52,7 +58,6 @@
   args="joint_state_controller
         hand_controller
         arm_controller
-        spring_controller
               --shutdown-timeout 3" />
 
 </launch>

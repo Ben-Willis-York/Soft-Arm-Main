@@ -41,9 +41,12 @@
 </joint>
 
 <gazebo>
-  <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-	<robotNamespace />
-  </plugin>
+  	<plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+		<robotNamespace />
+  	</plugin>
+ 	<plugin filename="libmain_description.so" name="main_description">
+		<kConstant> 0.4 </kConstant>
+	</plugin>
 </gazebo>
 
 </robot>

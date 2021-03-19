@@ -46,7 +46,7 @@
 	<base name="palm"/>
 	<length value="0.15"/>
 	<geometry base = "0.02 0.02" tip = "0.01 0.01"/>
-	<origin xyz="0.05 0.05 0" rpy="-0 0 0"/>
+	<origin xyz="0.04 0.04 0.03" rpy="-0.3 0 0"/>
 	<force value="2"/>
 </finger>
 
@@ -55,7 +55,7 @@
 	<base name="palm"/>
 	<length value="0.15"/>
 	<geometry base = "0.02 0.02" tip = "0.01 0.01"/>
-	<origin xyz="0.05 -0.05 0" rpy="-0 0 3.14159"/>
+	<origin xyz="0.04 -0.04 0.03" rpy="-0.3 0 3.14159"/>
 	<force value="2"/>
 </finger>
 
@@ -64,7 +64,7 @@
 	<base name="palm"/>
 	<length value="0.15"/>
 	<geometry base = "0.02 0.02" tip = "0.01 0.01"/>
-	<origin xyz="-0.05 0.05 0" rpy="-0 0 0"/>
+	<origin xyz="-0.04 0.04 0.03" rpy="-0.3 0 0"/>
 	<force value="2"/>
 </finger>
 
@@ -73,7 +73,7 @@
 	<base name="palm"/>
 	<geometry base = "0.02 0.02" tip = "0.01 0.01"/>
 	<length value="0.15"/>
-	<origin xyz="-0.05 -0.05 0" rpy="-0 0 3.14159"/>
+	<origin xyz="-0.04 -0.04 0.03" rpy="-0.3 0 3.14159"/>
 	<force value="2"/>
 </finger>
 
@@ -82,9 +82,12 @@
 
 
 <gazebo>
-  <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-	<robotNamespace></robotNamespace>
-  </plugin>
+  	<plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+		<robotNamespace></robotNamespace>
+  	</plugin>
+ 	<plugin name='main_description' filename='libmain_description.so'>
+		<kConstant> 0.4 </kConstant>
+	</plugin>
 </gazebo>
 
 </robot>

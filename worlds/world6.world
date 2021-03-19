@@ -562,5 +562,6 @@
       <allow_auto_disable>1</allow_auto_disable>
       <pose frame=''>-0.616962 0.050684 0.069199 -1.06852 0 0</pose>
     </model>
+
   </world>
 </sdf>
