@@ -221,6 +221,9 @@
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
       <robotNamespace/>
     </plugin>
+    <plugin filename="libmain_description.so" name="main_description">
+      <kConstant> 0.4 </kConstant>
+    </plugin>
   </gazebo>
   <!--  MACROS FOR FINGER: LT-->
   <link name="LTseg1">
@@ -250,6 +253,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg1">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -257,9 +261,9 @@
   </gazebo>
   <joint name="palm_LTseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="2.0" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <limit effort="2.0" lower="-0.0" upper="0.0" velocity="0.0001"/>
     <!--<dynamics damping="0.05" friction="0.0"/>-->
-    <origin rpy="-0 0 0" xyz="0.05 0.05 0"/>
+    <origin rpy="-0.3 0 0" xyz="0.04 0.04 0.03"/>
     <parent link="palm"/>
     <child link="LTseg1"/>
   </joint>
@@ -306,6 +310,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg2">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -313,7 +318,7 @@
   </gazebo>
   <joint name="LTseg1_LTseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.83680555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.83680555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg1"/>
@@ -365,6 +370,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg3">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -372,7 +378,7 @@
   </gazebo>
   <joint name="LTseg2_LTseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.68055555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.68055555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg2"/>
@@ -424,6 +430,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg4">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -431,7 +438,7 @@
   </gazebo>
   <joint name="LTseg3_LTseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.53125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.53125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg3"/>
@@ -483,6 +490,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg5">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -490,7 +498,7 @@
   </gazebo>
   <joint name="LTseg4_LTseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.38888888889" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.38888888889" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg4"/>
@@ -542,6 +550,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg6">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -549,7 +558,7 @@
   </gazebo>
   <joint name="LTseg5_LTseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.25347222222" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.25347222222" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg5"/>
@@ -601,6 +610,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg7">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -608,7 +618,7 @@
   </gazebo>
   <joint name="LTseg6_LTseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg6"/>
@@ -660,6 +670,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg8">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -667,7 +678,7 @@
   </gazebo>
   <joint name="LTseg7_LTseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.00347222222" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.00347222222" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg7"/>
@@ -719,6 +730,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg9">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -726,7 +738,7 @@
   </gazebo>
   <joint name="LTseg8_LTseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.888888888889" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.888888888889" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg8"/>
@@ -778,6 +790,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg10">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -785,7 +798,7 @@
   </gazebo>
   <joint name="LTseg9_LTseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.78125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.78125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg9"/>
@@ -837,6 +850,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg11">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -844,7 +858,7 @@
   </gazebo>
   <joint name="LTseg10_LTseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.680555555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.680555555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg10"/>
@@ -896,6 +910,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg12">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -903,7 +918,7 @@
   </gazebo>
   <joint name="LTseg11_LTseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.586805555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.586805555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg11"/>
@@ -956,6 +971,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg1">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -963,9 +979,9 @@
   </gazebo>
   <joint name="palm_RTseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="2.0" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <limit effort="2.0" lower="-0.0" upper="0.0" velocity="0.0001"/>
     <!--<dynamics damping="0.05" friction="0.0"/>-->
-    <origin rpy="-0 0 3.14159" xyz="0.05 -0.05 0"/>
+    <origin rpy="-0.3 0 3.14159" xyz="0.04 -0.04 0.03"/>
     <parent link="palm"/>
     <child link="RTseg1"/>
   </joint>
@@ -1012,6 +1028,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg2">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1019,7 +1036,7 @@
   </gazebo>
   <joint name="RTseg1_RTseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.83680555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.83680555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg1"/>
@@ -1071,6 +1088,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg3">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1078,7 +1096,7 @@
   </gazebo>
   <joint name="RTseg2_RTseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.68055555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.68055555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg2"/>
@@ -1130,6 +1148,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg4">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1137,7 +1156,7 @@
   </gazebo>
   <joint name="RTseg3_RTseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.53125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.53125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg3"/>
@@ -1189,6 +1208,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg5">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1196,7 +1216,7 @@
   </gazebo>
   <joint name="RTseg4_RTseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.38888888889" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.38888888889" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg4"/>
@@ -1248,6 +1268,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg6">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1255,7 +1276,7 @@
   </gazebo>
   <joint name="RTseg5_RTseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.25347222222" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.25347222222" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg5"/>
@@ -1307,6 +1328,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg7">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1314,7 +1336,7 @@
   </gazebo>
   <joint name="RTseg6_RTseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg6"/>
@@ -1366,6 +1388,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg8">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1373,7 +1396,7 @@
   </gazebo>
   <joint name="RTseg7_RTseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.00347222222" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.00347222222" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg7"/>
@@ -1425,6 +1448,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg9">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1432,7 +1456,7 @@
   </gazebo>
   <joint name="RTseg8_RTseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.888888888889" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.888888888889" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg8"/>
@@ -1484,6 +1508,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg10">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1491,7 +1516,7 @@
   </gazebo>
   <joint name="RTseg9_RTseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.78125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.78125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg9"/>
@@ -1543,6 +1568,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg11">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1550,7 +1576,7 @@
   </gazebo>
   <joint name="RTseg10_RTseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.680555555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.680555555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg10"/>
@@ -1602,6 +1628,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg12">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1609,7 +1636,7 @@
   </gazebo>
   <joint name="RTseg11_RTseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.586805555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.586805555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg11"/>
@@ -1662,6 +1689,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg1">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1669,9 +1697,9 @@
   </gazebo>
   <joint name="palm_LBseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="2.0" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <limit effort="2.0" lower="-0.0" upper="0.0" velocity="0.0001"/>
     <!--<dynamics damping="0.05" friction="0.0"/>-->
-    <origin rpy="-0 0 0" xyz="-0.05 0.05 0"/>
+    <origin rpy="-0.3 0 0" xyz="-0.04 0.04 0.03"/>
     <parent link="palm"/>
     <child link="LBseg1"/>
   </joint>
@@ -1718,6 +1746,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg2">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1725,7 +1754,7 @@
   </gazebo>
   <joint name="LBseg1_LBseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.83680555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.83680555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg1"/>
@@ -1777,6 +1806,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg3">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1784,7 +1814,7 @@
   </gazebo>
   <joint name="LBseg2_LBseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.68055555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.68055555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg2"/>
@@ -1836,6 +1866,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg4">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1843,7 +1874,7 @@
   </gazebo>
   <joint name="LBseg3_LBseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.53125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.53125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg3"/>
@@ -1895,6 +1926,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg5">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1902,7 +1934,7 @@
   </gazebo>
   <joint name="LBseg4_LBseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.38888888889" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.38888888889" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg4"/>
@@ -1954,6 +1986,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg6">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1961,7 +1994,7 @@
   </gazebo>
   <joint name="LBseg5_LBseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.25347222222" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.25347222222" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg5"/>
@@ -2013,6 +2046,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg7">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2020,7 +2054,7 @@
   </gazebo>
   <joint name="LBseg6_LBseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg6"/>
@@ -2072,6 +2106,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg8">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2079,7 +2114,7 @@
   </gazebo>
   <joint name="LBseg7_LBseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.00347222222" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.00347222222" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg7"/>
@@ -2131,6 +2166,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg9">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2138,7 +2174,7 @@
   </gazebo>
   <joint name="LBseg8_LBseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.888888888889" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.888888888889" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg8"/>
@@ -2190,6 +2226,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg10">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2197,7 +2234,7 @@
   </gazebo>
   <joint name="LBseg9_LBseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.78125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.78125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg9"/>
@@ -2249,6 +2286,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg11">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2256,7 +2294,7 @@
   </gazebo>
   <joint name="LBseg10_LBseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.680555555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.680555555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg10"/>
@@ -2308,6 +2346,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg12">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2315,7 +2354,7 @@
   </gazebo>
   <joint name="LBseg11_LBseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.586805555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.586805555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg11"/>
@@ -2368,6 +2407,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg1">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2375,9 +2415,9 @@
   </gazebo>
   <joint name="palm_RBseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="2.0" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <limit effort="2.0" lower="-0.0" upper="0.0" velocity="0.0001"/>
     <!--<dynamics damping="0.05" friction="0.0"/>-->
-    <origin rpy="-0 0 3.14159" xyz="-0.05 -0.05 0"/>
+    <origin rpy="-0.3 0 3.14159" xyz="-0.04 -0.04 0.03"/>
     <parent link="palm"/>
     <child link="RBseg1"/>
   </joint>
@@ -2424,6 +2464,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg2">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2431,7 +2472,7 @@
   </gazebo>
   <joint name="RBseg1_RBseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.83680555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.83680555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg1"/>
@@ -2483,6 +2524,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg3">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2490,7 +2532,7 @@
   </gazebo>
   <joint name="RBseg2_RBseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.68055555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.68055555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg2"/>
@@ -2542,6 +2584,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg4">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2549,7 +2592,7 @@
   </gazebo>
   <joint name="RBseg3_RBseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.53125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.53125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg3"/>
@@ -2601,6 +2644,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg5">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2608,7 +2652,7 @@
   </gazebo>
   <joint name="RBseg4_RBseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.38888888889" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.38888888889" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg4"/>
@@ -2660,6 +2704,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg6">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2667,7 +2712,7 @@
   </gazebo>
   <joint name="RBseg5_RBseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.25347222222" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.25347222222" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg5"/>
@@ -2719,6 +2764,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg7">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2726,7 +2772,7 @@
   </gazebo>
   <joint name="RBseg6_RBseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg6"/>
@@ -2778,6 +2824,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg8">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2785,7 +2832,7 @@
   </gazebo>
   <joint name="RBseg7_RBseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.00347222222" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="1.00347222222" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg7"/>
@@ -2837,6 +2884,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg9">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2844,7 +2892,7 @@
   </gazebo>
   <joint name="RBseg8_RBseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.888888888889" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.888888888889" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg8"/>
@@ -2896,6 +2944,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg10">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2903,7 +2952,7 @@
   </gazebo>
   <joint name="RBseg9_RBseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.78125" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.78125" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg9"/>
@@ -2955,6 +3004,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg11">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2962,7 +3012,7 @@
   </gazebo>
   <joint name="RBseg10_RBseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.680555555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.680555555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg10"/>
@@ -3014,6 +3064,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg12">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -3021,7 +3072,7 @@
   </gazebo>
   <joint name="RBseg11_RBseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.586805555556" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="0.586805555556" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg11"/>

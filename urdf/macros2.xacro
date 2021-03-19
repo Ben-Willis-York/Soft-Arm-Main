@@ -43,18 +43,21 @@
 		
 	</link>
 	<gazebo reference="${name}">
+		<!--plugin name='main_description' filename='libmain_description.so'/>-->
 		<mu1>20000</mu1>
 		<mu2>20000</mu2>
 		<selfCollide>true</selfCollide>
 		<gravity>true</gravity>
+		
 	</gazebo>
+	
 </xacro:macro>
 
 
 <xacro:macro name="seg_joint" params="seg1 seg2 length force">
 	<joint name="${seg1}_${seg2}_joint" type="revolute">
 		<axis xyz="1 0 0"/>
-		<limit effort="${force}" lower="-0.25" upper="0.25" velocity="0.001"/>
+		<limit effort="${force}" lower="-2" upper="2" velocity="0.001"/>
 		<dynamics damping="0.05" friction="0.0"/>
 		<origin xyz="0 0 ${length}" rpy="0 0 0"/>
 		<parent link="${seg1}"/>
@@ -62,6 +65,7 @@
 	</joint>
 	<gazebo reference="${seg1}_${seg2}_joint">
   		<implicitSpringDamper>True</implicitSpringDamper>
+		
 	</gazebo>
 </xacro:macro>
 
@@ -69,7 +73,7 @@
 <xacro:macro name="seg_joint_offset" params="seg1 seg2 length offset rotation force">
 	<joint name="${seg1}_${seg2}_joint" type="revolute">
 		<axis xyz="1 0 0"/>
-		<limit effort="${force}" lower="-0.1" upper="0.1" velocity="0.0001"/>
+		<limit effort="${force}" lower="-0.0" upper="0.0" velocity="0.0001"/>
 		<!--<dynamics damping="0.05" friction="0.0"/>-->
 		<origin xyz="${offset}" rpy="${rotation}"/>
 		<parent link="${seg1}"/>

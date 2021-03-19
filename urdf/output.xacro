@@ -41,16 +41,19 @@
 </joint>
 
 <gazebo>
-  <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-	<robotNamespace />
-  </plugin>
+  	<plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+		<robotNamespace />
+  	</plugin>
+ 	<plugin filename="libmain_description.so" name="main_description">
+		<kConstant> 0.4 </kConstant>
+	</plugin>
 </gazebo>
 
 
  <!--  MACROS FOR FINGER: LT-->
 
 <xacro:seg name= "LTseg1" length = "0.0125" height = "0.02" width = "0.02" />
-<xacro:seg_joint_offset seg1= "palm" seg2="LTseg1" length="0.0125" offset="0.05 0.05 0" rotation="-0 0 0" force="2.0" />
+<xacro:seg_joint_offset seg1= "palm" seg2="LTseg1" length="0.0125" offset="0.04 0.04 0.03" rotation="-0.3 0 0" force="2.0" />
 <xacro:seg_trans seg1="palm" seg2="LTseg1"/>
 <xacro:segment name= "LTseg2" parent="LTseg1" length="0.0125" height="0.0191666666667" width = "0.0191666666667" force = "1.83680555556" />
 <xacro:segment name= "LTseg3" parent="LTseg2" length="0.0125" height="0.0183333333333" width = "0.0183333333333" force = "1.68055555556" />
@@ -67,7 +70,7 @@
  <!--  MACROS FOR FINGER: RT-->
 
 <xacro:seg name= "RTseg1" length = "0.0125" height = "0.02" width = "0.02" />
-<xacro:seg_joint_offset seg1= "palm" seg2="RTseg1" length="0.0125" offset="0.05 -0.05 0" rotation="-0 0 3.14159" force="2.0" />
+<xacro:seg_joint_offset seg1= "palm" seg2="RTseg1" length="0.0125" offset="0.04 -0.04 0.03" rotation="-0.3 0 3.14159" force="2.0" />
 <xacro:seg_trans seg1="palm" seg2="RTseg1"/>
 <xacro:segment name= "RTseg2" parent="RTseg1" length="0.0125" height="0.0191666666667" width = "0.0191666666667" force = "1.83680555556" />
 <xacro:segment name= "RTseg3" parent="RTseg2" length="0.0125" height="0.0183333333333" width = "0.0183333333333" force = "1.68055555556" />
@@ -84,7 +87,7 @@
  <!--  MACROS FOR FINGER: LB-->
 
 <xacro:seg name= "LBseg1" length = "0.0125" height = "0.02" width = "0.02" />
-<xacro:seg_joint_offset seg1= "palm" seg2="LBseg1" length="0.0125" offset="-0.05 0.05 0" rotation="-0 0 0" force="2.0" />
+<xacro:seg_joint_offset seg1= "palm" seg2="LBseg1" length="0.0125" offset="-0.04 0.04 0.03" rotation="-0.3 0 0" force="2.0" />
 <xacro:seg_trans seg1="palm" seg2="LBseg1"/>
 <xacro:segment name= "LBseg2" parent="LBseg1" length="0.0125" height="0.0191666666667" width = "0.0191666666667" force = "1.83680555556" />
 <xacro:segment name= "LBseg3" parent="LBseg2" length="0.0125" height="0.0183333333333" width = "0.0183333333333" force = "1.68055555556" />
@@ -101,7 +104,7 @@
  <!--  MACROS FOR FINGER: RB-->
 
 <xacro:seg name= "RBseg1" length = "0.0125" height = "0.02" width = "0.02" />
-<xacro:seg_joint_offset seg1= "palm" seg2="RBseg1" length="0.0125" offset="-0.05 -0.05 0" rotation="-0 0 3.14159" force="2.0" />
+<xacro:seg_joint_offset seg1= "palm" seg2="RBseg1" length="0.0125" offset="-0.04 -0.04 0.03" rotation="-0.3 0 3.14159" force="2.0" />
 <xacro:seg_trans seg1="palm" seg2="RBseg1"/>
 <xacro:segment name= "RBseg2" parent="RBseg1" length="0.0125" height="0.0191666666667" width = "0.0191666666667" force = "1.83680555556" />
 <xacro:segment name= "RBseg3" parent="RBseg2" length="0.0125" height="0.0183333333333" width = "0.0183333333333" force = "1.68055555556" />
