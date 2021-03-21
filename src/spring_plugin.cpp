@@ -69,6 +69,7 @@ namespace gazebo
       this->rosQueueThread = std::thread(std::bind(&SpringJoint::QueueThread, this));
 
       this->kConstant = _sdf->Get<double>("kConstant");
+      this->rosNode->setParam("/Design/kConstant", this->kConstant);
 
       std::cerr << "K = " << this->kConstant << std::endl;
       
@@ -119,6 +120,7 @@ namespace gazebo
     {
       this->kConstant = _msg->data;
       std::cerr << this->kConstant << std::endl;
+      this->rosNode->setParam("/Design/kConstant", this->kConstant);
     }
 
     private: void QueueThread()

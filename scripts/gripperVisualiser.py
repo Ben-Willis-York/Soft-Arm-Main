@@ -11,8 +11,13 @@ from sensor_msgs.msg import JointState
 import geometry_msgs.msg
 from tf.transformations import euler_from_quaternion
 
+import colorsys
+
 import roslib; roslib.load_manifest('urdfdom_py')
 from urdf_parser_py.urdf import URDF
+
+JOINT_RESOLUTION = 12
+FINGER_LENGTH = 0.15*1000
 
 class Joint(object):
     def __init__(self, name, parent, child, limits=[-150,150]):
@@ -76,9 +81,6 @@ class StrainSensor(object):
                 next = jointLinks[next].next
         self.joints.append(jointLinks[self.endJoint])
             
-        for j in self.joints:
-            print(j.name)
-
     def getPositions(self):
         startTransform = getTransform("palm", self.startJoint).transform
         self.startCenter = Vector2(startTransform.y*1000, startTransform.z*1000)
@@ -135,12 +137,28 @@ class StrainSensor(object):
         self.getStrains(jointLinks)
 
     def draw(self, dis):
-        for p in self.outsidePositions:
-            dis.drawCircle(p.x, p.y, 2, fill = "red")
-        for p in self.insidePositions:
-            dis.drawCircle(p.x, p.y, 2, fill = "green")
+        if(options["showSides"].get()):
+            for p in self.outsidePositions:
+                dis.drawCircle(p.x, p.y, 2, fill = "red")
+            for p in self.insidePositions:
+                dis.drawCircle(p.x, p.y, 2, fill = "green")
 
 
+class JointImaginary(object):
+    def __init__(self, name):
+        self.name = name
+        self.pos = Vector2(0,0)
+        self.dir = Vector2(0,0)
+        self.perp = Vector2(0,0)
+
+        self.next = None
+        self.previous = None
+
+    def draw(self, dis, jointLinks, fill="green"):
+        if(self.next != None):
+            dis.drawLine(self.pos.x, self.pos.y, 
+                        jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill=fill)
+        dis.drawCircle(self.pos.x, self.pos.y, 2, fill=fill)
 
 
 class JointLink(object):
@@ -162,6 +180,9 @@ class JointLink(object):
         self.predictedPerp = Vector2(0,0)
         
     def update(self, jointLinks):
+        #print(self.name)
+        #print(jointLinks.keys())
+        #print 
         transform = getTransform("palm", self.link).transform
         self.pos = Vector2(transform.translation.y*1000, transform.translation.z*1000)
 
@@ -189,15 +210,11 @@ class JointLink(object):
         self.inside = self.pos + self.perp*10
         self.outside = self.pos - self.perp*10
 
-    def draw(self, dis, jointLinks):
-        #dis.drawLine(p1.x, p1.y, p1.x +dir.x, p1.y+dir.y)
-        #dis.drawCircle(self.pos.x, self.pos.y, 2)
-        if(self.next != None):
-            dis.drawLine(self.pos.x, self.pos.y, 
-                        jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill="blue")
-        #dis.drawCircle(self.predictedPos.x, self.predictedPos.y, 2, fill = "blue")
-        #dis.drawCircle(self.outside.x, self.outside.y, 2)
-        #dis.drawCircle(self.inside.x, self.inside.y, 2)
+    def draw(self, dis, jointLinks, fill="red"):
+        #if(self.next != None):
+        #    dis.drawLine(self.pos.x, self.pos.y, 
+        #                jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill=fill)
+        dis.drawCircle(self.pos.x, self.pos.y, 2, fill=fill)
 
 
 
@@ -209,6 +226,268 @@ def getJoint(name):
     return False
 
 
+class Finger(object):
+    def __init__(self, base, jointLinks):
+        self.jointLinks = jointLinks
+        self.base = base
+        self.jointNames = []
+        self.realJoints = {}
+        self.predictedJoints = {}
+        self.expectedJoints = {}
+        self.forces = []
+        self.sensors = []
+        self.K = 0.4
+        self.sign = 1
+
+        self.getJoints()
+
+    def addSensor(self, start, end, offset):
+        if start in self.jointNames and end in self.jointNames:
+            self.sensors.append(StrainSensor(start, end, offset, self.jointLinks))
+        else:
+            print("Not available")
+            print(self.jointNames)
+
+    def getJoints(self):
+        current = self.base
+        while current != None:
+            self.realJoints[current] = self.jointLinks[current]
+            self.jointNames.append(current)
+            self.forces.append(0)
+            current = self.jointLinks[current].next
+        
+        for j in self.realJoints.values():
+            pred = JointImaginary(j.name)
+            pred.next = j.next
+            pred.previous = j.previous
+            self.predictedJoints[pred.name] = pred
+
+            exp = JointImaginary(j.name)
+            exp.next = j.next
+            exp.previous = j.previous
+            self.expectedJoints[exp.name] = exp
+
+
+        t = getTransform("palm", self.jointLinks[self.base].link).transform
+        eulers = quaternionToEuler(t.rotation.x, t.rotation.y, t.rotation.z, t.rotation.w)
+        self.sign = int(cos(eulers[2]))
+        print(self.sign)
+        print("Joints for finger base: %s" % self.base)
+        print(self.jointNames)
+        print 
+            
+    def getRadiusFromLengths(self, length1, length2): 
+        if(length1 > length2):
+            l1 = length1
+            l2 = length2
+            sign = -1
+        else:
+            l1 = length2
+            l2 = length1
+            sign = 1
+        offset = 10
+
+        R = ((l2*offset)/(l1-l2) + offset) * sign
+        theta = l1/R
+        return R, theta
+
+    def getPrediction(self, dis):
+
+        path = []
+
+        for s in range(len(self.sensors)):
+            sensor = self.sensors[s]
+            if(s == 0):
+                baseJoint = self.predictedJoints[self.sensors[s].startJoint]
+                outsideLength, insideLength, centerLength = sensor.outsideLength, sensor.insideLength, sensor.centerLength
+            else:
+                prev = self.sensors[s-1]
+                baseJoint = self.predictedJoints[prev.endJoint]
+                outsideLength = sensor.outsideLength - prev.outsideLength
+                insideLength = sensor.insideLength - prev.insideLength
+                centerLength = sensor.centerLength - prev.centerLength
+
+            endJoint = self.predictedJoints[sensor.endJoint]
+
+
+            if(outsideLength < insideLength):
+                radius, theta = self.getRadiusFromLengths(outsideLength, centerLength)
+            else:
+                radius, theta = self.getRadiusFromLengths(centerLength,insideLength)
+
+            center = baseJoint.pos + baseJoint.perp * radius
+
+
+
+            globalTheta = theta - baseJoint.perp.Angle()
+            end = center + Vector2(radius*cos(pi-globalTheta), radius*sin(pi-globalTheta))
+
+            startTheta = baseJoint.perp.Angle()
+            endTheta = theta - startTheta
+            interval = theta/10
+
+            for i in range(10):
+                globalTheta = pi - interval*i + startTheta
+                path.append(center + Vector2(radius*cos(globalTheta), radius*sin(globalTheta)))
+            path.append(end)
+
+            endJoint.pos = end
+            endJoint.perp = (center-end).Normalise()* (radius/abs(radius))
+
+            if options["showNormals"].get():
+                p2 = endJoint.pos + endJoint.perp*20
+                dis.drawLine(endJoint.pos.x, endJoint.pos.y, p2.x, p2.y, fill = "red")
+            if options["showSensors"].get():
+                dis.drawCircle(end.x, end.y, 4, fill="yellow")
+            if options["showCenters"].get():
+                dis.drawCircle(center.x, center.y, 3, fill="blue")
+            if options["showCircles"].get():
+                dis.drawCircle(center.x, center.y, radius)
+        
+
+        
+        for i in range(12, 40):
+            globalTheta = pi - interval*i + startTheta
+            path.append(center + Vector2(radius*cos(globalTheta), radius*sin(globalTheta)))
+  
+        segLength = FINGER_LENGTH/JOINT_RESOLUTION
+
+        for j in range(len(self.jointNames)):
+            targetDist = segLength*j
+            dist = 0
+            n = 0
+            while abs(targetDist-dist) > 1 and targetDist > dist:
+                dist += (path[n+1] - path[n]).Mag()
+                n+=1
+            self.predictedJoints[self.jointNames[j]].pos = path[n]
+
+        for j in self.predictedJoints.values():
+            if j.next != None:
+                j.dir = (self.predictedJoints[j.next].pos - j.pos).Normalise()
+        
+        ''' END CASE '''
+        targetDist = segLength*len(self.jointNames)
+        dist = 0
+        n = 0
+        while abs(targetDist-dist) > 1 and targetDist > dist:
+            dist += (path[n+1] - path[n]).Mag()
+            n+=1
+        self.predictedJoints[self.jointNames[-1]].dir = (path[n] - self.predictedJoints[self.jointNames[-1]].pos).Normalise()
+        
+    def getExpected(self, dis, efforts):
+        self.K = rospy.get_param("/Design/kConstant")
+        segLength = FINGER_LENGTH/JOINT_RESOLUTION
+
+        effort = efforts[0]
+
+        next=self.expectedJoints[self.base].next
+        while next != None:
+            prev = self.expectedJoints[self.expectedJoints[next].previous]
+            expected = self.expectedJoints[next]
+
+            expectedAngle =  prev.dir.Angle() + (effort/self.K)
+            
+            expected.pos = prev.pos + prev.dir * segLength
+            expected.dir = Vector2(cos(expectedAngle), sin(expectedAngle))
+            expected.perp = Vector2(-expected.dir.y, expected.dir.x)
+            next = expected.next
+
+    def update(self):
+        self.predictedJoints[self.base].pos = self.realJoints[self.base].pos
+        self.predictedJoints[self.base].perp = self.realJoints[self.base].perp
+
+        self.expectedJoints[self.base].pos = self.realJoints[self.base].pos
+        self.expectedJoints[self.base].perp = self.realJoints[self.base].perp
+        self.expectedJoints[self.base].dir = self.realJoints[self.base].dir
+
+        for j in self.realJoints.values():
+            j.update(self.realJoints)
+        for s in self.sensors:
+            s.update(self.realJoints)
+
+    def drawForces(self, dis):
+        maxSeen = 0
+        maxForce = 0.05
+
+        expectedAngles = []
+        predictedAngles = []
+        relativeAngles = []
+
+        for j in self.jointNames:
+            expected = self.expectedJoints[j]
+            predicted = self.predictedJoints[j]
+            
+            if(expected.previous):
+                expectedRelativeAngle = expected.dir.AngleBetween(self.expectedJoints[expected.previous].dir)
+            else:
+                expectedRelativeAngle = expected.dir.Angle()
+            if(predicted.previous):
+                predictedRelativeAngle = predicted.dir.AngleBetween(self.predictedJoints[predicted.previous].dir)
+            else:
+                predictedRelativeAngle = predicted.dir.Angle()
+
+
+            relativeAngle = abs(expectedRelativeAngle - predictedRelativeAngle)
+            while relativeAngle > 2*pi:
+                relativeAngle -= 2*pi
+            while relativeAngle < 0:
+                relativeAngle += 2*pi
+
+            expectedAngles.append(expectedRelativeAngle)
+            predictedAngles.append(predictedRelativeAngle)
+            relativeAngles.append(relativeAngle)
+
+            force = self.K * relativeAngle
+
+            #force = 1
+            if(force > maxSeen):
+                maxSeen = force
+            
+            hue = mapper(force, 0, maxForce, 0.3, 1)
+            col = colorsys.hsv_to_rgb(1-hue, 1, 1)
+            #print(hue)
+
+            #force = 0.03
+            #print(force)
+            g = 255-mapper(abs(0.5*maxForce-force), 0, 0.4*maxForce, 0, 255)
+            #g = mapper(force, 0.25*maxForce, 0.75*maxForce, 0, 255)
+            #g = ((max(0.25,min(0.75,force)) - 0.25)*2)*255
+
+            r = mapper(force, 0.2*maxForce, 1*maxForce, 0, 255)
+            #r = ((max(0.5, min(1, force)) - 0.5)*2)*255
+            b = 255 - mapper(force, 0.0*maxForce, 0.8*maxForce, 0, 255)
+            #b = (0.5 - (max(0, min(0.5, force)))) * 2 * 255
+            
+            #col = (int(r), int(g), int(b))
+            col = (col[0]*255, col[1]*255, col[2]*255)
+
+            #print(col)
+
+            col = "#%02x%02x%02x" % (col[0] ,col[1] ,col[2])
+            self.predictedJoints[j].draw(dis, self.predictedJoints, fill=col)
+        #print 
+        #print(maxSeen)
+        #print(expectedAngles)
+        #print(predictedAngles)
+        #print(relativeAngles)
+
+    def draw(self, dis, efforts):
+        self.getPrediction(dis)
+        self.getExpected(dis, efforts)
+        for s in self.sensors:
+            s.draw(dis)
+        if options["showReal"].get():
+            for j in self.realJoints.values():
+                j.draw(dis, self.realJoints, fill="green")
+        if options["showExpected"].get():
+            for j in self.expectedJoints.values():
+                j.draw(dis, self.expectedJoints, fill="blue")
+        if options["showPredicted"].get():
+            for j in self.predictedJoints.values():
+                j.draw(dis, self.predictedJoints, fill="red")
+        if options["showForces"].get():
+            self.drawForces(dis)
+
 class Gripper(object):
     def __init__(self):
         self.jointNames = rospy.get_param("/hand_controller/joints")
@@ -218,11 +497,16 @@ class Gripper(object):
         self.jointLinks = {}
         self.fingerBases = []
         self.sensors = []
+        self.fingers  = []
+        self.efforts = [0]
+        rospy.Subscriber("/hand_controller/command", Float64MultiArray, self.storeEfforts)
+
+    def storeEfforts(self, x):
+        self.efforts = x.data
 
     def setup(self):
         #Add joints with corrosponding links
         for j in self.jointNames:
-
             self.jointLinks[j] = JointLink(j)
             self.jointLinks[j].link = self.robot.joint_map[j].child
 
@@ -238,15 +522,20 @@ class Gripper(object):
                 self.fingerBases.append(j)
                 self.jointLinks[j].predictedPerp = self.jointLinks[j].perp
                 self.jointLinks[j].predictedPos = self.jointLinks[j].pos
-        #print(self.fingerBases)
 
-        self.sensors.append(StrainSensor("palm_LTseg1_joint", "LTseg3_LTseg4_joint", 10, self.jointLinks))
-        self.sensors.append(StrainSensor("palm_LTseg1_joint", "LTseg7_LTseg8_joint", 10, self.jointLinks))
-        self.sensors.append(StrainSensor("palm_LTseg1_joint", "LTseg9_LTseg10_joint", 10, self.jointLinks))
-        self.sensors.append(StrainSensor("palm_LTseg1_joint", "LTseg11_LTseg12_joint", 10, self.jointLinks))
+        for b in self.fingerBases[1:2]:
+            self.fingers.append(Finger(b, self.jointLinks))
 
-    def getRadiusFromLengths(self, length1, length2):
-    
+        prefixes = ["LT", "LB", "RT", "RB"]
+        prefixes = ["LT"]
+        for p in prefixes:
+            for f in self.fingers:
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg7_%sseg8_joint" % (p,p) , 10)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg9_%sseg10_joint" % (p,p) , 10)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg11_%sseg12_joint" % (p,p), 10)
+
+    def getRadiusFromLengths(self, length1, length2): 
         if(length1 > length2):
             l1 = length1
             l2 = length2
@@ -261,7 +550,7 @@ class Gripper(object):
         theta = l1/R
         return R, theta
 
-    def getPridiction(self, dis):
+    def getPrediction(self, dis):
         
         path = []
 
@@ -286,8 +575,8 @@ class Gripper(object):
                 radius, theta = self.getRadiusFromLengths(centerLength,insideLength)
 
             center = baseJoint.predictedPos + baseJoint.predictedPerp * radius
-            #dis.drawCircle(center.x, center.y, 3, fill="blue")
-            #dis.drawCircle(center.x, center.y, radius)
+
+
 
             globalTheta = theta - baseJoint.predictedPerp.Angle()
             end = center + Vector2(radius*cos(pi-globalTheta), radius*sin(pi-globalTheta))
@@ -308,8 +597,15 @@ class Gripper(object):
             
             #dis.drawLine(baseJoint.predictedPos.x, baseJoint.predictedPos.y, baseJoint.predictedPos.x+(baseJoint.predictedPerp.x*30), baseJoint.predictedPos.y+(baseJoint.predictedPerp.y*30), fill = "blue")
             #dis.drawLine(baseJoint.pos.x, baseJoint.pos.y, baseJoint.pos.x+(baseJoint.perp.x*30), baseJoint.pos.y+(baseJoint.perp.y*30), fill = "red")
-
-            dis.drawCircle(end.x, end.y, 4, fill="yellow")
+            if showNormals.get():
+                p2 = endJoint.predictedPos + endJoint.predictedPerp*20
+                dis.drawLine(endJoint.predictedPos.x, endJoint.predictedPos.y, p2.x, p2.y, fill = "red")
+            if showSensors.get():
+                dis.drawCircle(end.x, end.y, 4, fill="yellow")
+            if showCenters.get():
+                dis.drawCircle(center.x, center.y, 3, fill="blue")
+            if showCircles.get():
+                dis.drawCircle(center.x, center.y, radius)
         
         for p in range(len(path)-1):
             #dis.drawCircle(path[p].x, path[p].y, 2)
@@ -324,7 +620,6 @@ class Gripper(object):
             end = next
             
             next = self.jointLinks[next].next
-        print(end)
 
         perp1 = (self.jointLinks[base].inside - self.jointLinks[base].outside)*1
         perp2 = (self.jointLinks[end].inside - self.jointLinks[end].outside)*3
@@ -405,7 +700,6 @@ class Gripper(object):
         
         p = getTransform("palm", self.jointLinks[base].link).transform
         eulers = quaternionToEuler(p.rotation.x, p.rotation.y, p.rotation.z, p.rotation.w)
-        print(eulers)
         p = Vector2(p.translation.y*1000, p.translation.z*1000)
         dis.drawLine(p.x, p.y, p.x+100*cos(eulers[0]), p.y+100*sin(eulers[0]))
         
@@ -417,27 +711,21 @@ class Gripper(object):
         dis.drawCircle()
 
     def update(self):
-        for j in self.jointLinks.values():
-            j.update(self.jointLinks)
-        for j in self.fingerBases:
-            self.jointLinks[j].predictedPerp = self.jointLinks[j].perp
-            self.jointLinks[j].predictedPos = self.jointLinks[j].pos
+        for f in self.fingers:
+            f.update()
+        #for j in self.jointLinks.values():
+            #j.update(self.jointLinks)
+        #for j in self.fingerBases:
+        #    self.jointLinks[j].predictedPerp = self.jointLinks[j].perp
+        #    self.jointLinks[j].predictedPos = self.jointLinks[j].pos
 
-        for s in self.sensors:
-            s.update(self.jointLinks)
+        #for s in self.sensors:
+        #    s.update(self.jointLinks)
         
     def draw(self, dis):
-        self.getPridiction(dis)
-        #for s in self.sensors:
-            #s.draw(dis)
-        for next in self.fingerBases[1:2]:
-            while next != None:
-                self.jointLinks[next].draw(dis, self.jointLinks)
-                next = self.jointLinks[next].next
-            #self.calcCurve2(dis, b)
-        #self.calcCurve(dis)
-        #for j in self.jointLinks.values():
-            #j.draw(dis)
+        for f in self.fingers:
+            f.draw(dis, self.efforts)
+
         
 def getTransform(link1, link2,  timeout=5):
 
@@ -480,10 +768,15 @@ def scrollerUp(event):
     global radi
     radi += 2
 
-
 def scrollerDown(event):
     global radi
     radi -= 2
+
+def mapper(value, lower, upper, v1, v2):
+    value = max(lower, min(upper, value))
+    frac = (value-lower)/(upper-lower)
+    output = v1 + (v2-v1)*frac
+    return output
 
 
 radi = 50
@@ -492,11 +785,30 @@ root = Tk()
 root.bind("<Motion>", setMouse)
 root.bind("<Button-4>", scrollerUp)
 root.bind("<Button-5>", scrollerDown)
+
 d = display.Display(root)
 d.scale = 2
 
+options = {}
+labels = ["showReal", "showSensors", "showCenters", "showCircles", "showNormals", "showSides", "showExpected", "showPredicted", "showForces"]
+for l in labels:
+    options[l] = BooleanVar(False)
+
+
+options["showForces"].set(True)
+Checkbutton(root, text="Show Sensors", variable=options["showSensors"]).place(x = 10, y = 20)
+Checkbutton(root, text="Show Centers", variable=options["showCenters"]).place(x = 10, y = 40)
+Checkbutton(root, text="Show Circles", variable=options["showCircles"]).place(x = 10, y = 60)
+Checkbutton(root, text="Show Normals", variable=options["showNormals"]).place(x = 10, y = 80)
+Checkbutton(root, text="Show Sides", variable=options["showSides"]).place(x = 10, y = 100)
+Checkbutton(root, text="Show Expected", variable=options["showExpected"]).place(x = 10, y = 120)
+Checkbutton(root, text="Show Predicted", variable=options["showPredicted"]).place(x = 10, y = 140)
+Checkbutton(root, text="Show Forces", variable=options["showForces"]).place(x = 10, y = 160)
+Checkbutton(root, text="Show Real", variable=options["showReal"]).place(x = 10, y=190)
+
 rospy.init_node('gripperController', anonymous=True)
 rospy.logerr("controller starting")
+
 
 tfBuffer = tf2_ros.Buffer()
 listener = tf2_ros.TransformListener(tfBuffer)
@@ -506,139 +818,19 @@ g.setup()
 
 print("Setup complete")
 
-while True:
+rate = rospy.Rate(100)
+
+while not rospy.is_shutdown():
     d.clear()
     g.update()
     #g.calcStrains(d)
     g.draw(d)
     d.display()
+    rate.sleep()
     #print("<----------->")
     #t1 = getTransform("palm", "LTseg3").transform.rotation
     #print(quaternionToEuler(t1.x, t1.y, t1.z, t1.w))
     #print("-----------")
     #t1 = getTransform("palm", "RTseg3").transform.rotation
     #print(quaternionToEuler(t1.x, t1.y, t1.z, t1.w))
-
-
-
-
-joints = []
-links = []
-
-jointLinks = {}
-
-jointNames = rospy.get_param("/hand_controller/joints")
-robot = URDF.from_xml_string(rospy.get_param("/robot_description"))
-
-link_map = robot.link_map
-joint_map = robot.joint_map
-
-for j in jointNames:
-    joints.append(robot.joint_map[j])
-
-    jointLinks[j] = JointLink(j)
-    jointLinks[j].link = robot.joint_map[j].child
-
-    #print(joints[-1].child)
-    if(robot.link_map[joints[-1].child] not in links):
-        links.append(robot.link_map[joints[-1].child])
-    if(robot.link_map[joints[-1].parent] not in links):
-        links.append(robot.link_map[joints[-1].parent])
-
-for j in jointLinks.keys():
-    link = jointLinks[j].link
-    for i in jointLinks.keys():
-        if(joint_map[i].child == joint_map[j].parent):
-            jointLinks[j].previous = i
-        if(joint_map[i].parent == link):
-            jointLinks[j].next = i
-
-
-
-
-
-
-j = "palm_LTseg1_joint"
-while j != None:
-
-    output = jointLinks[j].name
-    if(jointLinks[j].previous):
-        output += "  ," + jointLinks[j].previous
-    if(jointLinks[j].next):
-        output += "  ," + jointLinks[j].next
-    print(output)
-
-    j = jointLinks[j].next
-
-#print(robot.joint_map)
-
-#print(jointNames)
-
-for l in links:
-    transform = getTransform("palm", l.name)
-    
-
-maxEffort = 1
-
-while True:
-    root.update()
-    d.clear()
-
-
-    efforts = []
-    jointState = rospy.wait_for_message("joint_states", JointState)
-
-    for j in joints:
-        for i in range(len(jointState.name)):
-            if(j.name == jointState.name[i]):
-                efforts.append(jointState.effort[i])
-                effort = jointState.effort[i]
-                break
-        parent = j.parent
-        child = j.child
-        
-        
-    
-        t1 = getTransform("palm", j.parent).transform
-        t2 = getTransform("palm", j.child).transform
-        p1 = t1.translation
-        p2 = t2.translation
-        r1 = t1.rotation
-        r2 = t2.rotation
-        p1 = Vector2(p1.y*1000, p1.z*1000)
-        p2 = Vector2(p2.y*1000, p2.z*1000)
-
-        if(j.name == "LTseg1_LTseg2_joint"):
-            #print(r2)
-            pass
-
-        if(effort != 0):
-            mag = math.log(abs(effort*1000))
-        else:
-            mag = 0
-        mag = float(mag)/float(maxEffort)
-
-        r = max(0.0, min(255.0, mag*255.0))
-        b = max(-1.0, min(0.0, mag)) * -255.0
-
-        col = '#%02x%02x%02x' % (int(r), 0, int(b))
-        #d.drawLine(p1.x, p1.y, p2.x, p2.y, fill=col)
-        #d.drawCircle(p2.x, p2.y, 3, fill = col)
-        
-        jointLinks[j.name].draw(d)
-    #for l in links:
-        #trans = getTransform("palm", l.name)
-        #print trans
-        #d.drawCircle(trans.transform.translation.y*1000, trans.transform.translation.z*1000, 5)
-    d.display()
-#     for j in jointNames:
-
-#         parent = getJoint(j.parent.name)
-#         child = getJoint(j.child.name)
-
-#         if(parent != False and child != False):
-#             parent.child = child
-#             child.parent = parent
-#         elif(parent != False):
-#             child = Joint(j.child)
 

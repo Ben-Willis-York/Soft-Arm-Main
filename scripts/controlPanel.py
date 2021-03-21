@@ -285,7 +285,7 @@ class ControlPanel():
 
         self.angleControl = RadialDisplay(self.root, self.solver, self.controller, VectorClass.Vector2(300,10))
 
-        self.graspControl = Scale(self.root, from_=-1, to=1, resolution=0.01, label = "Grasp", command = lambda x: self.controller.setGrasp(x))
+        self.graspControl = Scale(self.root, from_=-1, to=1, resolution=0.01, label = "Grasp")
         self.graspControl.place(x=500, y=20)
 
         for l in linksNoBase:
@@ -295,8 +295,8 @@ class ControlPanel():
 
         #self.controller.setJointStatesWithBase([0,0,0,0])
         
-    def grasp(self):
-        print("yo")
+    def sendGraspCommand(self):
+        self.controller.setGrasp(self.graspControl.get())
 
     def GetLinks(self):
         jointNames = rospy.get_param("/arm_controller/joints")
@@ -394,13 +394,14 @@ class ControlPanel():
         self.solver.draw(self.horizontalDisplay)
         self.preview.drawArm(self.horizontalDisplay, fill="red")
         self.horizontalDisplay.display()
+        self.sendGraspCommand()
         
 
 
 
 if __name__ == '__main__':
     rospy.init_node('newController', anonymous=True)
-    rospy.logerr("controller starting")
+    rospy.loginfo("controller starting")
     rate = rospy.Rate(100)
     panel = ControlPanel()
     panel.setup()

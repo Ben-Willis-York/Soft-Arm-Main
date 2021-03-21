@@ -142,6 +142,15 @@ class Vector2(object):
     def Angle(self):
         return math.atan2(self.y, self.x)
 
+    def AngleBetween(self, other):
+        if(type(other) == Vector2):
+            try:
+                return math.acos(self.Dot(other))
+            except:
+                return 0
+        else:
+            raise TypeError
+
     def Cross(self, other):
         pass
 

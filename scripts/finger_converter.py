@@ -105,6 +105,7 @@ def convertFingers(root):
                 geom = baseGeom - (interval*n)
                 area = geom.x * geom.y
                 force = baseForce * (area/baseArea)
+                force = baseForce
                 segName = name+"seg" +str(n+1)
                 parentName = name+"seg" +str(n)
                 addedLines.append('<xacro:segment name= "%s" parent="%s" length="%s" height="%s" width = "%s" force = "%s" />\n' % (segName, parentName, leng, str(geom.y), str(geom.x), str(force)))

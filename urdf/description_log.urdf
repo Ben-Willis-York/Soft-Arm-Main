@@ -318,7 +318,7 @@
   </gazebo>
   <joint name="LTseg1_LTseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.83680555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg1"/>
@@ -378,7 +378,7 @@
   </gazebo>
   <joint name="LTseg2_LTseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.68055555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg2"/>
@@ -438,7 +438,7 @@
   </gazebo>
   <joint name="LTseg3_LTseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.53125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg3"/>
@@ -498,7 +498,7 @@
   </gazebo>
   <joint name="LTseg4_LTseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.38888888889" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg4"/>
@@ -558,7 +558,7 @@
   </gazebo>
   <joint name="LTseg5_LTseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.25347222222" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg5"/>
@@ -618,7 +618,7 @@
   </gazebo>
   <joint name="LTseg6_LTseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg6"/>
@@ -678,7 +678,7 @@
   </gazebo>
   <joint name="LTseg7_LTseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.00347222222" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg7"/>
@@ -738,7 +738,7 @@
   </gazebo>
   <joint name="LTseg8_LTseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.888888888889" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg8"/>
@@ -798,7 +798,7 @@
   </gazebo>
   <joint name="LTseg9_LTseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.78125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg9"/>
@@ -858,7 +858,7 @@
   </gazebo>
   <joint name="LTseg10_LTseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.680555555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg10"/>
@@ -918,7 +918,7 @@
   </gazebo>
   <joint name="LTseg11_LTseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.586805555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg11"/>
@@ -1036,7 +1036,7 @@
   </gazebo>
   <joint name="RTseg1_RTseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.83680555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg1"/>
@@ -1096,7 +1096,7 @@
   </gazebo>
   <joint name="RTseg2_RTseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.68055555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg2"/>
@@ -1156,7 +1156,7 @@
   </gazebo>
   <joint name="RTseg3_RTseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.53125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg3"/>
@@ -1216,7 +1216,7 @@
   </gazebo>
   <joint name="RTseg4_RTseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.38888888889" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg4"/>
@@ -1276,7 +1276,7 @@
   </gazebo>
   <joint name="RTseg5_RTseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.25347222222" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg5"/>
@@ -1336,7 +1336,7 @@
   </gazebo>
   <joint name="RTseg6_RTseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg6"/>
@@ -1396,7 +1396,7 @@
   </gazebo>
   <joint name="RTseg7_RTseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.00347222222" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg7"/>
@@ -1456,7 +1456,7 @@
   </gazebo>
   <joint name="RTseg8_RTseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.888888888889" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg8"/>
@@ -1516,7 +1516,7 @@
   </gazebo>
   <joint name="RTseg9_RTseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.78125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg9"/>
@@ -1576,7 +1576,7 @@
   </gazebo>
   <joint name="RTseg10_RTseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.680555555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg10"/>
@@ -1636,7 +1636,7 @@
   </gazebo>
   <joint name="RTseg11_RTseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.586805555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg11"/>
@@ -1754,7 +1754,7 @@
   </gazebo>
   <joint name="LBseg1_LBseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.83680555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg1"/>
@@ -1814,7 +1814,7 @@
   </gazebo>
   <joint name="LBseg2_LBseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.68055555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg2"/>
@@ -1874,7 +1874,7 @@
   </gazebo>
   <joint name="LBseg3_LBseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.53125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg3"/>
@@ -1934,7 +1934,7 @@
   </gazebo>
   <joint name="LBseg4_LBseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.38888888889" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg4"/>
@@ -1994,7 +1994,7 @@
   </gazebo>
   <joint name="LBseg5_LBseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.25347222222" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg5"/>
@@ -2054,7 +2054,7 @@
   </gazebo>
   <joint name="LBseg6_LBseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg6"/>
@@ -2114,7 +2114,7 @@
   </gazebo>
   <joint name="LBseg7_LBseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.00347222222" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg7"/>
@@ -2174,7 +2174,7 @@
   </gazebo>
   <joint name="LBseg8_LBseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.888888888889" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg8"/>
@@ -2234,7 +2234,7 @@
   </gazebo>
   <joint name="LBseg9_LBseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.78125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg9"/>
@@ -2294,7 +2294,7 @@
   </gazebo>
   <joint name="LBseg10_LBseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.680555555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg10"/>
@@ -2354,7 +2354,7 @@
   </gazebo>
   <joint name="LBseg11_LBseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.586805555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg11"/>
@@ -2472,7 +2472,7 @@
   </gazebo>
   <joint name="RBseg1_RBseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.83680555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg1"/>
@@ -2532,7 +2532,7 @@
   </gazebo>
   <joint name="RBseg2_RBseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.68055555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg2"/>
@@ -2592,7 +2592,7 @@
   </gazebo>
   <joint name="RBseg3_RBseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.53125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg3"/>
@@ -2652,7 +2652,7 @@
   </gazebo>
   <joint name="RBseg4_RBseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.38888888889" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg4"/>
@@ -2712,7 +2712,7 @@
   </gazebo>
   <joint name="RBseg5_RBseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.25347222222" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg5"/>
@@ -2772,7 +2772,7 @@
   </gazebo>
   <joint name="RBseg6_RBseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg6"/>
@@ -2832,7 +2832,7 @@
   </gazebo>
   <joint name="RBseg7_RBseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1.00347222222" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg7"/>
@@ -2892,7 +2892,7 @@
   </gazebo>
   <joint name="RBseg8_RBseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.888888888889" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg8"/>
@@ -2952,7 +2952,7 @@
   </gazebo>
   <joint name="RBseg9_RBseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.78125" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg9"/>
@@ -3012,7 +3012,7 @@
   </gazebo>
   <joint name="RBseg10_RBseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.680555555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg10"/>
@@ -3072,7 +3072,7 @@
   </gazebo>
   <joint name="RBseg11_RBseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="0.586805555556" lower="-2" upper="2" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg11"/>
