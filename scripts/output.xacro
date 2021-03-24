@@ -44,10 +44,13 @@
   	<plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
 		<robotNamespace />
   	</plugin>
- 	<plugin filename="libmain_description.so" name="main_description">
+ 	<plugin filename="libspring_joint_plugin.so" name="spring_joint_plugin">
 		<kConstant> 0.4 </kConstant>
 	</plugin>
-
+	<plugin filename="libjoint_controller_plugin.so" name="joint_controller_plugin">
+		<jointNamesParam> "/arm_joints/joints" </jointNamesParam>
+	</plugin>
+	
 </gazebo>
 
 </robot>

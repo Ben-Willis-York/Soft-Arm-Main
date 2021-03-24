@@ -10,12 +10,13 @@
 #include "ros/callback_queue.h"
 #include "ros/subscribe_options.h"
 #include "std_msgs/Float32.h"
+#include "std_msgs/Float32MultiArray.h"
 #include <thread>
 
 
 namespace gazebo
 {
-  class SpringJoint : public ModelPlugin
+  class JointController : public ModelPlugin
   {
     public:
     private:
@@ -27,11 +28,18 @@ namespace gazebo
 
       std::vector<physics::JointPtr> joints; //Array of spring joints
 
+      std::vector<common::PID> pids;
+
+      std::vector<std::string> jointNames;
+
       std::unique_ptr<ros::NodeHandle> rosNode;
       ros::Subscriber rosSub;
       ros::CallbackQueue rosQueue;
       std::thread rosQueueThread;
 
+      std::vector<float> targets;
+      std::vector<float> setpoints;
+      float speed = 0.0001;
 
     public: void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     {
@@ -42,10 +50,10 @@ namespace gazebo
       // Listen to the update event. This event is broadcast every
       // simulation iteration.
       this->updateConnection = event::Events::ConnectWorldUpdateBegin(
-          std::bind(&SpringJoint::OnUpdate, this));
+          std::bind(&JointController::OnUpdate, this));
 
       //Setup ROS node
-      std::string node_name = std::string("my_node");
+      std::string node_name = std::string("my_controller_node");
       if (!ros::isInitialized()) 
       {
         int argc = 0;
@@ -53,26 +61,22 @@ namespace gazebo
 
         ros::init(argc, argv, node_name, ros::init_options::NoSigintHandler);
       }
-      this->rosNode.reset(new ros::NodeHandle("gazebo_client"));
-
-      ros::SubscribeOptions so = ros::SubscribeOptions::create<std_msgs::Float32>(
-      "/" + this->model->GetName() + "/kConstant",
+      this->rosNode.reset(new ros::NodeHandle(node_name));
+      
+      ros::SubscribeOptions so = ros::SubscribeOptions::create<std_msgs::Float32MultiArray>(
+      "/" + this->model->GetName() + "/commands",
       1,
-      boost::bind(&SpringJoint::OnRosMsg, this, _1),
+      boost::bind(&JointController::OnRosMsg, this, _1),
       ros::VoidPtr(), &this->rosQueue);
 
       this->rosSub = this->rosNode->subscribe(so);
 
-      this->rosQueueThread = std::thread(std::bind(&SpringJoint::QueueThread, this));
-
-      this->kConstant = _sdf->Get<double>("kConstant");
-      this->rosNode->setParam("/Design/kConstant", this->kConstant);
-
-      std::cerr << "K = " << this->kConstant << std::endl;
+      this->rosQueueThread = std::thread(std::bind(&JointController::QueueThread, this));
       
-
+      this->GetJoints();
     }
 
+    
     // Called by the world update start event
     public: void OnUpdate()
     {
@@ -81,43 +85,57 @@ namespace gazebo
       
       if(this->paramsFound)
       {
-        for(int i = 0; i < this->joints.size(); i++)
+        for(int i = 0; i < targets.size(); i++)
         {
-          physics::JointPtr j = this->joints[i];
-          double position = j->Position();
-          //std::cerr << j->GetName() << ", " << position << std::endl;
-          double force = position * -this->kConstant;
-          //printf("%+7.5f\n\r", position);
-
-          //std::cerr << j->GetName() << "," << position << std::endl;
-          j->SetForce(0,force);
+          float pos = this->joints[i]->Position();
+          if(this->setpoints[i] < this->targets[i]-0.002) { this->setpoints[i] += this->speed; }
+          if(this->setpoints[i] > this->targets[i]+0.002) { this->setpoints[i] -= this->speed; }
+          else{this->setpoints[i] = this->targets[i]; }
+          this->model->GetJointController()->SetPositionTarget(this->joints[i]->GetScopedName(), this->setpoints[i]);
+          //std::cerr << this->setpoints[i] << ",";
         }
+        //std::cerr << std::endl;
+
       }
     }
 
     public: void GetJoints()
     {
-      std::vector<std::string> param;
-      if(!rosNode->getParam("/hand_controller/joints", param))
+      const std::string paramName = this->sdf->Get<std::string>("jointNamesParam");
+
+      std::cerr << paramName << std::endl;
+
+      if(!rosNode->getParam("/arm_joints/joints", this->jointNames))
       { std::cerr << "Not Found" << std::endl; }
       else
       { 
-        std::cerr << param[0] << std::endl; 
         this->paramsFound = true;
-      }
-
-      for(int i = 0; i < param.size(); i++)
-      {
-        this->joints.push_back(this->model->GetJoint(param[i]));
+        std::cerr << "FOUND JOINTS" << std::endl;
+        for(int i = 0; i < this->jointNames.size(); i++)
+        {
+          std::cerr << this->jointNames[i] << std::endl;
+          this->joints.push_back(this->model->GetJoint(this->jointNames[i]));
+          targets.push_back(-0.7);
+          setpoints.push_back(0);
+          pids.push_back(common::PID(2000,0,0));
+          this->model->GetJointController()->SetPositionPID(this->joints[i]->GetScopedName(), this->pids[i]);
+          this->model->GetJointController()->SetPositionTarget(this->joints[i]->GetScopedName(), 1.0);
+        }
       }
     }
   
-
-    public: void OnRosMsg(const std_msgs::Float32ConstPtr& _msg)
+  
+    public: void OnRosMsg(const std_msgs::Float32MultiArray::ConstPtr& _msg)
     {
-      this->kConstant = _msg->data;
-      std::cerr << this->kConstant << std::endl;
-      this->rosNode->setParam("/Design/kConstant", this->kConstant);
+      std::vector<float> arr = _msg->data;
+      for(int i =0; i < arr.size(); i++)
+      {
+        this->targets[i] = arr[i];
+        std::cerr << arr[i] << std::endl;
+      }
+      //this->kConstant = _msg->data;
+      //std::cerr << this->kConstant << std::endl;
+      //this->rosNode->setParam("/Design/kConstant", this->kConstant);
     }
 
     private: void QueueThread()
@@ -129,11 +147,8 @@ namespace gazebo
       }
     }
 
-
-
-
+  
   };
-
   // Register this plugin with the simulator
-  GZ_REGISTER_MODEL_PLUGIN(SpringJoint)
+  GZ_REGISTER_MODEL_PLUGIN(JointController)
 }

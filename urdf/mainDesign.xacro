@@ -85,11 +85,11 @@
   	<plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
 		<robotNamespace></robotNamespace>
   	</plugin>
- 	<plugin name='spring_joint_plugin' filename='libspring_joint_plugin'>
+ 	<plugin name='spring_joint_plugin' filename='libspring_joint_plugin.so'>
 		<kConstant> 0.4 </kConstant>
 	</plugin>
-	<plugin name="joint_controller" filenam ="libjoint_controller">
-		<jointNamesParam> "arm" </jointNamesParam>
+	<plugin name="joint_controller_plugin" filename ="libjoint_controller_plugin.so">
+		<jointNamesParam> "/arm_joints/joints" </jointNamesParam>
 	</plugin>
 	
 </gazebo>

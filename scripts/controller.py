@@ -6,6 +6,7 @@ import tf2_py
 import tf2_ros
 import rospy, os, time
 from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Float32MultiArray
 from sensor_msgs.msg import JointState
 import geometry_msgs.msg
 
@@ -146,6 +147,22 @@ class Controller():
             self.setpoints[a] = angles[a]
         #self.setJointStatesWithBase(self.setpoints)
 
+        pub = rospy.Publisher("/Design/commands", Float32MultiArray, queue_size=10)
+        armNames = rospy.get_param("/arm_controller/joints")
+        #data = rospy.wait_for_message("joint_states", JointState)
+        #arr = []
+        #for n in armNames:
+        #    for d in range(len(data.name)):
+        #        if(data.name[d] == n):
+        #            arr.append(data.position[d])
+        arr = [0]*4
+        for a in range(len(angles)):
+            #arr[a] = -radians(((angles[a]+180)%360)-180)
+            arr[a] = -radians(angles[a])
+
+        packet = Float32MultiArray(data = arr)
+        pub.publish(packet)
+
     def setSetpoints(self, angles):
         for a in range(len(angles)):
             self.setpoints[1+a] = angles[a]
@@ -212,7 +229,7 @@ class Controller():
         #    s = radians(v)
 
 
-        self.updateSteps()
+        #self.updateSteps()
         '''
         nextStep = []
         for a in range(len(self.state)):

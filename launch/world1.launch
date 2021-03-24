@@ -40,6 +40,10 @@
   file = "config/strainSensors.yaml"
   ns="strain_sensors" />
 
+  <rosparam command="load"
+  file = "config/arm_joints.yaml"
+  ns="arm_joints"/>
+
   <!--<rosparam command="load"
   file = "config/fingerSprings.yaml"
   ns = "spring_controller" />-->
@@ -57,7 +61,7 @@
   <node name="base_joint_controller_spawner" pkg="controller_manager" type="spawner"
   args="joint_state_controller
         hand_controller
-        arm_controller
+        
               --shutdown-timeout 3" />
 
 </launch>
