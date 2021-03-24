@@ -9,23 +9,23 @@
 
 <xacro:property name="fingerForce" value = "1"/>
 
-<xacro:macro name="segment" params="name parent length">
-	<xacro:seg name="${name}" length="${length}"/>
-	<xacro:seg_joint seg1="${parent}" seg2="${name}" length="${length}"/>
+<xacro:macro name="segment" params="name parent length height width force">
+	<xacro:seg name="${name}" length="${length}" height="${height}" width="${width}"/>
+	<xacro:seg_joint seg1="${parent}" seg2="${name}" length="${length}" force="${force}"/>
 	<xacro:seg_trans seg1="${parent}" seg2="${name}"/>
 </xacro:macro>
 
-<xacro:macro name="seg" params="name length">
+<xacro:macro name="seg" params="name length height width">
 	<link name="${name}">
 		<visual>
 			<geometry>
-				<box size="0.02 0.02 ${length}"/>
+				<box size="${width} ${height} ${length}"/>
 			</geometry>
 			<origin xyz="0 0 0"/>
 			<material name="white"/>
 		</visual>
 
-		<xacro:box_inertial_with_origin x="0.02" y="0.02" z="${length}" mass="0.01">
+		<xacro:box_inertial_with_origin x="${width}" y="${height}" z="${length}" mass="0.01">
 			<origin xyz="0 0 0" rpy="0 0 0"/>
 		</xacro:box_inertial_with_origin>
 		<!--
@@ -36,25 +36,28 @@
 		-->
 		<collision>
 			<geometry>
-				<box size="0.02 0.02 ${length}"/>
+				<box size="${width} ${height} ${length}"/>
 			</geometry>
 			<origin xyz="0 0 0"/>
 		</collision>
 		
 	</link>
 	<gazebo reference="${name}">
+		<!--plugin name='main_description' filename='libmain_description.so'/>-->
 		<mu1>20000</mu1>
 		<mu2>20000</mu2>
 		<selfCollide>true</selfCollide>
 		<gravity>true</gravity>
+		
 	</gazebo>
+	
 </xacro:macro>
 
 
-<xacro:macro name="seg_joint" params="seg1 seg2 length">
+<xacro:macro name="seg_joint" params="seg1 seg2 length force">
 	<joint name="${seg1}_${seg2}_joint" type="revolute">
 		<axis xyz="1 0 0"/>
-		<limit effort="${fingerForce}" lower="-0.25" upper="0.25" velocity="0.001"/>
+		<limit effort="${force}" lower="-2" upper="2" velocity="0.001"/>
 		<dynamics damping="0.05" friction="0.0"/>
 		<origin xyz="0 0 ${length}" rpy="0 0 0"/>
 		<parent link="${seg1}"/>
@@ -62,14 +65,15 @@
 	</joint>
 	<gazebo reference="${seg1}_${seg2}_joint">
   		<implicitSpringDamper>True</implicitSpringDamper>
+		
 	</gazebo>
 </xacro:macro>
 
 
-<xacro:macro name="seg_joint_offset" params="seg1 seg2 length offset rotation">
+<xacro:macro name="seg_joint_offset" params="seg1 seg2 length offset rotation force">
 	<joint name="${seg1}_${seg2}_joint" type="revolute">
 		<axis xyz="1 0 0"/>
-		<limit effort="${fingerForce}" lower="-0.1" upper="0.1" velocity="0.0001"/>
+		<limit effort="${force}" lower="-0.0" upper="0.0" velocity="0.0001"/>
 		<!--<dynamics damping="0.05" friction="0.0"/>-->
 		<origin xyz="${offset}" rpy="${rotation}"/>
 		<parent link="${seg1}"/>

@@ -221,6 +221,9 @@
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
       <robotNamespace/>
     </plugin>
+    <plugin filename="libmain_description.so" name="main_description">
+      <kConstant> 0.4 </kConstant>
+    </plugin>
   </gazebo>
   <!--  MACROS FOR FINGER: LT-->
   <link name="LTseg1">
@@ -250,6 +253,7 @@
     </collision>
   </link>
   <gazebo reference="LTseg1">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -257,9 +261,9 @@
   </gazebo>
   <joint name="palm_LTseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <limit effort="2.0" lower="-0.0" upper="0.0" velocity="0.0001"/>
     <!--<dynamics damping="0.05" friction="0.0"/>-->
-    <origin rpy="-0 0 0" xyz="0.05 0.05 0"/>
+    <origin rpy="-0.3 0 0" xyz="0.04 0.04 0.03"/>
     <parent link="palm"/>
     <child link="LTseg1"/>
   </joint>
@@ -282,7 +286,7 @@
   <link name="LTseg2">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -290,7 +294,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="4.36342418057e-07" ixy="0.0" ixz="0.0" iyy="4.36342418057e-07" iyz="0.0" izz="6.12268273613e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -300,12 +304,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg2">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -313,7 +318,7 @@
   </gazebo>
   <joint name="LTseg1_LTseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg1"/>
@@ -341,7 +346,7 @@
   <link name="LTseg3">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -349,7 +354,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="4.10300761805e-07" ixy="0.0" ixz="0.0" iyy="4.10300761805e-07" iyz="0.0" izz="5.60184961109e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -359,12 +364,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg3">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -372,7 +378,7 @@
   </gazebo>
   <joint name="LTseg2_LTseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg2"/>
@@ -400,7 +406,7 @@
   <link name="LTseg4">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0175 0.0175 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -408,7 +414,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.854165125e-07" ixy="0.0" ixz="0.0" iyy="3.854165125e-07" iyz="0.0" izz="5.104164625e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -418,12 +424,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0175 0.0175 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg4">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -431,7 +438,7 @@
   </gazebo>
   <joint name="LTseg3_LTseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg3"/>
@@ -459,7 +466,7 @@
   <link name="LTseg5">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -467,7 +474,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.6168967014e-07" ixy="0.0" ixz="0.0" iyy="3.6168967014e-07" iyz="0.0" izz="4.6296277778e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -477,12 +484,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg5">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -490,7 +498,7 @@
   </gazebo>
   <joint name="LTseg4_LTseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg4"/>
@@ -518,7 +526,7 @@
   <link name="LTseg6">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -526,7 +534,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.39120234721e-07" ixy="0.0" ixz="0.0" iyy="3.39120234721e-07" iyz="0.0" izz="4.17823906943e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -536,12 +544,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg6">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -549,7 +558,7 @@
   </gazebo>
   <joint name="LTseg5_LTseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg5"/>
@@ -577,7 +586,7 @@
   <link name="LTseg7">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.015 0.015 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -585,7 +594,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.1770820625e-07" ixy="0.0" ixz="0.0" iyy="3.1770820625e-07" iyz="0.0" izz="3.7499985e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -595,12 +604,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.015 0.015 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg7">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -608,7 +618,7 @@
   </gazebo>
   <joint name="LTseg6_LTseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg6"/>
@@ -636,7 +646,7 @@
   <link name="LTseg8">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -644,7 +654,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.97453584723e-07" ixy="0.0" ixz="0.0" iyy="2.97453584723e-07" iyz="0.0" izz="3.34490606946e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -654,12 +664,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg8">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -667,7 +678,7 @@
   </gazebo>
   <joint name="LTseg7_LTseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg7"/>
@@ -695,7 +706,7 @@
   <link name="LTseg9">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -703,7 +714,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.78356370138e-07" ixy="0.0" ixz="0.0" iyy="2.78356370138e-07" iyz="0.0" izz="2.96296177776e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -713,12 +724,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg9">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -726,7 +738,7 @@
   </gazebo>
   <joint name="LTseg8_LTseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg8"/>
@@ -754,7 +766,7 @@
   <link name="LTseg10">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0125 0.0125 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -762,7 +774,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.604165625e-07" ixy="0.0" ixz="0.0" iyy="2.604165625e-07" iyz="0.0" izz="2.604165625e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -772,12 +784,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0125 0.0125 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg10">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -785,7 +798,7 @@
   </gazebo>
   <joint name="LTseg9_LTseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg9"/>
@@ -813,7 +826,7 @@
   <link name="LTseg11">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -821,7 +834,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.43634161806e-07" ixy="0.0" ixz="0.0" iyy="2.43634161806e-07" iyz="0.0" izz="2.26851761112e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -831,12 +844,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg11">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -844,7 +858,7 @@
   </gazebo>
   <joint name="LTseg10_LTseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg10"/>
@@ -872,7 +886,7 @@
   <link name="LTseg12">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -880,7 +894,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.28009168055e-07" ixy="0.0" ixz="0.0" iyy="2.28009168055e-07" iyz="0.0" izz="1.9560177361e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -890,12 +904,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LTseg12">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -903,7 +918,7 @@
   </gazebo>
   <joint name="LTseg11_LTseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LTseg11"/>
@@ -956,6 +971,7 @@
     </collision>
   </link>
   <gazebo reference="RTseg1">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -963,9 +979,9 @@
   </gazebo>
   <joint name="palm_RTseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <limit effort="2.0" lower="-0.0" upper="0.0" velocity="0.0001"/>
     <!--<dynamics damping="0.05" friction="0.0"/>-->
-    <origin rpy="-0 0 3.14159" xyz="0.05 -0.05 0"/>
+    <origin rpy="-0.3 0 3.14159" xyz="0.04 -0.04 0.03"/>
     <parent link="palm"/>
     <child link="RTseg1"/>
   </joint>
@@ -988,7 +1004,7 @@
   <link name="RTseg2">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -996,7 +1012,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="4.36342418057e-07" ixy="0.0" ixz="0.0" iyy="4.36342418057e-07" iyz="0.0" izz="6.12268273613e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1006,12 +1022,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg2">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1019,7 +1036,7 @@
   </gazebo>
   <joint name="RTseg1_RTseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg1"/>
@@ -1047,7 +1064,7 @@
   <link name="RTseg3">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1055,7 +1072,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="4.10300761805e-07" ixy="0.0" ixz="0.0" iyy="4.10300761805e-07" iyz="0.0" izz="5.60184961109e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1065,12 +1082,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg3">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1078,7 +1096,7 @@
   </gazebo>
   <joint name="RTseg2_RTseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg2"/>
@@ -1106,7 +1124,7 @@
   <link name="RTseg4">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0175 0.0175 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1114,7 +1132,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.854165125e-07" ixy="0.0" ixz="0.0" iyy="3.854165125e-07" iyz="0.0" izz="5.104164625e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1124,12 +1142,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0175 0.0175 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg4">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1137,7 +1156,7 @@
   </gazebo>
   <joint name="RTseg3_RTseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg3"/>
@@ -1165,7 +1184,7 @@
   <link name="RTseg5">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1173,7 +1192,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.6168967014e-07" ixy="0.0" ixz="0.0" iyy="3.6168967014e-07" iyz="0.0" izz="4.6296277778e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1183,12 +1202,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg5">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1196,7 +1216,7 @@
   </gazebo>
   <joint name="RTseg4_RTseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg4"/>
@@ -1224,7 +1244,7 @@
   <link name="RTseg6">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1232,7 +1252,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.39120234721e-07" ixy="0.0" ixz="0.0" iyy="3.39120234721e-07" iyz="0.0" izz="4.17823906943e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1242,12 +1262,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg6">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1255,7 +1276,7 @@
   </gazebo>
   <joint name="RTseg5_RTseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg5"/>
@@ -1283,7 +1304,7 @@
   <link name="RTseg7">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.015 0.015 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1291,7 +1312,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.1770820625e-07" ixy="0.0" ixz="0.0" iyy="3.1770820625e-07" iyz="0.0" izz="3.7499985e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1301,12 +1322,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.015 0.015 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg7">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1314,7 +1336,7 @@
   </gazebo>
   <joint name="RTseg6_RTseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg6"/>
@@ -1342,7 +1364,7 @@
   <link name="RTseg8">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1350,7 +1372,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.97453584723e-07" ixy="0.0" ixz="0.0" iyy="2.97453584723e-07" iyz="0.0" izz="3.34490606946e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1360,12 +1382,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg8">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1373,7 +1396,7 @@
   </gazebo>
   <joint name="RTseg7_RTseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg7"/>
@@ -1401,7 +1424,7 @@
   <link name="RTseg9">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1409,7 +1432,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.78356370138e-07" ixy="0.0" ixz="0.0" iyy="2.78356370138e-07" iyz="0.0" izz="2.96296177776e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1419,12 +1442,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg9">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1432,7 +1456,7 @@
   </gazebo>
   <joint name="RTseg8_RTseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg8"/>
@@ -1460,7 +1484,7 @@
   <link name="RTseg10">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0125 0.0125 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1468,7 +1492,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.604165625e-07" ixy="0.0" ixz="0.0" iyy="2.604165625e-07" iyz="0.0" izz="2.604165625e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1478,12 +1502,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0125 0.0125 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg10">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1491,7 +1516,7 @@
   </gazebo>
   <joint name="RTseg9_RTseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg9"/>
@@ -1519,7 +1544,7 @@
   <link name="RTseg11">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1527,7 +1552,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.43634161806e-07" ixy="0.0" ixz="0.0" iyy="2.43634161806e-07" iyz="0.0" izz="2.26851761112e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1537,12 +1562,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg11">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1550,7 +1576,7 @@
   </gazebo>
   <joint name="RTseg10_RTseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg10"/>
@@ -1578,7 +1604,7 @@
   <link name="RTseg12">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1586,7 +1612,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.28009168055e-07" ixy="0.0" ixz="0.0" iyy="2.28009168055e-07" iyz="0.0" izz="1.9560177361e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1596,12 +1622,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RTseg12">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1609,7 +1636,7 @@
   </gazebo>
   <joint name="RTseg11_RTseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RTseg11"/>
@@ -1662,6 +1689,7 @@
     </collision>
   </link>
   <gazebo reference="LBseg1">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1669,9 +1697,9 @@
   </gazebo>
   <joint name="palm_LBseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <limit effort="2.0" lower="-0.0" upper="0.0" velocity="0.0001"/>
     <!--<dynamics damping="0.05" friction="0.0"/>-->
-    <origin rpy="-0 0 0" xyz="-0.05 0.05 0"/>
+    <origin rpy="-0.3 0 0" xyz="-0.04 0.04 0.03"/>
     <parent link="palm"/>
     <child link="LBseg1"/>
   </joint>
@@ -1694,7 +1722,7 @@
   <link name="LBseg2">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1702,7 +1730,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="4.36342418057e-07" ixy="0.0" ixz="0.0" iyy="4.36342418057e-07" iyz="0.0" izz="6.12268273613e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1712,12 +1740,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg2">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1725,7 +1754,7 @@
   </gazebo>
   <joint name="LBseg1_LBseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg1"/>
@@ -1753,7 +1782,7 @@
   <link name="LBseg3">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1761,7 +1790,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="4.10300761805e-07" ixy="0.0" ixz="0.0" iyy="4.10300761805e-07" iyz="0.0" izz="5.60184961109e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1771,12 +1800,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg3">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1784,7 +1814,7 @@
   </gazebo>
   <joint name="LBseg2_LBseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg2"/>
@@ -1812,7 +1842,7 @@
   <link name="LBseg4">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0175 0.0175 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1820,7 +1850,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.854165125e-07" ixy="0.0" ixz="0.0" iyy="3.854165125e-07" iyz="0.0" izz="5.104164625e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1830,12 +1860,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0175 0.0175 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg4">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1843,7 +1874,7 @@
   </gazebo>
   <joint name="LBseg3_LBseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg3"/>
@@ -1871,7 +1902,7 @@
   <link name="LBseg5">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1879,7 +1910,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.6168967014e-07" ixy="0.0" ixz="0.0" iyy="3.6168967014e-07" iyz="0.0" izz="4.6296277778e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1889,12 +1920,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg5">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1902,7 +1934,7 @@
   </gazebo>
   <joint name="LBseg4_LBseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg4"/>
@@ -1930,7 +1962,7 @@
   <link name="LBseg6">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1938,7 +1970,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.39120234721e-07" ixy="0.0" ixz="0.0" iyy="3.39120234721e-07" iyz="0.0" izz="4.17823906943e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -1948,12 +1980,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg6">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -1961,7 +1994,7 @@
   </gazebo>
   <joint name="LBseg5_LBseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg5"/>
@@ -1989,7 +2022,7 @@
   <link name="LBseg7">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.015 0.015 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -1997,7 +2030,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.1770820625e-07" ixy="0.0" ixz="0.0" iyy="3.1770820625e-07" iyz="0.0" izz="3.7499985e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2007,12 +2040,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.015 0.015 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg7">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2020,7 +2054,7 @@
   </gazebo>
   <joint name="LBseg6_LBseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg6"/>
@@ -2048,7 +2082,7 @@
   <link name="LBseg8">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2056,7 +2090,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.97453584723e-07" ixy="0.0" ixz="0.0" iyy="2.97453584723e-07" iyz="0.0" izz="3.34490606946e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2066,12 +2100,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg8">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2079,7 +2114,7 @@
   </gazebo>
   <joint name="LBseg7_LBseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg7"/>
@@ -2107,7 +2142,7 @@
   <link name="LBseg9">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2115,7 +2150,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.78356370138e-07" ixy="0.0" ixz="0.0" iyy="2.78356370138e-07" iyz="0.0" izz="2.96296177776e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2125,12 +2160,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg9">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2138,7 +2174,7 @@
   </gazebo>
   <joint name="LBseg8_LBseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg8"/>
@@ -2166,7 +2202,7 @@
   <link name="LBseg10">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0125 0.0125 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2174,7 +2210,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.604165625e-07" ixy="0.0" ixz="0.0" iyy="2.604165625e-07" iyz="0.0" izz="2.604165625e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2184,12 +2220,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0125 0.0125 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg10">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2197,7 +2234,7 @@
   </gazebo>
   <joint name="LBseg9_LBseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg9"/>
@@ -2225,7 +2262,7 @@
   <link name="LBseg11">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2233,7 +2270,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.43634161806e-07" ixy="0.0" ixz="0.0" iyy="2.43634161806e-07" iyz="0.0" izz="2.26851761112e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2243,12 +2280,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg11">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2256,7 +2294,7 @@
   </gazebo>
   <joint name="LBseg10_LBseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg10"/>
@@ -2284,7 +2322,7 @@
   <link name="LBseg12">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2292,7 +2330,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.28009168055e-07" ixy="0.0" ixz="0.0" iyy="2.28009168055e-07" iyz="0.0" izz="1.9560177361e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2302,12 +2340,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="LBseg12">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2315,7 +2354,7 @@
   </gazebo>
   <joint name="LBseg11_LBseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="LBseg11"/>
@@ -2368,6 +2407,7 @@
     </collision>
   </link>
   <gazebo reference="RBseg1">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2375,9 +2415,9 @@
   </gazebo>
   <joint name="palm_RBseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.1" upper="0.1" velocity="0.0001"/>
+    <limit effort="2.0" lower="-0.0" upper="0.0" velocity="0.0001"/>
     <!--<dynamics damping="0.05" friction="0.0"/>-->
-    <origin rpy="-0 0 3.14159" xyz="-0.05 -0.05 0"/>
+    <origin rpy="-0.3 0 3.14159" xyz="-0.04 -0.04 0.03"/>
     <parent link="palm"/>
     <child link="RBseg1"/>
   </joint>
@@ -2400,7 +2440,7 @@
   <link name="RBseg2">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2408,7 +2448,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="4.36342418057e-07" ixy="0.0" ixz="0.0" iyy="4.36342418057e-07" iyz="0.0" izz="6.12268273613e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2418,12 +2458,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg2">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2431,7 +2472,7 @@
   </gazebo>
   <joint name="RBseg1_RBseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg1"/>
@@ -2459,7 +2500,7 @@
   <link name="RBseg3">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2467,7 +2508,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="4.10300761805e-07" ixy="0.0" ixz="0.0" iyy="4.10300761805e-07" iyz="0.0" izz="5.60184961109e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2477,12 +2518,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg3">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2490,7 +2532,7 @@
   </gazebo>
   <joint name="RBseg2_RBseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg2"/>
@@ -2518,7 +2560,7 @@
   <link name="RBseg4">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0175 0.0175 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2526,7 +2568,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.854165125e-07" ixy="0.0" ixz="0.0" iyy="3.854165125e-07" iyz="0.0" izz="5.104164625e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2536,12 +2578,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0175 0.0175 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg4">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2549,7 +2592,7 @@
   </gazebo>
   <joint name="RBseg3_RBseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg3"/>
@@ -2577,7 +2620,7 @@
   <link name="RBseg5">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2585,7 +2628,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.6168967014e-07" ixy="0.0" ixz="0.0" iyy="3.6168967014e-07" iyz="0.0" izz="4.6296277778e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2595,12 +2638,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg5">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2608,7 +2652,7 @@
   </gazebo>
   <joint name="RBseg4_RBseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg4"/>
@@ -2636,7 +2680,7 @@
   <link name="RBseg6">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2644,7 +2688,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.39120234721e-07" ixy="0.0" ixz="0.0" iyy="3.39120234721e-07" iyz="0.0" izz="4.17823906943e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2654,12 +2698,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg6">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2667,7 +2712,7 @@
   </gazebo>
   <joint name="RBseg5_RBseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg5"/>
@@ -2695,7 +2740,7 @@
   <link name="RBseg7">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.015 0.015 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2703,7 +2748,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="3.1770820625e-07" ixy="0.0" ixz="0.0" iyy="3.1770820625e-07" iyz="0.0" izz="3.7499985e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2713,12 +2758,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.015 0.015 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg7">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2726,7 +2772,7 @@
   </gazebo>
   <joint name="RBseg6_RBseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg6"/>
@@ -2754,7 +2800,7 @@
   <link name="RBseg8">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2762,7 +2808,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.97453584723e-07" ixy="0.0" ixz="0.0" iyy="2.97453584723e-07" iyz="0.0" izz="3.34490606946e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2772,12 +2818,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg8">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2785,7 +2832,7 @@
   </gazebo>
   <joint name="RBseg7_RBseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg7"/>
@@ -2813,7 +2860,7 @@
   <link name="RBseg9">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2821,7 +2868,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.78356370138e-07" ixy="0.0" ixz="0.0" iyy="2.78356370138e-07" iyz="0.0" izz="2.96296177776e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2831,12 +2878,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg9">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2844,7 +2892,7 @@
   </gazebo>
   <joint name="RBseg8_RBseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg8"/>
@@ -2872,7 +2920,7 @@
   <link name="RBseg10">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0125 0.0125 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2880,7 +2928,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.604165625e-07" ixy="0.0" ixz="0.0" iyy="2.604165625e-07" iyz="0.0" izz="2.604165625e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2890,12 +2938,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0125 0.0125 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg10">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2903,7 +2952,7 @@
   </gazebo>
   <joint name="RBseg9_RBseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg9"/>
@@ -2931,7 +2980,7 @@
   <link name="RBseg11">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2939,7 +2988,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.43634161806e-07" ixy="0.0" ixz="0.0" iyy="2.43634161806e-07" iyz="0.0" izz="2.26851761112e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -2949,12 +2998,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg11">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -2962,7 +3012,7 @@
   </gazebo>
   <joint name="RBseg10_RBseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg10"/>
@@ -2990,7 +3040,7 @@
   <link name="RBseg12">
     <visual>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="white"/>
@@ -2998,7 +3048,7 @@
     <inertial>
       <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="4.6354148125e-07" ixy="0.0" ixz="0.0" iyy="4.6354148125e-07" iyz="0.0" izz="6.666664e-07"/>
+      <inertia ixx="2.28009168055e-07" ixy="0.0" ixz="0.0" iyy="2.28009168055e-07" iyz="0.0" izz="1.9560177361e-07"/>
     </inertial>
     <!--
 		<inertial>
@@ -3008,12 +3058,13 @@
 		-->
     <collision>
       <geometry>
-        <box size="0.02 0.02 0.0125"/>
+        <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
   </link>
   <gazebo reference="RBseg12">
+    <!--plugin name='main_description' filename='libmain_description.so'/>-->
     <mu1>20000</mu1>
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
@@ -3021,7 +3072,7 @@
   </gazebo>
   <joint name="RBseg11_RBseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
-    <limit effort="1" lower="-0.25" upper="0.25" velocity="0.001"/>
+    <limit effort="2.0" lower="-2" upper="2" velocity="0.001"/>
     <dynamics damping="0.05" friction="0.0"/>
     <origin rpy="0 0 0" xyz="0 0 0.0125"/>
     <parent link="RBseg11"/>

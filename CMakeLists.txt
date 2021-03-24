@@ -5,6 +5,18 @@ project(main_description)
 # add_compile_options(-std=c++11)
 
 
+# Check for c++11 / c++0x support
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+if(COMPILER_SUPPORTS_CXX11)
+    set(CMAKE_CXX_FLAGS "-std=c++11")
+elseif(COMPILER_SUPPORTS_CXX0X)
+    set(CMAKE_CXX_FLAGS "-std=c++0x")
+else()
+    message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+endif()
+
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -17,11 +29,16 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  gazebo_tutorials
+  gazebo_ros
+  gazebo_msgs
 )
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
-
+find_package(Boost REQUIRED COMPONENTS system)
+find_package(gazebo REQUIRED)
+find_package(roscpp REQUIRED)
+find_package(std_msgs REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -77,6 +94,7 @@ find_package(catkin REQUIRED COMPONENTS
 generate_messages(
   DEPENDENCIES
   std_msgs
+  gazebo_msgs
 )
 
 ################################################
@@ -109,10 +127,10 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-  LIBRARIES prototyping_description
-  CATKIN_DEPENDS roscpp rospy std_msgs message_runtime
-  DEPENDS system_lib
+  #INCLUDE_DIRS include
+  LIBRARIES main_description
+  CATKIN_DEPENDS roscpp rospy std_msgs message_runtime gazebo_msgs gazebo_ros
+  DEPENDS system_lib gazebo_msgs
 )
 
 ###########
@@ -121,16 +139,40 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
+include_directories( 
+  ${Boost_INCLUDE_DIR} 
+  ${catkin_INCLUDE_DIRS} 
+  ${GAZEBO_INCLUDE_DIRS}
+  ${roscpp_INCLUDE_DIRS}
+  ${std_msgs_INCLUDE_DIRS}
 )
 
-## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/prototyping_description.cpp
-# )
 
+## Declare a C++ library
+add_library(simple_world_plugin src/simple_world_plugin.cpp)
+target_link_libraries(
+  simple_world_plugin
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${roscpp_LIBRARIES}
+)
+
+add_library(spring_joint_plugin src/spring_joint_plugin.cpp)
+target_link_libraries(
+  spring_joint_plugin
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${roscpp_LIBRARIES}
+)
+
+add_library(joint_controller_plugin src/joint_controller_plugin.cpp)
+target_link_libraries(
+  joint_controller_plugin
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${roscpp_LIBRARIES}
+)
+  
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -152,9 +194,6 @@ include_directories(
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
 
 #############
 ## Install ##
@@ -167,6 +206,7 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
    scripts/finger_converter.py scripts/description_logger.py scripts/controlPanel.py scripts/controller.py scripts/commander.py scripts/VectorClass.py scripts/simulator.py scripts/display.py scripts/robot.py scripts/tester.py
+   scripts/gripperVisualiser.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

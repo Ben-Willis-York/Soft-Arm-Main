@@ -139,6 +139,18 @@ class Vector2(object):
     def Det(self, other):
         return(self.x*other.y - self.y*other.x)
 
+    def Angle(self):
+        return math.atan2(self.y, self.x)
+
+    def AngleBetween(self, other):
+        if(type(other) == Vector2):
+            try:
+                return math.acos(self.Dot(other))
+            except:
+                return 0
+        else:
+            raise TypeError
+
     def Cross(self, other):
         pass
 
@@ -276,6 +288,7 @@ class Vector3:
         if(type(other) == Vector3):
             return (self.x * other.x + self.y * other.y + self.z * other.z)
         raise TypeError
+
 
         '''Print'''
     def __str__(self):
