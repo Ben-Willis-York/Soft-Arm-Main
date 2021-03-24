@@ -158,7 +158,7 @@ class JointImaginary(object):
         if(self.next != None):
             dis.drawLine(self.pos.x, self.pos.y, 
                         jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill=fill)
-        dis.drawCircle(self.pos.x, self.pos.y, 2, fill=fill)
+        dis.drawCircle(self.pos.x, self.pos.y, 1.5, fill=fill)
 
 
 class JointLink(object):
@@ -211,10 +211,10 @@ class JointLink(object):
         self.outside = self.pos - self.perp*10
 
     def draw(self, dis, jointLinks, fill="red"):
-        #if(self.next != None):
-        #    dis.drawLine(self.pos.x, self.pos.y, 
-        #                jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill=fill)
-        dis.drawCircle(self.pos.x, self.pos.y, 2, fill=fill)
+        if(self.next != None):
+            dis.drawLine(self.pos.x, self.pos.y, 
+                        jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill=fill)
+        dis.drawCircle(self.pos.x, self.pos.y, 1, fill=fill)
 
 
 
@@ -246,7 +246,7 @@ class Finger(object):
             self.sensors.append(StrainSensor(start, end, offset, self.jointLinks))
         else:
             print("Not available")
-            print(self.jointNames)
+            #print(self.jointNames)
 
     def getJoints(self):
         current = self.base
@@ -270,7 +270,7 @@ class Finger(object):
 
         t = getTransform("palm", self.jointLinks[self.base].link).transform
         eulers = quaternionToEuler(t.rotation.x, t.rotation.y, t.rotation.z, t.rotation.w)
-        self.sign = int(cos(eulers[2]))
+        self.sign = round(cos(eulers[2]),0)
         print(self.sign)
         print("Joints for finger base: %s" % self.base)
         print(self.jointNames)
@@ -317,13 +317,13 @@ class Finger(object):
 
             center = baseJoint.pos + baseJoint.perp * radius
 
-
+            theta *= self.sign
 
             globalTheta = theta - baseJoint.perp.Angle()
             end = center + Vector2(radius*cos(pi-globalTheta), radius*sin(pi-globalTheta))
 
             startTheta = baseJoint.perp.Angle()
-            endTheta = theta - startTheta
+            endTheta = theta - startTheta 
             interval = theta/10
 
             for i in range(10):
@@ -385,7 +385,7 @@ class Finger(object):
             prev = self.expectedJoints[self.expectedJoints[next].previous]
             expected = self.expectedJoints[next]
 
-            expectedAngle =  prev.dir.Angle() + (effort/self.K)
+            expectedAngle =  prev.dir.Angle() + (effort/self.K) * self.sign
             
             expected.pos = prev.pos + prev.dir * segLength
             expected.dir = Vector2(cos(expectedAngle), sin(expectedAngle))
@@ -523,11 +523,11 @@ class Gripper(object):
                 self.jointLinks[j].predictedPerp = self.jointLinks[j].perp
                 self.jointLinks[j].predictedPos = self.jointLinks[j].pos
 
-        for b in self.fingerBases[1:2]:
+        for b in self.fingerBases[1:3]:
             self.fingers.append(Finger(b, self.jointLinks))
 
         prefixes = ["LT", "LB", "RT", "RB"]
-        prefixes = ["LT"]
+        prefixes = ["LT", "RT", "RB"]
         for p in prefixes:
             for f in self.fingers:
                 f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10)

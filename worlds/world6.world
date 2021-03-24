@@ -563,5 +563,8 @@
       <pose frame=''>-0.616962 0.050684 0.069199 -1.06852 0 0</pose>
     </model>
 
+  <plugin name="hello_world" filename ="/home/ben/gazebo_plugin_tutorial/build/libhello_world.so"/>
+
+
   </world>
 </sdf>

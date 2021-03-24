@@ -47,6 +47,7 @@
  	<plugin filename="libmain_description.so" name="main_description">
 		<kConstant> 0.4 </kConstant>
 	</plugin>
+
 </gazebo>
 
 

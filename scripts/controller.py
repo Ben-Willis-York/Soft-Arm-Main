@@ -23,7 +23,8 @@ class Controller():
         self.reached = []
 
         self.speeds = [3, 1, 1, 1]
-        self.maxSpeed = 1
+        self.maxSpeed = 2
+    
 
         self.names = rospy.get_param("/arm_controller/joints")
         for n in self.names:
@@ -57,6 +58,7 @@ class Controller():
         
     def setPath(self, path):
         #self.path = path
+        print(path)
         self.setSetpointsWithBase(path[0])
         self.path = path[1:]
 
@@ -158,7 +160,7 @@ class Controller():
 
         for a in range(len(self.state)):
             difference = self.currentSetpoints[a]-self.setpoints[a]
-            threshold = self.speeds[a]
+            threshold = self.speeds[a]*0.5
             #print(difference)
             if((difference < threshold) and (difference > -threshold)):
                 nextState.append(self.setpoints[a])

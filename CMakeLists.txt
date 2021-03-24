@@ -149,11 +149,30 @@ include_directories(
 
 
 ## Declare a C++ library
-add_library(
-  #${PROJECT_NAME} src/simple_world_plugin.cpp
-  ${PROJECT_NAME} src/spring_plugin.cpp
+add_library(simple_world_plugin src/simple_world_plugin.cpp)
+target_link_libraries(
+  simple_world_plugin
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${roscpp_LIBRARIES}
 )
 
+add_library(spring_joint_plugin src/spring_joint_plugin.cpp)
+target_link_libraries(
+  spring_joint_plugin
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${roscpp_LIBRARIES}
+)
+
+add_library(joint_controller_plugin src/joint_controller_plugin.cpp)
+target_link_libraries(
+  joint_controller_plugin
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${roscpp_LIBRARIES}
+)
+  
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -175,12 +194,6 @@ add_library(
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(
-  ${PROJECT_NAME}
-  ${catkin_LIBRARIES}
-  ${GAZEBO_LIBRARIES}
-  ${roscpp_LIBRARIES}
-)
 
 #############
 ## Install ##
