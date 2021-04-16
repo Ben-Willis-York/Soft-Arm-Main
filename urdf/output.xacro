@@ -48,7 +48,10 @@
 		<kConstant> 0.4 </kConstant>
 	</plugin>
 	<plugin filename="libjoint_controller_plugin.so" name="joint_controller_plugin">
-		<jointNamesParam> "/arm_joints/joints" </jointNamesParam>
+		<jointNamesParam> arm_controller/ </jointNamesParam>
+	</plugin>
+	<plugin filename="libjoint_force_visualiser_plugin.so" name="joint_force_visualier_plugin">
+		<robotNamespace />
 	</plugin>
 	
 </gazebo>

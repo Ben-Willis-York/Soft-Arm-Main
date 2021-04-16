@@ -6,6 +6,7 @@ import tf2_py
 import tf2_ros
 import roslib
 import rospy, os, time, math
+from std_msgs.msg import Float32MultiArray
 from std_msgs.msg import Float64MultiArray
 from sensor_msgs.msg import JointState
 import geometry_msgs.msg
@@ -41,7 +42,7 @@ class Joint(object):
         self.angle = val
 
 class StrainSensor(object):
-    def __init__(self, startJoint, endJoint, offset, jointLinks):
+    def __init__(self, startJoint, endJoint, offset, jointLinks, tfBuffer):
         self.startJoint = startJoint
         self.startCenter = Vector2(0,0)
         self.startInside = Vector2(0,0)
@@ -66,6 +67,7 @@ class StrainSensor(object):
         self.centerLength = 1
 
         self.joints = []
+        self.tfBuffer = tfBuffer
 
 
 
@@ -82,17 +84,17 @@ class StrainSensor(object):
         self.joints.append(jointLinks[self.endJoint])
             
     def getPositions(self):
-        startTransform = getTransform("palm", self.startJoint).transform
+        startTransform = getTransform(self.tfBuffer, "palm", self.startJoint).transform
         self.startCenter = Vector2(startTransform.y*1000, startTransform.z*1000)
 
         dir = Vector2(0,0)
         if(jointLinks[startJoint].next):
-            t1 = getTransform("palm", jointLinks[jointLinks[startJoint].next].link).transform
+            t1 = getTransform(self.tfBuffer, "palm", jointLinks[jointLinks[startJoint].next].link).transform
             p1 = Vector2(t1.translation.y*1000, t1.translation.z*1000)
             dir += p1-self.pos
 
 
-        endTransform = getTransform("palm", self.endJoint).transform
+        endTransform = getTransform(self.tfBuffer, "palm", self.endJoint).transform
         self.endCenter = Vector2(endTransform.y*1000, endTransform.z*1000)
 
     def getStrains(self, jointLinks):
@@ -136,7 +138,7 @@ class StrainSensor(object):
     def update(self, jointLinks):
         self.getStrains(jointLinks)
 
-    def draw(self, dis):
+    def draw(self, dis, options):
         if(options["showSides"].get()):
             for p in self.outsidePositions:
                 dis.drawCircle(p.x, p.y, 2, fill = "red")
@@ -151,13 +153,18 @@ class JointImaginary(object):
         self.dir = Vector2(0,0)
         self.perp = Vector2(0,0)
 
+        self.force = 0
+
         self.next = None
         self.previous = None
 
-    def draw(self, dis, jointLinks, fill="green"):
+    def draw(self, dis, jointLinks, options, fill="green"):
         if(self.next != None):
             dis.drawLine(self.pos.x, self.pos.y, 
-                        jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill=fill)
+                    jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill=fill)
+        if options["showNormals"].get():
+            forceVec = self.perp * self.force * 200
+            dis.drawLine(self.pos.x, self.pos.y, self.pos.x+forceVec.x, self.pos.y+forceVec.y)
         dis.drawCircle(self.pos.x, self.pos.y, 1.5, fill=fill)
 
 
@@ -174,16 +181,17 @@ class JointLink(object):
         self.outside = Vector2(0,0)
         self.insideStrain = 0
         self.outsideStrain = 0
+        self.force = 0
 
         self.predictedPos = Vector2(0,0)
         self.predictedDir = Vector2(0,0)
         self.predictedPerp = Vector2(0,0)
         
-    def update(self, jointLinks):
+    def update(self, jointLinks, tfBuffer):
         #print(self.name)
         #print(jointLinks.keys())
         #print 
-        transform = getTransform("palm", self.link).transform
+        transform = getTransform(tfBuffer, "palm", self.link).transform
         self.pos = Vector2(transform.translation.y*1000, transform.translation.z*1000)
 
         #if(self.previous == None):
@@ -192,12 +200,12 @@ class JointLink(object):
         #else:
         dir = Vector2(0,0)
         if(self.next):
-            t1 = getTransform("palm", jointLinks[self.next].link).transform
+            t1 = getTransform(tfBuffer,"palm", jointLinks[self.next].link).transform
             p1 = Vector2(t1.translation.y*1000, t1.translation.z*1000)
             dir += p1-self.pos
 
         if(self.previous):
-            t1 = getTransform("palm", jointLinks[self.previous].link).transform
+            t1 = getTransform(tfBuffer,"palm", jointLinks[self.previous].link).transform
             p1 = Vector2(t1.translation.y*1000, t1.translation.z*1000)
             
             dir += self.pos-p1
@@ -227,28 +235,31 @@ def getJoint(name):
 
 
 class Finger(object):
-    def __init__(self, base, jointLinks):
+    def __init__(self, base, jointLinks, tfBuffer):
         self.jointLinks = jointLinks
         self.base = base
+        self.baseLongitudeRotation = 0
         self.jointNames = []
         self.realJoints = {}
         self.predictedJoints = {}
         self.expectedJoints = {}
+        self.colors = {}
         self.forces = []
         self.sensors = []
         self.K = 0.4
         self.sign = 1
 
-        self.getJoints()
+        self.getJoints(tfBuffer)
 
-    def addSensor(self, start, end, offset):
+    def addSensor(self, start, end, offset,tfBuffer):
         if start in self.jointNames and end in self.jointNames:
-            self.sensors.append(StrainSensor(start, end, offset, self.jointLinks))
+            self.sensors.append(StrainSensor(start, end, offset, self.jointLinks,tfBuffer))
         else:
-            print("Not available")
+            #print("Not available")
             #print(self.jointNames)
+            pass
 
-    def getJoints(self):
+    def getJoints(self,tfBuffer):
         current = self.base
         while current != None:
             self.realJoints[current] = self.jointLinks[current]
@@ -267,15 +278,12 @@ class Finger(object):
             exp.previous = j.previous
             self.expectedJoints[exp.name] = exp
 
+            self.colors[j.name] = [0,0,0]
 
-        t = getTransform("palm", self.jointLinks[self.base].link).transform
+        t = getTransform(tfBuffer, "palm", self.jointLinks[self.base].link).transform
         eulers = quaternionToEuler(t.rotation.x, t.rotation.y, t.rotation.z, t.rotation.w)
         self.sign = round(cos(eulers[2]),0)
-        print(self.sign)
-        print("Joints for finger base: %s" % self.base)
-        print(self.jointNames)
-        print 
-            
+             
     def getRadiusFromLengths(self, length1, length2): 
         if(length1 > length2):
             l1 = length1
@@ -291,9 +299,12 @@ class Finger(object):
         theta = l1/R
         return R, theta
 
-    def getPrediction(self, dis):
+    def getPrediction(self, dis, options):
+
+        centers = []
 
         path = []
+        normalsPath=[]
 
         for s in range(len(self.sensors)):
             sensor = self.sensors[s]
@@ -316,6 +327,7 @@ class Finger(object):
                 radius, theta = self.getRadiusFromLengths(centerLength,insideLength)
 
             center = baseJoint.pos + baseJoint.perp * radius
+            centers.append(center)
 
             theta *= self.sign
 
@@ -323,20 +335,24 @@ class Finger(object):
             end = center + Vector2(radius*cos(pi-globalTheta), radius*sin(pi-globalTheta))
 
             startTheta = baseJoint.perp.Angle()
-            endTheta = theta - startTheta 
+            endTheta = theta - startTheta
+
             interval = theta/10
 
             for i in range(10):
                 globalTheta = pi - interval*i + startTheta
                 path.append(center + Vector2(radius*cos(globalTheta), radius*sin(globalTheta)))
+                normalsPath.append((center-path[-1]).Normalise() * (radius/abs(radius)))
             path.append(end)
-
+            normalsPath.append((center-path[-1]).Normalise() * (radius/abs(radius)))
+            
             endJoint.pos = end
-            endJoint.perp = (center-end).Normalise()* (radius/abs(radius))
+            #endJoint.perp = (center-end).Normalise() * (radius/abs(radius))
 
-            if options["showNormals"].get():
-                p2 = endJoint.pos + endJoint.perp*20
-                dis.drawLine(endJoint.pos.x, endJoint.pos.y, p2.x, p2.y, fill = "red")
+            #if options["showNormals"].get():
+            #    p2 = endJoint.pos + endJoint.perp*20
+            #    dis.drawLine(endJoint.pos.x, endJoint.pos.y, p2.x, p2.y, fill = "red")
+            #print("Options:" , options)
             if options["showSensors"].get():
                 dis.drawCircle(end.x, end.y, 4, fill="yellow")
             if options["showCenters"].get():
@@ -344,11 +360,10 @@ class Finger(object):
             if options["showCircles"].get():
                 dis.drawCircle(center.x, center.y, radius)
         
-
-        
         for i in range(12, 40):
             globalTheta = pi - interval*i + startTheta
             path.append(center + Vector2(radius*cos(globalTheta), radius*sin(globalTheta)))
+            normalsPath.append((center-path[-1]).Normalise() * (radius/abs(radius)))
   
         segLength = FINGER_LENGTH/JOINT_RESOLUTION
 
@@ -360,10 +375,11 @@ class Finger(object):
                 dist += (path[n+1] - path[n]).Mag()
                 n+=1
             self.predictedJoints[self.jointNames[j]].pos = path[n]
-
+            self.predictedJoints[self.jointNames[j]].perp = normalsPath[n]
         for j in self.predictedJoints.values():
             if j.next != None:
                 j.dir = (self.predictedJoints[j.next].pos - j.pos).Normalise()
+                #j.perp = j.dir.Perpendicular()
         
         ''' END CASE '''
         targetDist = segLength*len(self.jointNames)
@@ -373,15 +389,17 @@ class Finger(object):
             dist += (path[n+1] - path[n]).Mag()
             n+=1
         self.predictedJoints[self.jointNames[-1]].dir = (path[n] - self.predictedJoints[self.jointNames[-1]].pos).Normalise()
-        
+        self.predictedJoints[self.jointNames[-1]].perp = normalsPath[n]
+ 
     def getExpected(self, dis, efforts):
         self.K = rospy.get_param("/Design/kConstant")
         segLength = FINGER_LENGTH/JOINT_RESOLUTION
 
-        effort = efforts[0]
+        #effort = efforts[0]
 
         next=self.expectedJoints[self.base].next
         while next != None:
+            effort = efforts[next]
             prev = self.expectedJoints[self.expectedJoints[next].previous]
             expected = self.expectedJoints[next]
 
@@ -392,8 +410,9 @@ class Finger(object):
             expected.perp = Vector2(-expected.dir.y, expected.dir.x)
             next = expected.next
 
-    def update(self):
+    def update(self,tfBuffer, options):
         self.predictedJoints[self.base].pos = self.realJoints[self.base].pos
+        self.predictedJoints[self.base].dir = self.realJoints[self.base].dir
         self.predictedJoints[self.base].perp = self.realJoints[self.base].perp
 
         self.expectedJoints[self.base].pos = self.realJoints[self.base].pos
@@ -401,17 +420,21 @@ class Finger(object):
         self.expectedJoints[self.base].dir = self.realJoints[self.base].dir
 
         for j in self.realJoints.values():
-            j.update(self.realJoints)
+            j.update(self.realJoints, tfBuffer)
         for s in self.sensors:
             s.update(self.realJoints)
 
-    def drawForces(self, dis):
+    def drawForces(self, dis, options):
         maxSeen = 0
-        maxForce = 0.05
+        maxForce = 0.08
 
         expectedAngles = []
         predictedAngles = []
         relativeAngles = []
+
+        relativeAnglesArr =[]
+
+        totalForceVec = Vector2(0,0)
 
         for j in self.jointNames:
             expected = self.expectedJoints[j]
@@ -426,67 +449,65 @@ class Finger(object):
             else:
                 predictedRelativeAngle = predicted.dir.Angle()
 
-
-            relativeAngle = abs(expectedRelativeAngle - predictedRelativeAngle)
-            while relativeAngle > 2*pi:
+            relativeAngle = expectedRelativeAngle - predictedRelativeAngle
+            #relativeAngle = abs(relativeAngle)
+            while relativeAngle > pi:
                 relativeAngle -= 2*pi
-            while relativeAngle < 0:
+            while relativeAngle < -pi:
                 relativeAngle += 2*pi
 
-            expectedAngles.append(expectedRelativeAngle)
-            predictedAngles.append(predictedRelativeAngle)
-            relativeAngles.append(relativeAngle)
-
+            if(relativeAngle >= 0):
+                sign = -1
+            else:
+                sign = 1
+       
+            relativeAngle = abs(relativeAngle)
             force = self.K * relativeAngle
-
-            #force = 1
-            if(force > maxSeen):
-                maxSeen = force
-            
-            hue = mapper(force, 0, maxForce, 0.3, 1)
-            col = colorsys.hsv_to_rgb(1-hue, 1, 1)
-            #print(hue)
-
-            #force = 0.03
-            #print(force)
-            g = 255-mapper(abs(0.5*maxForce-force), 0, 0.4*maxForce, 0, 255)
-            #g = mapper(force, 0.25*maxForce, 0.75*maxForce, 0, 255)
-            #g = ((max(0.25,min(0.75,force)) - 0.25)*2)*255
-
-            r = mapper(force, 0.2*maxForce, 1*maxForce, 0, 255)
-            #r = ((max(0.5, min(1, force)) - 0.5)*2)*255
-            b = 255 - mapper(force, 0.0*maxForce, 0.8*maxForce, 0, 255)
-            #b = (0.5 - (max(0, min(0.5, force)))) * 2 * 255
-            
-            #col = (int(r), int(g), int(b))
-            col = (col[0]*255, col[1]*255, col[2]*255)
-
-            #print(col)
+            col = self.forceToColour(force)
+            self.colors[j] = [float(col[0]) ,float(col[1]) ,float(col[2])]
 
             col = "#%02x%02x%02x" % (col[0] ,col[1] ,col[2])
-            self.predictedJoints[j].draw(dis, self.predictedJoints, fill=col)
+            self.predictedJoints[j].force = force * self.sign * sign
+            self.predictedJoints[j].draw(dis, self.predictedJoints, options, fill=col)  
+            totalForceVec += self.predictedJoints[j].perp * force * self.sign * sign
+
+        p1 = self.realJoints[self.base].pos
+        p2 = self.realJoints[self.base].pos + totalForceVec * 50
+        dis.drawLine(p1.x, p1.y, p2.x, p2.y)
         #print 
         #print(maxSeen)
         #print(expectedAngles)
         #print(predictedAngles)
         #print(relativeAngles)
 
-    def draw(self, dis, efforts):
-        self.getPrediction(dis)
+    def forceToColour(self, force):
+        maxForce = 0.08
+        force = abs(force)
+
+        hue = mapper(force, 0, maxForce, 0.3, 1)
+        col = colorsys.hsv_to_rgb(1-hue, 1, 1)
+
+        col = (col[0]*255, col[1]*255, col[2]*255)
+        return col
+
+
+    def draw(self, dis, efforts, options):
+        self.getPrediction(dis, options)
         self.getExpected(dis, efforts)
         for s in self.sensors:
-            s.draw(dis)
+            s.draw(dis, options)
         if options["showReal"].get():
             for j in self.realJoints.values():
-                j.draw(dis, self.realJoints, fill="green")
+                col = "#%02x%02x%02x" % self.forceToColour(j.force)
+                j.draw(dis, self.realJoints, fill=col)
         if options["showExpected"].get():
             for j in self.expectedJoints.values():
-                j.draw(dis, self.expectedJoints, fill="blue")
+                j.draw(dis, self.expectedJoints, options, fill="blue")
         if options["showPredicted"].get():
             for j in self.predictedJoints.values():
-                j.draw(dis, self.predictedJoints, fill="red")
+                j.draw(dis, self.predictedJoints, options, fill="red")
         if options["showForces"].get():
-            self.drawForces(dis)
+            self.drawForces(dis, options)
 
 class Gripper(object):
     def __init__(self):
@@ -498,11 +519,37 @@ class Gripper(object):
         self.fingerBases = []
         self.sensors = []
         self.fingers  = []
-        self.efforts = [0]
-        rospy.Subscriber("/hand_controller/command", Float64MultiArray, self.storeEfforts)
 
-    def storeEfforts(self, x):
-        self.efforts = x.data
+        self.effortInputs = {}
+        self.appliedForce = [0,0,0]
+        self.jointStates = {}
+        self.springStates = {}
+
+        print(self.jointNames)
+
+        self.tfBuffer = tf2_ros.Buffer()
+        self.listener = tf2_ros.TransformListener(self.tfBuffer)
+        rospy.Subscriber("/hand_controller/command", Float64MultiArray, self.storeEffortInputs)
+        rospy.Subscriber("/link_0_force_fetcher/link_0_forces", Float32MultiArray, self.storeAppliedForce)
+        rospy.Subscriber("/joint_states", JointState, self.storeJointStates)
+        rospy.Subscriber("/Design/spring_states", Float32MultiArray, self.storeSpringStates)
+
+    def storeSpringStates(self, x):
+        for j in range(len(self.jointNames)):
+            self.springStates[self.jointNames[j]] = x.data[j]
+
+
+    def storeJointStates(self, x):
+        for i in range(len(x.name)):
+            self.jointStates[x.name[i]] = x.effort[i]
+
+    def storeAppliedForce(self, x):
+        self.appliedForce= x.data
+
+    def storeEffortInputs(self, x):
+   
+        for j in range(len(self.jointNames)):
+            self.effortInputs[self.jointNames[j]] = x.data[j]
 
     def setup(self):
         #Add joints with corrosponding links
@@ -523,17 +570,17 @@ class Gripper(object):
                 self.jointLinks[j].predictedPerp = self.jointLinks[j].perp
                 self.jointLinks[j].predictedPos = self.jointLinks[j].pos
 
-        for b in self.fingerBases[1:3]:
-            self.fingers.append(Finger(b, self.jointLinks))
+        for b in self.fingerBases:
+            self.fingers.append(Finger(b, self.jointLinks, self.tfBuffer))
 
         prefixes = ["LT", "LB", "RT", "RB"]
-        prefixes = ["LT", "RT", "RB"]
+        prefixes = ["LT", "RT", "RB", "LB"]
         for p in prefixes:
             for f in self.fingers:
-                f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10)
-                f.addSensor("palm_%sseg1_joint" % (p), "%sseg7_%sseg8_joint" % (p,p) , 10)
-                f.addSensor("palm_%sseg1_joint" % (p), "%sseg9_%sseg10_joint" % (p,p) , 10)
-                f.addSensor("palm_%sseg1_joint" % (p), "%sseg11_%sseg12_joint" % (p,p), 10)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10, self.tfBuffer)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg7_%sseg8_joint" % (p,p) , 10, self.tfBuffer)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg9_%sseg10_joint" % (p,p) , 10, self.tfBuffer)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg11_%sseg12_joint" % (p,p), 10, self.tfBuffer)
 
     def getRadiusFromLengths(self, length1, length2): 
         if(length1 > length2):
@@ -710,9 +757,22 @@ class Gripper(object):
         dis.drawCircle(c.x, c.y, R)
         dis.drawCircle()
 
-    def update(self):
+    def update(self, options):
         for f in self.fingers:
-            f.update()
+            f.update(self.tfBuffer, options)
+            try:
+                arr = []
+                springOutputArr = ""
+                effortInputsArr = ""
+                for j in f.jointNames:
+                    springOutputArr += "%+0.2f, " % (self.springStates[j])
+                    effortInputsArr += "%+0.2f, " % (self.effortInputs[j])
+
+                    self.jointLinks[j].force = self.effortInputs[j]+self.springStates[j]
+                    #arr.append(round(self.jointStates[j]-self.springStates[j],2))
+            
+            except:
+                print("Joint states not recieved")
         #for j in self.jointLinks.values():
             #j.update(self.jointLinks)
         #for j in self.fingerBases:
@@ -722,17 +782,40 @@ class Gripper(object):
         #for s in self.sensors:
         #    s.update(self.jointLinks)
         
-    def draw(self, dis):
+    def draw(self, dis, options):
         for f in self.fingers:
-            f.draw(dis, self.efforts)
-
+            try:
+                f.draw(dis, self.effortInputs, options)
+            except KeyError:
+                pass
+    
+        names = rospy.get_param("hand_controller/joints")
+        arr = []
+        for n in names:
+            found = False
+            for f in self.fingers:
+                try:
+                    col = f.colors[n]
+                    found = True
+                except KeyError:
+                    pass
+            if found:
+                for i in range(3):
+                    arr.append(col[i])
+            else:
+                for i in range(3):
+                    arr.append(0)
         
-def getTransform(link1, link2,  timeout=5):
+        pub = rospy.Publisher("Design/forces", Float32MultiArray, queue_size=10)
+        data = Float32MultiArray(data = arr)
+        pub.publish(data)
+
+def getTransform(buffer, link1, link2,  timeout=5):
 
             found = False
             while found == False:
                 try:
-                    trans = tfBuffer.lookup_transform(link1, link2, rospy.Time(), rospy.Duration(timeout))
+                    trans = buffer.lookup_transform(link1, link2, rospy.Time(), rospy.Duration(timeout))
                     
                     found = True
                 except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
@@ -779,58 +862,62 @@ def mapper(value, lower, upper, v1, v2):
     return output
 
 
-radi = 50
-mouseX, mouseY = 0, 0    
-root = Tk()
-root.bind("<Motion>", setMouse)
-root.bind("<Button-4>", scrollerUp)
-root.bind("<Button-5>", scrollerDown)
-
-d = display.Display(root)
-d.scale = 2
-
-options = {}
-labels = ["showReal", "showSensors", "showCenters", "showCircles", "showNormals", "showSides", "showExpected", "showPredicted", "showForces"]
-for l in labels:
-    options[l] = BooleanVar(False)
 
 
-options["showForces"].set(True)
-Checkbutton(root, text="Show Sensors", variable=options["showSensors"]).place(x = 10, y = 20)
-Checkbutton(root, text="Show Centers", variable=options["showCenters"]).place(x = 10, y = 40)
-Checkbutton(root, text="Show Circles", variable=options["showCircles"]).place(x = 10, y = 60)
-Checkbutton(root, text="Show Normals", variable=options["showNormals"]).place(x = 10, y = 80)
-Checkbutton(root, text="Show Sides", variable=options["showSides"]).place(x = 10, y = 100)
-Checkbutton(root, text="Show Expected", variable=options["showExpected"]).place(x = 10, y = 120)
-Checkbutton(root, text="Show Predicted", variable=options["showPredicted"]).place(x = 10, y = 140)
-Checkbutton(root, text="Show Forces", variable=options["showForces"]).place(x = 10, y = 160)
-Checkbutton(root, text="Show Real", variable=options["showReal"]).place(x = 10, y=190)
+if __name__ == "__main__":
 
-rospy.init_node('gripperController', anonymous=True)
-rospy.logerr("controller starting")
+    radi = 50
+    mouseX, mouseY = 0, 0    
+    root = Tk()
+    root.bind("<Motion>", setMouse)
+    root.bind("<Button-4>", scrollerUp)
+    root.bind("<Button-5>", scrollerDown)
+
+    d = display.Display(root)
+    d.scale = 2
+
+    options = {}
+    labels = ["showReal", "showSensors", "showCenters", "showCircles", "showNormals", "showSides", "showExpected", "showPredicted", "showForces"]
+    for l in labels:
+        options[l] = BooleanVar(False)
 
 
-tfBuffer = tf2_ros.Buffer()
-listener = tf2_ros.TransformListener(tfBuffer)
+    options["showForces"].set(True)
+    Checkbutton(root, text="Show Sensors", variable=options["showSensors"]).place(x = 10, y = 20)
+    Checkbutton(root, text="Show Centers", variable=options["showCenters"]).place(x = 10, y = 40)
+    Checkbutton(root, text="Show Circles", variable=options["showCircles"]).place(x = 10, y = 60)
+    Checkbutton(root, text="Show Normals", variable=options["showNormals"]).place(x = 10, y = 80)
+    Checkbutton(root, text="Show Sides", variable=options["showSides"]).place(x = 10, y = 100)
+    Checkbutton(root, text="Show Expected", variable=options["showExpected"]).place(x = 10, y = 120)
+    Checkbutton(root, text="Show Predicted", variable=options["showPredicted"]).place(x = 10, y = 140)
+    Checkbutton(root, text="Show Forces", variable=options["showForces"]).place(x = 10, y = 160)
+    Checkbutton(root, text="Show Real", variable=options["showReal"]).place(x = 10, y=190)
 
-g = Gripper()
-g.setup()
+    rospy.init_node('gripperController', anonymous=True)
+    rospy.logerr("controller starting")
 
-print("Setup complete")
 
-rate = rospy.Rate(100)
+    #tfBuffer = tf2_ros.Buffer()
+    #listener = tf2_ros.TransformListener(tfBuffer)
 
-while not rospy.is_shutdown():
-    d.clear()
-    g.update()
-    #g.calcStrains(d)
-    g.draw(d)
-    d.display()
-    rate.sleep()
-    #print("<----------->")
-    #t1 = getTransform("palm", "LTseg3").transform.rotation
-    #print(quaternionToEuler(t1.x, t1.y, t1.z, t1.w))
-    #print("-----------")
-    #t1 = getTransform("palm", "RTseg3").transform.rotation
-    #print(quaternionToEuler(t1.x, t1.y, t1.z, t1.w))
+    g = Gripper()
+    g.setup()
+
+    print("Setup complete")
+
+    rate = rospy.Rate(100)
+
+    while not rospy.is_shutdown():
+        d.clear()
+        g.update(options)
+        #g.calcStrains(d)
+        g.draw(d,options)
+        d.display()
+        rate.sleep()
+        #print("<----------->")
+        #t1 = getTransform("palm", "LTseg3").transform.rotation
+        #print(quaternionToEuler(t1.x, t1.y, t1.z, t1.w))
+        #print("-----------")
+        #t1 = getTransform("palm", "RTseg3").transform.rotation
+        #print(quaternionToEuler(t1.x, t1.y, t1.z, t1.w))
 

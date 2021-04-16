@@ -145,14 +145,18 @@ class Vector2(object):
     def AngleBetween(self, other):
         if(type(other) == Vector2):
             try:
-                return math.acos(self.Dot(other))
+                return self.Angle()-other.Angle()
             except:
+        
                 return 0
         else:
             raise TypeError
 
     def Cross(self, other):
         pass
+
+    def Perpendicular(self):
+        return Vector2(self.y, -self.x)
 
     '''Print'''
     def __str__(self):

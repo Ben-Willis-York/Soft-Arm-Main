@@ -9,7 +9,7 @@
 
 <!--  PROPERTIES  -->
 
-<xacro:property name="strength" value="1000"/>
+<xacro:property name="strength" value="10000"/>
 <xacro:property name="speed" value = "0.01"/>
 <xacro:property name="damping" value = "0"/>
 

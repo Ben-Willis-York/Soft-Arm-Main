@@ -10,6 +10,7 @@
 #include "ros/callback_queue.h"
 #include "ros/subscribe_options.h"
 #include "std_msgs/Float32.h"
+#include "std_msgs/Float32MultiArray.h"
 #include <thread>
 
 
@@ -30,8 +31,11 @@ namespace gazebo
 
       std::vector<physics::JointPtr> joints; //Array of spring joints
 
+      std::vector<float> springStates;
+
       std::unique_ptr<ros::NodeHandle> rosNode;
       ros::Subscriber rosSub;
+      ros::Publisher rosPub;
       ros::CallbackQueue rosQueue;
       std::thread rosQueueThread;
 
@@ -65,7 +69,7 @@ namespace gazebo
       ros::VoidPtr(), &this->rosQueue);
 
       this->rosSub = this->rosNode->subscribe(so);
-
+      this->rosPub = this->rosNode->advertise<std_msgs::Float32MultiArray>("/"+this->model->GetName()+"/spring_states", 1);
       this->rosQueueThread = std::thread(std::bind(&SpringJoint::QueueThread, this));
 
       this->kConstant = _sdf->Get<double>("kConstant");
@@ -94,8 +98,17 @@ namespace gazebo
 
           //std::cerr << j->GetName() << "," << position << std::endl;
           j->SetForce(0,force);
+          springStates[i]=force;
         }
+        PublishStates();
       }
+    }
+
+    private: void PublishStates()
+    {
+      std_msgs::Float32MultiArray msg = std_msgs::Float32MultiArray();
+      msg.data = this->springStates;
+      rosPub.publish(msg);
     }
 
     public: void GetJoints()
@@ -112,6 +125,7 @@ namespace gazebo
       for(int i = 0; i < param.size(); i++)
       {
         this->joints.push_back(this->model->GetJoint(param[i]));
+        this->springStates.push_back(0.0f);
       }
     }
   

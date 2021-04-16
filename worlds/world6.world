@@ -68,6 +68,7 @@
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>1000</real_time_update_rate>
+      
     </physics>
     <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
@@ -255,6 +256,9 @@
       <static>0</static>
       <allow_auto_disable>1</allow_auto_disable>
       <pose frame=''>0.543957 0.064974 0.129691 0 0 -0.000354</pose>
+      <plugin name="applied_force_fetcher" filename="libapplied_force_fetcher_plugin.so">
+        <LinkName> link_0 </LinkName>
+      </plugin>
     </model>
     <model name='unit_sphere_soft'>
       <link name='link'>
@@ -563,8 +567,7 @@
       <pose frame=''>-0.616962 0.050684 0.069199 -1.06852 0 0</pose>
     </model>
 
-  <plugin name="hello_world" filename ="/home/ben/gazebo_plugin_tutorial/build/libhello_world.so"/>
-
+ 
 
   </world>
 </sdf>

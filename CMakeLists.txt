@@ -172,6 +172,22 @@ target_link_libraries(
   ${GAZEBO_LIBRARIES}
   ${roscpp_LIBRARIES}
 )
+
+add_library(joint_force_visualiser_plugin src/joint_force_visualiser_plugin.cpp)
+target_link_libraries(
+  joint_force_visualiser_plugin
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${roscpp_LIBRARIES}
+)
+
+add_library(applied_force_fetcher_plugin src/applied_force_fetcher_plugin.cpp)
+target_link_libraries(
+  applied_force_fetcher_plugin
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${roscpp_LIBRARIES}
+)
   
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries

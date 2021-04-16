@@ -58,7 +58,7 @@
 	<joint name="${seg1}_${seg2}_joint" type="revolute">
 		<axis xyz="1 0 0"/>
 		<limit effort="${force}" lower="-2" upper="2" velocity="0.001"/>
-		<dynamics damping="0.05" friction="0.0"/>
+		<dynamics damping="0.02" friction="0.0"/>
 		<origin xyz="0 0 ${length}" rpy="0 0 0"/>
 		<parent link="${seg1}"/>
 		<child link="${seg2}"/>

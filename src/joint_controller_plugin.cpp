@@ -3,6 +3,7 @@
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 #include <gazebo/common/Plugin.hh>
+#include <gazebo/common/Time.hh>
 #include <ignition/math/Vector3.hh>
 #include <ros/ros.h>
 #include <stdio.h>
@@ -37,9 +38,14 @@ namespace gazebo
       ros::CallbackQueue rosQueue;
       std::thread rosQueueThread;
 
-      std::vector<float> targets;
-      std::vector<float> setpoints;
-      float speed = 0.0001;
+      std::vector<double> targets;
+      std::vector<double> setpoints;
+      std::vector<double> speeds;
+      double maxSpeed = 0.0003;
+      
+      common::Time prevTime = 0;
+
+
 
     public: void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     {
@@ -53,7 +59,7 @@ namespace gazebo
           std::bind(&JointController::OnUpdate, this));
 
       //Setup ROS node
-      std::string node_name = std::string("my_controller_node");
+      std::string node_name = std::string("");
       if (!ros::isInitialized()) 
       {
         int argc = 0;
@@ -80,6 +86,9 @@ namespace gazebo
     // Called by the world update start event
     public: void OnUpdate()
     {
+
+      //common::Time time = physics::World::SimTime();
+
       //Get joint names
       if(this->paramsFound == false) { this-> GetJoints(); }
       
@@ -87,11 +96,25 @@ namespace gazebo
       {
         for(int i = 0; i < targets.size(); i++)
         {
-          float pos = this->joints[i]->Position();
-          if(this->setpoints[i] < this->targets[i]-0.002) { this->setpoints[i] += this->speed; }
-          if(this->setpoints[i] > this->targets[i]+0.002) { this->setpoints[i] -= this->speed; }
-          else{this->setpoints[i] = this->targets[i]; }
+          double thresh = this->speeds[i];
+          double difference = this->setpoints[i] - this->targets[i];
+
+          if((difference <= thresh) && (difference >= -thresh))
+          {
+            this->setpoints[i] = this->targets[i];
+          }
+          else if(difference > thresh)
+          {
+            this->setpoints[i] -= this->speeds[i];
+          }
+          else if(difference < -thresh)
+          {
+            this->setpoints[i] += this->speeds[i];
+          }
+          else { std::cerr << "elsed" << std::endl;}
+
           this->model->GetJointController()->SetPositionTarget(this->joints[i]->GetScopedName(), this->setpoints[i]);
+          this->model->GetJointController()->Update();
           //std::cerr << this->setpoints[i] << ",";
         }
         //std::cerr << std::endl;
@@ -101,25 +124,73 @@ namespace gazebo
 
     public: void GetJoints()
     {
-      const std::string paramName = this->sdf->Get<std::string>("jointNamesParam");
+      std::string paramName;
+      //paramName = "/arm_joints/joints";
+      //std::cerr << paramName << std::endl;
+      std::string paramBase = this->sdf->Get<std::string>("jointNamesParam");
+      std::cerr << paramBase << std::endl;
 
-      std::cerr << paramName << std::endl;
-
-      if(!rosNode->getParam("/arm_joints/joints", this->jointNames))
+      if(!rosNode->getParam(paramBase+"joints", this->jointNames))
       { std::cerr << "Not Found" << std::endl; }
       else
       { 
         this->paramsFound = true;
-        std::cerr << "FOUND JOINTS" << std::endl;
-        for(int i = 0; i < this->jointNames.size(); i++)
+
+        //std::cerr << "FOUND JOINTS" << std::endl;
+        float s;
+        std::string name = jointNames[0];
+        std::string n = paramBase + name + "/pid/p";
+        //std::cerr << n << std::endl;
+        //std::cerr << "true or false? " << this->rosNode->getParam(n, s) << std::endl;
+        //std::cerr << "Rev1 p: " << s << std::endl;
+
+
+
+        for(int j = 0; j < this->jointNames.size(); j++)
         {
-          std::cerr << this->jointNames[i] << std::endl;
-          this->joints.push_back(this->model->GetJoint(this->jointNames[i]));
-          targets.push_back(-0.7);
+          
+          float p;
+          float i;
+          float d;
+          //std::string jointName = jointNames[0];
+          //std::string param = paramBase + jointName + "/pid/p";
+          //std::cerr << param << std::endl;
+
+   
+          std::string name = jointNames[j];
+          std::string n = paramBase + name + "/pid/p";
+          if(!rosNode->getParam(n, p))
+          { p=0; }
+
+          n = paramBase + name + "/pid/i";
+          if(!rosNode->getParam(n, i))
+          { i=0; }
+
+          
+          n = paramBase + name + "/pid/d";
+          if(!rosNode->getParam(n, d))
+          { d=0; }
+
+          /*
+          std::cerr << jointNames[j] << ": ";
+          if(!rosNode->getParam(n, p))
+          { std::cerr << ", p=" << p; }
+          if(!rosNode->getParam("arm_controller/Rev1/pid/i", i))
+          { std::cerr << ", i= " << i; }
+          if(!rosNode->getParam(param + "/d", d))
+          { std::cerr << ", d=" << d; }
+          std::cerr << std::endl;
+          */
+         
+          std::cerr << jointNames[j] << " P: " << p << " I: " << i << " D: " << d << std::endl;
+
+          this->joints.push_back(this->model->GetJoint(this->jointNames[j]));
+          targets.push_back(0.0);
           setpoints.push_back(0);
-          pids.push_back(common::PID(2000,0,0));
-          this->model->GetJointController()->SetPositionPID(this->joints[i]->GetScopedName(), this->pids[i]);
-          this->model->GetJointController()->SetPositionTarget(this->joints[i]->GetScopedName(), 1.0);
+          speeds.push_back(0.00001);
+          pids.push_back(common::PID(p, i, d, 0, 0));
+          this->model->GetJointController()->SetPositionPID(this->joints[j]->GetScopedName(), this->pids[j]);
+          this->model->GetJointController()->SetPositionTarget(this->joints[j]->GetScopedName(), 0.0);
         }
       }
     }
@@ -127,15 +198,33 @@ namespace gazebo
   
     public: void OnRosMsg(const std_msgs::Float32MultiArray::ConstPtr& _msg)
     {
+      std::cerr << "Setting Angles: ";
       std::vector<float> arr = _msg->data;
+
+      std::vector<double> differences = std::vector<double>(jointNames.size());
+      double maxDiff = 0;
+
       for(int i =0; i < arr.size(); i++)
       {
         this->targets[i] = arr[i];
-        std::cerr << arr[i] << std::endl;
+        differences[i] = this->targets[i] - this->setpoints[i];
+        if( std::abs(differences[i]) > maxDiff) {maxDiff = std::abs(differences[i]);}
+
+        std::cerr << arr[i] << ", ";
       }
-      //this->kConstant = _msg->data;
-      //std::cerr << this->kConstant << std::endl;
-      //this->rosNode->setParam("/Design/kConstant", this->kConstant);
+      std::cerr << std::endl;
+
+      std::cerr << "Speeds: ";
+      for(int i = 0; i < differences.size(); i++)
+      {
+        if(maxDiff > 0)
+        {
+          this->speeds[i] = std::abs(this->maxSpeed * differences[i]/maxDiff);
+          std::cerr << this->speeds[i] << ", ";
+        }
+      }
+      std::cerr << std::endl;
+
     }
 
     private: void QueueThread()
