@@ -773,14 +773,6 @@ class Gripper(object):
             
             except:
                 print("Joint states not recieved")
-        #for j in self.jointLinks.values():
-            #j.update(self.jointLinks)
-        #for j in self.fingerBases:
-        #    self.jointLinks[j].predictedPerp = self.jointLinks[j].perp
-        #    self.jointLinks[j].predictedPos = self.jointLinks[j].pos
-
-        #for s in self.sensors:
-        #    s.update(self.jointLinks)
         
     def draw(self, dis, options):
         for f in self.fingers:

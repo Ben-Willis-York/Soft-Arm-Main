@@ -78,4 +78,3 @@ while not rospy.is_shutdown():
     #g.draw(d)
     #d.display()
     rate.sleep()
-    #print("<------
