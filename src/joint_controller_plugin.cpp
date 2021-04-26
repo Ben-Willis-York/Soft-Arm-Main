@@ -22,6 +22,7 @@ namespace gazebo
     public:
     private:
       bool paramsFound = false;
+      bool commandRecieved = false;
 
       physics::ModelPtr model; // Pointer to the model
       event::ConnectionPtr updateConnection; // Pointer to the update event connection
@@ -185,12 +186,13 @@ namespace gazebo
           std::cerr << jointNames[j] << " P: " << p << " I: " << i << " D: " << d << std::endl;
 
           this->joints.push_back(this->model->GetJoint(this->jointNames[j]));
-          targets.push_back(0.0);
-          setpoints.push_back(0);
+          float startPos = this->joints[j]->Position();
+          targets.push_back(startPos);
+          setpoints.push_back(startPos);
           speeds.push_back(0.00001);
           pids.push_back(common::PID(p, i, d, 0, 0));
           this->model->GetJointController()->SetPositionPID(this->joints[j]->GetScopedName(), this->pids[j]);
-          this->model->GetJointController()->SetPositionTarget(this->joints[j]->GetScopedName(), 0.0);
+          this->model->GetJointController()->SetPositionTarget(this->joints[j]->GetScopedName(), startPos);
         }
       }
     }
@@ -198,6 +200,8 @@ namespace gazebo
   
     public: void OnRosMsg(const std_msgs::Float32MultiArray::ConstPtr& _msg)
     {
+
+
       std::cerr << "Setting Angles: ";
       std::vector<float> arr = _msg->data;
 

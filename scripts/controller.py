@@ -25,7 +25,6 @@ class Controller():
 
         self.speeds = [3, 1, 1, 1]
         self.maxSpeed = 2
-    
 
         self.names = rospy.get_param("/arm_controller/joints")
         for n in self.names:
@@ -35,6 +34,7 @@ class Controller():
         
         armNames = rospy.get_param("/arm_controller/joints")
         data = rospy.wait_for_message("joint_states", JointState)
+        print(data)
         arr = []
         for n in armNames:
             for d in range(len(data.name)):
@@ -42,6 +42,10 @@ class Controller():
                     arr.append(-data.position[d])
                     
         self.state = arr
+        for i in range(len(self.state)):
+            self.setpoints[i] = self.state[i]
+            self.currentSetpoints[i] = self.state[i]
+        print("Start angles:" , self.state)
 
     def setGrasp(self, strength):
         val = float(strength)/10

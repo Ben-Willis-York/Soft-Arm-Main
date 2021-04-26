@@ -134,11 +134,6 @@ namespace gazebo
         if(!jointsFound)
         {
             GetJoints();
-            for(int i = 0; i < 10; i++)
-            {
-                SetLinkColour(i, 0, 0 ,1);
-                
-            }
         }
     }
 

@@ -6,10 +6,8 @@
 
   <param command="$(find xacro)/xacro $(find main_description)/urdf/output.xacro" name="robot_description"/>
 
-  <node args="-param robot_description -urdf -J base_link -0.8 -model Design" name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"/>
-
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value = "$(find main_description)/worlds/readypose.world"/>
+    <arg name="world_name" value = "$(find main_description)/worlds/inside-object.world"/>
     <arg name="paused" value="true"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
@@ -21,7 +19,6 @@
   <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="200.0" />
   </node>
-
    
 
   <rosparam command="load"
@@ -49,6 +46,8 @@
   ns = "spring_controller" />-->
 
   <node pkg="main_description" name="controlPanel" type="controlPanel.py"/>
+
+  <node pkg="main_description" name="gripperControlPanel" type = "gripperControlPanel.py"/>
 
   <!--<node pkg="prototyping_description" name="controller" type="controller.py"/>-->
 

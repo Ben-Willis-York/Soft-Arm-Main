@@ -251,7 +251,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg1_collision">
       <geometry>
         <box size="0.02 0.02 0.0125"/>
       </geometry>
@@ -264,6 +264,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg1_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg1_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="palm_LTseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -308,7 +315,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg2_collision">
       <geometry>
         <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
@@ -321,6 +328,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg2_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg2_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg1_LTseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -368,7 +382,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg3_collision">
       <geometry>
         <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
@@ -381,6 +395,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg3_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg3_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg2_LTseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -428,7 +449,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg4_collision">
       <geometry>
         <box size="0.0175 0.0175 0.0125"/>
       </geometry>
@@ -441,6 +462,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg4_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg4_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg3_LTseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -488,7 +516,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg5_collision">
       <geometry>
         <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
@@ -501,6 +529,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg5_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg5_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg4_LTseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -548,7 +583,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg6_collision">
       <geometry>
         <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
@@ -561,6 +596,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg6_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg6_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg5_LTseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -608,7 +650,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg7_collision">
       <geometry>
         <box size="0.015 0.015 0.0125"/>
       </geometry>
@@ -621,6 +663,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg7_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg7_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg6_LTseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -668,7 +717,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg8_collision">
       <geometry>
         <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
@@ -681,6 +730,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg8_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg8_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg7_LTseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -728,7 +784,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg9_collision">
       <geometry>
         <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
@@ -741,6 +797,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg9_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg9_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg8_LTseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -788,7 +851,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg10_collision">
       <geometry>
         <box size="0.0125 0.0125 0.0125"/>
       </geometry>
@@ -801,6 +864,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg10_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg10_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg9_LTseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -848,7 +918,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg11_collision">
       <geometry>
         <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
@@ -861,6 +931,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg11_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg11_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg10_LTseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -908,7 +985,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LTseg12_collision">
       <geometry>
         <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
@@ -921,6 +998,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LTseg12_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LTseg12_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LTseg11_LTseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -969,7 +1053,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg1_collision">
       <geometry>
         <box size="0.02 0.02 0.0125"/>
       </geometry>
@@ -982,6 +1066,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg1_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg1_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="palm_RTseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1026,7 +1117,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg2_collision">
       <geometry>
         <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
@@ -1039,6 +1130,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg2_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg2_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg1_RTseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1086,7 +1184,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg3_collision">
       <geometry>
         <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
@@ -1099,6 +1197,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg3_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg3_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg2_RTseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1146,7 +1251,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg4_collision">
       <geometry>
         <box size="0.0175 0.0175 0.0125"/>
       </geometry>
@@ -1159,6 +1264,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg4_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg4_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg3_RTseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1206,7 +1318,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg5_collision">
       <geometry>
         <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
@@ -1219,6 +1331,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg5_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg5_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg4_RTseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1266,7 +1385,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg6_collision">
       <geometry>
         <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
@@ -1279,6 +1398,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg6_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg6_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg5_RTseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1326,7 +1452,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg7_collision">
       <geometry>
         <box size="0.015 0.015 0.0125"/>
       </geometry>
@@ -1339,6 +1465,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg7_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg7_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg6_RTseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1386,7 +1519,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg8_collision">
       <geometry>
         <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
@@ -1399,6 +1532,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg8_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg8_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg7_RTseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1446,7 +1586,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg9_collision">
       <geometry>
         <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
@@ -1459,6 +1599,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg9_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg9_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg8_RTseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1506,7 +1653,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg10_collision">
       <geometry>
         <box size="0.0125 0.0125 0.0125"/>
       </geometry>
@@ -1519,6 +1666,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg10_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg10_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg9_RTseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1566,7 +1720,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg11_collision">
       <geometry>
         <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
@@ -1579,6 +1733,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg11_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg11_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg10_RTseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1626,7 +1787,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RTseg12_collision">
       <geometry>
         <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
@@ -1639,6 +1800,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RTseg12_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RTseg12_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RTseg11_RTseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1687,7 +1855,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg1_collision">
       <geometry>
         <box size="0.02 0.02 0.0125"/>
       </geometry>
@@ -1700,6 +1868,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg1_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg1_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="palm_LBseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1744,7 +1919,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg2_collision">
       <geometry>
         <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
@@ -1757,6 +1932,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg2_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg2_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg1_LBseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1804,7 +1986,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg3_collision">
       <geometry>
         <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
@@ -1817,6 +1999,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg3_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg3_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg2_LBseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1864,7 +2053,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg4_collision">
       <geometry>
         <box size="0.0175 0.0175 0.0125"/>
       </geometry>
@@ -1877,6 +2066,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg4_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg4_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg3_LBseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1924,7 +2120,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg5_collision">
       <geometry>
         <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
@@ -1937,6 +2133,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg5_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg5_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg4_LBseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -1984,7 +2187,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg6_collision">
       <geometry>
         <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
@@ -1997,6 +2200,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg6_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg6_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg5_LBseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2044,7 +2254,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg7_collision">
       <geometry>
         <box size="0.015 0.015 0.0125"/>
       </geometry>
@@ -2057,6 +2267,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg7_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg7_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg6_LBseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2104,7 +2321,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg8_collision">
       <geometry>
         <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
@@ -2117,6 +2334,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg8_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg8_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg7_LBseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2164,7 +2388,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg9_collision">
       <geometry>
         <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
@@ -2177,6 +2401,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg9_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg9_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg8_LBseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2224,7 +2455,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg10_collision">
       <geometry>
         <box size="0.0125 0.0125 0.0125"/>
       </geometry>
@@ -2237,6 +2468,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg10_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg10_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg9_LBseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2284,7 +2522,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg11_collision">
       <geometry>
         <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
@@ -2297,6 +2535,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg11_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg11_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg10_LBseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2344,7 +2589,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="LBseg12_collision">
       <geometry>
         <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
@@ -2357,6 +2602,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="LBseg12_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>LBseg12_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="LBseg11_LBseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2405,7 +2657,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg1_collision">
       <geometry>
         <box size="0.02 0.02 0.0125"/>
       </geometry>
@@ -2418,6 +2670,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg1_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg1_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="palm_RBseg1_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2462,7 +2721,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg2_collision">
       <geometry>
         <box size="0.0191666666667 0.0191666666667 0.0125"/>
       </geometry>
@@ -2475,6 +2734,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg2_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg2_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg1_RBseg2_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2522,7 +2788,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg3_collision">
       <geometry>
         <box size="0.0183333333333 0.0183333333333 0.0125"/>
       </geometry>
@@ -2535,6 +2801,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg3_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg3_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg2_RBseg3_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2582,7 +2855,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg4_collision">
       <geometry>
         <box size="0.0175 0.0175 0.0125"/>
       </geometry>
@@ -2595,6 +2868,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg4_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg4_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg3_RBseg4_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2642,7 +2922,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg5_collision">
       <geometry>
         <box size="0.0166666666667 0.0166666666667 0.0125"/>
       </geometry>
@@ -2655,6 +2935,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg5_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg5_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg4_RBseg5_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2702,7 +2989,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg6_collision">
       <geometry>
         <box size="0.0158333333333 0.0158333333333 0.0125"/>
       </geometry>
@@ -2715,6 +3002,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg6_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg6_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg5_RBseg6_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2762,7 +3056,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg7_collision">
       <geometry>
         <box size="0.015 0.015 0.0125"/>
       </geometry>
@@ -2775,6 +3069,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg7_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg7_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg6_RBseg7_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2822,7 +3123,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg8_collision">
       <geometry>
         <box size="0.0141666666667 0.0141666666667 0.0125"/>
       </geometry>
@@ -2835,6 +3136,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg8_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg8_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg7_RBseg8_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2882,7 +3190,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg9_collision">
       <geometry>
         <box size="0.0133333333333 0.0133333333333 0.0125"/>
       </geometry>
@@ -2895,6 +3203,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg9_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg9_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg8_RBseg9_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -2942,7 +3257,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg10_collision">
       <geometry>
         <box size="0.0125 0.0125 0.0125"/>
       </geometry>
@@ -2955,6 +3270,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg10_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg10_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg9_RBseg10_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -3002,7 +3324,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg11_collision">
       <geometry>
         <box size="0.0116666666667 0.0116666666667 0.0125"/>
       </geometry>
@@ -3015,6 +3337,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg11_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg11_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg10_RBseg11_joint" type="revolute">
     <axis xyz="1 0 0"/>
@@ -3062,7 +3391,7 @@
 			<inertia ixx="0.000000001" ixy="0.000000001" ixz="0.000000001" iyy="0.000000001" iyz="0.000000001" izz="0.000000001"/>
 		</inertial>
 		-->
-    <collision>
+    <collision name="RBseg12_collision">
       <geometry>
         <box size="0.0108333333333 0.0108333333333 0.0125"/>
       </geometry>
@@ -3075,6 +3404,13 @@
     <mu2>20000</mu2>
     <selfCollide>true</selfCollide>
     <gravity>true</gravity>
+    <sensor name="RBseg12_sensor" type="contact">
+      <always_on>true</always_on>
+      <contact>
+        <collision>RBseg12_collision</collision>
+      </contact>
+      <update_rate> 30 </update_rate>
+    </sensor>
   </gazebo>
   <joint name="RBseg11_RBseg12_joint" type="revolute">
     <axis xyz="1 0 0"/>

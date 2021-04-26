@@ -1,0 +1,5916 @@
+<sdf version='1.6'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <audio>
+      <device>default</device>
+    </audio>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <state world_name='default'>
+      <sim_time>1842 590000000</sim_time>
+      <real_time>86 293393603</real_time>
+      <wall_time>1619449739 99256</wall_time>
+      <iterations>73460</iterations>
+      <model name='Design'>
+        <pose frame=''>-0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='LBseg1'>
+          <pose frame=''>0.448269 0.049808 0.217104 3.0548 1.56199 -2.92761</pose>
+          <velocity>0.015096 -0.002193 -0.011635 0.083476 -0.013879 1.24446</velocity>
+          <acceleration>30.2578 -0.755198 -21.8428 0.502443 -0.442614 1.0198</acceleration>
+          <wrench>0.302578 -0.007552 -0.218428 0 -0 0</wrench>
+        </link>
+        <link name='LBseg10'>
+          <pose frame=''>0.555728 0.083011 0.215222 -3.12089 1.54229 -2.82091</pose>
+          <velocity>0.00535 -0.001091 0.003123 -0.05897 0.298039 0.057144</velocity>
+          <acceleration>14.0339 3.83659 5.65402 -0.991678 1.52406 0.605264</acceleration>
+          <wrench>0.140339 0.038366 0.05654 0 -0 0</wrench>
+        </link>
+        <link name='LBseg11'>
+          <pose frame=''>0.567666 0.086703 0.214869 -3.12108 1.54218 -2.82103</pose>
+          <velocity>0.005075 -0.000972 -0.000108 -0.062795 0.317706 0.129666</velocity>
+          <acceleration>14.4021 0.396291 -0.202272 1.74199 -0.136098 0.121109</acceleration>
+          <wrench>0.144021 0.003963 -0.002023 0 -0 0</wrench>
+        </link>
+        <link name='LBseg12'>
+          <pose frame=''>0.579603 0.090395 0.214512 -3.1211 1.54218 -2.82105</pose>
+          <velocity>0.004719 0.000387 -0.004048 -0.06273 0.319181 0.125572</velocity>
+          <acceleration>15.071 -1.97668 -7.32808 1.02121 -1.51182 -2.86928</acceleration>
+          <wrench>0.15071 -0.019767 -0.073281 0 -0 0</wrench>
+        </link>
+        <link name='LBseg2'>
+          <pose frame=''>0.460205 0.053515 0.21708 3.10893 1.55814 -2.87438</pose>
+          <velocity>0.009542 0.011988 -0.014009 0.117778 -0.135936 0.484008</velocity>
+          <acceleration>28.5866 -0.542679 -26.5259 0.257952 1.44944 -2.02813</acceleration>
+          <wrench>0.285866 -0.005427 -0.265259 0 -0 0</wrench>
+        </link>
+        <link name='LBseg3'>
+          <pose frame=''>0.472144 0.057211 0.217004 3.13511 1.55449 -2.84875</pose>
+          <velocity>0.006374 0.018574 -0.013875 0.135447 -0.216379 -0.042237</velocity>
+          <acceleration>25.1205 5.68916 -26.4728 2.31713 -0.599992 0.652627</acceleration>
+          <wrench>0.251205 0.056892 -0.264728 0 -0 0</wrench>
+        </link>
+        <link name='LBseg4'>
+          <pose frame=''>0.484086 0.0609 0.216875 -3.134 1.55119 -2.83506</pose>
+          <velocity>0.004771 0.020149 -0.011463 0.131169 -0.240559 -0.454603</velocity>
+          <acceleration>21.2431 13.2729 -22.0882 1.67873 -1.12121 2.41852</acceleration>
+          <wrench>0.212431 0.132729 -0.220882 0 -0 0</wrench>
+        </link>
+        <link name='LBseg5'>
+          <pose frame=''>0.496029 0.064583 0.216693 -3.12651 1.54837 -2.82754</pose>
+          <velocity>0.004434 0.017612 -0.007387 0.10756 -0.201712 -0.631688</velocity>
+          <acceleration>18.2518 17.7953 -14.5055 -1.95767 -1.0217 -1.00938</acceleration>
+          <wrench>0.182518 0.177953 -0.145055 0 -0 0</wrench>
+        </link>
+        <link name='LBseg6'>
+          <pose frame=''>0.507971 0.068266 0.216465 -3.12275 1.54611 -2.82353</pose>
+          <velocity>0.004683 0.013118 -0.002629 0.069032 -0.108098 -0.625349</velocity>
+          <acceleration>16.1322 19.096 -5.5662 -0.586811 0.977535 -2.20946</acceleration>
+          <wrench>0.161322 0.19096 -0.055662 0 -0 0</wrench>
+        </link>
+        <link name='LBseg7'>
+          <pose frame=''>0.519911 0.07195 0.216195 -3.12102 1.54444 -2.82161</pose>
+          <velocity>0.005075 0.008157 0.001631 0.024162 0.017464 -0.496997</velocity>
+          <acceleration>14.8546 17.233 2.49494 0.871315 0.723823 -0.891205</acceleration>
+          <wrench>0.148546 0.17233 0.024949 0 -0 0</wrench>
+        </link>
+        <link name='LBseg8'>
+          <pose frame=''>0.531851 0.075635 0.215893 -3.12051 1.5433 -2.82089</pose>
+          <velocity>0.005384 0.00367 0.004319 -0.01616 0.143766 -0.287948</velocity>
+          <acceleration>14.1953 13.2179 7.63534 2.71488 1.21762 -2.84715</acceleration>
+          <wrench>0.141953 0.132179 0.076353 0 -0 0</wrench>
+        </link>
+        <link name='LBseg9'>
+          <pose frame=''>0.543791 0.079322 0.215566 -3.12061 1.54262 -2.82078</pose>
+          <velocity>0.005455 0.000521 0.004805 -0.044833 0.241875 -0.095106</velocity>
+          <acceleration>13.9302 8.43927 8.66331 -1.1155 -0.347846 1.13072</acceleration>
+          <wrench>0.139303 0.084393 0.086633 0 -0 0</wrench>
+        </link>
+        <link name='LTseg1'>
+          <pose frame=''>0.448013 0.049809 0.137105 3.05567 1.56201 -2.92848</pose>
+          <velocity>0.001381 -0.001776 -0.011811 0.061786 -0.014602 -1.04752</velocity>
+          <acceleration>3.27562 -1.30671 -22.1315 2.30913 1.24973 -1.73291</acceleration>
+          <wrench>0.032756 -0.013067 -0.221315 0 -0 0</wrench>
+        </link>
+        <link name='LTseg10'>
+          <pose frame=''>0.555481 0.083042 0.135227 -3.12058 1.54229 -2.82083</pose>
+          <velocity>0.000975 0.003144 0.00355 -0.068562 0.330082 -0.089246</velocity>
+          <acceleration>-0.57283 -0.352723 6.69401 2.85296 1.25544 -2.4804</acceleration>
+          <wrench>-0.005728 -0.003527 0.06694 0 -0 0</wrench>
+        </link>
+        <link name='LTseg11'>
+          <pose frame=''>0.567419 0.086732 0.134874 -3.12065 1.54218 -2.82095</pose>
+          <velocity>0.001202 0.002215 6.6e-05 -0.077062 0.353238 -0.139787</velocity>
+          <acceleration>-1.25179 2.32256 0.456712 -0.603244 1.30004 -0.053685</acceleration>
+          <wrench>-0.012518 0.023226 0.004567 0 -0 0</wrench>
+        </link>
+        <link name='LTseg12'>
+          <pose frame=''>0.579357 0.090421 0.134517 -3.12068 1.54217 -2.82097</pose>
+          <velocity>0.00156 0.000599 -0.004291 -0.076625 0.354344 -0.140824</velocity>
+          <acceleration>-2.13083 5.12727 -7.37546 -0.031426 -0.780092 -2.62765</acceleration>
+          <wrench>-0.021308 0.051273 -0.073755 0 -0 0</wrench>
+        </link>
+        <link name='LTseg2'>
+          <pose frame=''>0.459961 0.053486 0.137082 3.10775 1.55818 -2.87567</pose>
+          <velocity>0.005637 -0.015428 -0.014298 0.116791 -0.133477 -0.279882</velocity>
+          <acceleration>2.00153 -0.422801 -26.9871 0.4099 0.545018 -2.98474</acceleration>
+          <wrench>0.020015 -0.004228 -0.269871 0 -0 0</wrench>
+        </link>
+        <link name='LTseg3'>
+          <pose frame=''>0.471906 0.057174 0.137006 3.13323 1.55453 -2.84974</pose>
+          <velocity>0.007082 -0.019926 -0.014291 0.153393 -0.213344 0.20037</velocity>
+          <acceleration>2.15678 -3.96572 -27.1808 -1.15582 0.062457 1.69894</acceleration>
+          <wrench>0.021568 -0.039657 -0.271808 0 -0 0</wrench>
+        </link>
+        <link name='LTseg4'>
+          <pose frame=''>0.483849 0.060868 0.136877 -3.13608 1.55123 -2.83566</pose>
+          <velocity>0.006785 -0.018686 -0.011942 0.165148 -0.237618 0.48989</velocity>
+          <acceleration>2.55597 -7.9422 -22.9496 2.08178 -0.265803 -0.743253</acceleration>
+          <wrench>0.02556 -0.079422 -0.229496 0 -0 0</wrench>
+        </link>
+        <link name='LTseg5'>
+          <pose frame=''>0.49579 0.064566 0.136696 -3.12822 1.54841 -2.82782</pose>
+          <velocity>0.005452 -0.013946 -0.007812 0.148312 -0.199051 0.568219</velocity>
+          <acceleration>2.57227 -10.1136 -15.3067 2.87341 -1.05966 0.554293</acceleration>
+          <wrench>0.025723 -0.101136 -0.153067 0 -0 0</wrench>
+        </link>
+        <link name='LTseg6'>
+          <pose frame=''>0.507729 0.068264 0.136468 -3.12392 1.54614 -2.8236</pose>
+          <velocity>0.003843 -0.008157 -0.002873 0.107286 -0.103925 0.503217</velocity>
+          <acceleration>2.13704 -10.0848 -6.05072 -1.78371 0.711755 2.78928</acceleration>
+          <wrench>0.02137 -0.100848 -0.060507 0 -0 0</wrench>
+        </link>
+        <link name='LTseg7'>
+          <pose frame=''>0.519667 0.071962 0.136199 -3.1217 1.54445 -2.82157</pose>
+          <velocity>0.002441 -0.002936 0.001656 0.052782 0.026277 0.361434</velocity>
+          <acceleration>1.4023 -8.27873 2.52656 1.32164 1.05284 1.29678</acceleration>
+          <wrench>0.014023 -0.082787 0.025266 0 -0 0</wrench>
+        </link>
+        <link name='LTseg8'>
+          <pose frame=''>0.531606 0.075657 0.135897 -3.12076 1.54331 -2.82081</pose>
+          <velocity>0.001465 0.00089 0.004612 -0.001937 0.159865 0.177337</velocity>
+          <acceleration>0.637431 -5.64812 8.22914 -0.52319 1.14365 -2.25552</acceleration>
+          <wrench>0.006374 -0.056481 0.082291 0 -0 0</wrench>
+        </link>
+        <link name='LTseg9'>
+          <pose frame=''>0.543544 0.079351 0.13557 -3.12051 1.54262 -2.8207</pose>
+          <velocity>0.001014 0.002842 0.005262 -0.044231 0.266702 0.019111</velocity>
+          <acceleration>0.008517 -2.97815 9.65608 -0.080607 1.34408 0.661958</acceleration>
+          <wrench>8.5e-05 -0.029782 0.096561 0 -0 0</wrench>
+        </link>
+        <link name='Link1_1'>
+          <pose frame=''>0 0 0.05 0 -0 -3e-06</pose>
+          <velocity>1e-06 -2.6e-05 1.8e-05 -0.000278 -2.7e-05 -0.00598</velocity>
+          <acceleration>0.133316 -0.050904 0.036719 -0.719452 -0.076029 -2.84204</acceleration>
+          <wrench>0.122367 -0.046724 0.033704 0 -0 0</wrench>
+        </link>
+        <link name='Link2_1'>
+          <pose frame=''>-4.2e-05 0.009807 0.1 -1e-06 0.398946 -3e-06</pose>
+          <velocity>0.000134 -6.8e-05 -1e-06 -7.8e-05 -0.049443 -0.006257</velocity>
+          <acceleration>-16.1034 -0.827964 6.97097 3.11674 0.527282 -0.398536</acceleration>
+          <wrench>-11.4664 -0.589553 4.96368 0 -0 0</wrench>
+        </link>
+        <link name='Link3_1'>
+          <pose frame=''>0.116492 0.009807 0.376441 3.14159 0.652043 3.14158</pose>
+          <velocity>-0.013584 -0.000705 0.005753 0.001746 -0.113313 -0.003741</velocity>
+          <acceleration>0.505779 -0.710019 31.7805 1.91761 -0.089466 -2.50982</acceleration>
+          <wrench>0.270741 -0.380071 17.012 0 -0 0</wrench>
+        </link>
+        <link name='Link4_1'>
+          <pose frame=''>0.268143 0.009806 0.17769 -3.1402 1.56756 -3.1402</pose>
+          <velocity>0.00893 -0.000804 0.022958 0.003565 0.194924 -0.00632</velocity>
+          <acceleration>18.4759 -0.530534 9.41783 1.13121 0.187576 0.425913</acceleration>
+          <wrench>5.20445 -0.149446 2.6529 0 -0 0</wrench>
+        </link>
+        <link name='RBseg1'>
+          <pose frame=''>0.44827 -0.030192 0.217105 3.05379 -1.562 -0.211621</pose>
+          <velocity>0.01548 -0.001655 -0.01209 -0.070437 -0.041666 1.08282</velocity>
+          <acceleration>31.5482 0.335108 -22.6898 -2.83018 0.258827 0.867999</acceleration>
+          <wrench>0.315482 0.003351 -0.226898 0 -0 0</wrench>
+        </link>
+        <link name='RBseg10'>
+          <pose frame=''>0.555714 -0.063458 0.215223 -3.12118 -1.54235 -0.32034</pose>
+          <velocity>0.008984 -0.006645 0.002113 0.010139 0.240569 0.232722</velocity>
+          <acceleration>15.1321 -6.49519 3.78207 0.338847 -1.17437 -2.78473</acceleration>
+          <wrench>0.151321 -0.064952 0.037821 0 -0 0</wrench>
+        </link>
+        <link name='RBseg11'>
+          <pose frame=''>0.567651 -0.067151 0.214871 -3.12128 -1.54224 -0.320236</pose>
+          <velocity>0.009253 -0.004906 -0.000815 0.012211 0.240875 0.296087</velocity>
+          <acceleration>14.249 -8.44333 -1.28221 -1.69345 -0.142255 2.99961</acceleration>
+          <wrench>0.14249 -0.084433 -0.012822 0 -0 0</wrench>
+        </link>
+        <link name='RBseg12'>
+          <pose frame=''>0.579589 -0.070843 0.214515 -3.12128 -1.54224 -0.320224</pose>
+          <velocity>0.010015 -0.001806 -0.003847 0.013559 0.244783 0.290734</velocity>
+          <acceleration>13.8536 -9.25816 -6.37402 2.39913 0.906949 1.14178</acceleration>
+          <wrench>0.138536 -0.092582 -0.06374 0 -0 0</wrench>
+        </link>
+        <link name='RBseg2'>
+          <pose frame=''>0.460215 -0.033874 0.217082 3.10636 -1.55815 -0.265102</pose>
+          <velocity>0.018681 0.012195 -0.014423 -0.133201 -0.163154 0.279333</velocity>
+          <acceleration>28.4663 -0.062237 -27.2303 -1.58368 -1.44262 -0.520407</acceleration>
+          <wrench>0.284663 -0.000622 -0.272303 0 -0 0</wrench>
+        </link>
+        <link name='RBseg3'>
+          <pose frame=''>0.472154 -0.037569 0.217006 3.13218 -1.55449 -0.2913</pose>
+          <velocity>0.019154 0.016985 -0.013869 -0.17174 -0.231188 -0.245678</velocity>
+          <acceleration>26.5466 2.77623 -26.3208 0.820966 0.628729 1.09609</acceleration>
+          <wrench>0.265466 0.027762 -0.263208 0 -0 0</wrench>
+        </link>
+        <link name='RBseg4'>
+          <pose frame=''>0.484093 -0.04127 0.216877 -3.1368 -1.55118 -0.3055</pose>
+          <velocity>0.017933 0.015866 -0.010857 -0.180456 -0.233459 -0.542792</velocity>
+          <acceleration>24.9928 5.84818 -20.7535 -0.410301 -0.697829 -1.74955</acceleration>
+          <wrench>0.249928 0.058482 -0.207535 0 -0 0</wrench>
+        </link>
+        <link name='RBseg5'>
+          <pose frame=''>0.496031 -0.044971 0.216696 -3.12879 -1.54836 -0.313378</pose>
+          <velocity>0.015823 0.011249 -0.006275 -0.159288 -0.171697 -0.608779</velocity>
+          <acceleration>23.3922 7.38107 -12.2074 -0.674023 0.637601 0.657617</acceleration>
+          <wrench>0.233922 0.073811 -0.122074 0 -0 0</wrench>
+        </link>
+        <link name='RBseg6'>
+          <pose frame=''>0.507969 -0.048672 0.216467 -3.12443 -1.5461 -0.317588</pose>
+          <velocity>0.013573 0.005488 -0.001374 -0.117172 -0.064084 -0.518185</velocity>
+          <acceleration>21.6159 6.68219 -3.04247 1.22518 0.673715 0.02941</acceleration>
+          <wrench>0.216159 0.066822 -0.030425 0 -0 0</wrench>
+        </link>
+        <link name='RBseg7'>
+          <pose frame=''>0.519905 -0.052371 0.216197 -3.12222 -1.54444 -0.319607</pose>
+          <velocity>0.011615 7e-05 0.002535 -0.06825 0.057866 -0.338679</velocity>
+          <acceleration>19.8261 4.29245 4.27011 -1.46508 -1.0558 0.060203</acceleration>
+          <wrench>0.198261 0.042925 0.042701 0 -0 0</wrench>
+        </link>
+        <link name='RBseg8'>
+          <pose frame=''>0.531842 -0.056069 0.215894 -3.12131 -1.54332 -0.320358</pose>
+          <velocity>0.010138 -0.004144 0.004484 -0.026183 0.159989 -0.109492</velocity>
+          <acceleration>18.0289 0.561583 7.92689 0.88755 -0.603728 -3.01387</acceleration>
+          <wrench>0.180289 0.005616 0.079269 0 -0 0</wrench>
+        </link>
+        <link name='RBseg9'>
+          <pose frame=''>0.543779 -0.059764 0.215566 -3.12111 -1.54266 -0.320463</pose>
+          <velocity>0.009269 -0.006432 0.004185 -0.000192 0.220641 0.092542</velocity>
+          <acceleration>16.4304 -3.31041 7.4429 1.6113 -1.1182 -0.821332</acceleration>
+          <wrench>0.164304 -0.033104 0.074429 0 -0 0</wrench>
+        </link>
+        <link name='RTseg1'>
+          <pose frame=''>0.448012 -0.030192 0.137107 2.58433 -1.56931 0.257659</pose>
+          <velocity>0.000787 -0.001797 -0.012395 0.02115 0.275157 0.3861</velocity>
+          <acceleration>3.11492 -0.573661 -23.242 -2.75101 -0.357913 2.95608</acceleration>
+          <wrench>0.031149 -0.005737 -0.23242 0 -0 0</wrench>
+        </link>
+        <link name='RTseg10'>
+          <pose frame=''>0.555481 -0.063423 0.135221 -3.12054 -1.543 -0.320749</pose>
+          <velocity>0.000728 -0.001687 0.001217 -0.004886 0.222105 -0.043662</velocity>
+          <acceleration>1.892 -1.38942 1.81907 -2.46152 1.04137 -0.462213</acceleration>
+          <wrench>0.01892 -0.013894 0.018191 0 -0 0</wrench>
+        </link>
+        <link name='RTseg11'>
+          <pose frame=''>0.56742 -0.067111 0.134868 -3.12082 -1.54251 -0.32041</pose>
+          <velocity>0.00043 -0.002046 -0.00171 -0.017328 0.180731 -0.011573</velocity>
+          <acceleration>1.51703 -1.65756 -3.18536 -3.1021 0.835623 -0.327579</acceleration>
+          <wrench>0.01517 -0.016576 -0.031854 0 -0 0</wrench>
+        </link>
+        <link name='RTseg12'>
+          <pose frame=''>0.579358 -0.070799 0.134513 -3.12087 -1.54232 -0.320318</pose>
+          <velocity>0.000291 -0.002065 -0.003074 -0.044586 0.092877 0.001465</velocity>
+          <acceleration>1.35825 -1.5164 -4.84924 2.114 0.674147 -0.594666</acceleration>
+          <wrench>0.013582 -0.015164 -0.048492 0 -0 0</wrench>
+        </link>
+        <link name='RTseg2'>
+          <pose frame=''>0.459957 -0.033881 0.137086 3.05681 -1.56551 -0.215028</pose>
+          <velocity>0.002196 0.002983 -0.015 -0.052719 0.086003 0.200621</velocity>
+          <acceleration>3.00221 -0.072886 -28.3056 -0.208903 0.015885 1.21278</acceleration>
+          <wrench>0.030022 -0.000729 -0.283056 0 -0 0</wrench>
+        </link>
+        <link name='RTseg3'>
+          <pose frame=''>0.4719 -0.037573 0.137012 3.12594 -1.56143 -0.284334</pose>
+          <velocity>0.002909 0.005508 -0.014563 -0.119967 -0.097712 0.022013</velocity>
+          <acceleration>3.13116 1.2504 -27.5992 -1.95901 -0.768644 -0.436526</acceleration>
+          <wrench>0.031312 0.012504 -0.275992 0 -0 0</wrench>
+        </link>
+        <link name='RTseg4'>
+          <pose frame=''>0.483842 -0.041267 0.136883 -3.13381 -1.55738 -0.307794</pose>
+          <velocity>0.002968 0.005804 -0.011291 -0.167445 -0.244861 0.00636</velocity>
+          <acceleration>3.20612 2.20509 -21.5053 0.573078 0.469604 -2.20303</acceleration>
+          <wrench>0.032061 0.022051 -0.215053 0 -0 0</wrench>
+        </link>
+        <link name='RTseg5'>
+          <pose frame=''>0.495784 -0.044961 0.136701 -3.12439 -1.55358 -0.317257</pose>
+          <velocity>0.002986 0.005766 -0.006061 -0.187783 -0.317818 -0.105666</velocity>
+          <acceleration>3.63922 3.92698 -11.6921 0.431786 0.395644 -2.00309</acceleration>
+          <wrench>0.036392 0.03927 -0.116921 0 -0 0</wrench>
+        </link>
+        <link name='RTseg6'>
+          <pose frame=''>0.507725 -0.048655 0.13647 -3.12068 -1.55022 -0.320936</pose>
+          <velocity>0.002601 0.004236 -0.000386 -0.17249 -0.292384 -0.100873</velocity>
+          <acceleration>3.38611 2.99937 -1.04734 1.04738 1.54424 -2.0288</acceleration>
+          <wrench>0.033861 0.029994 -0.010473 0 -0 0</wrench>
+        </link>
+        <link name='RTseg7'>
+          <pose frame=''>0.519664 -0.052349 0.136198 -3.11959 -1.54745 -0.321957</pose>
+          <velocity>0.002222 0.002671 0.003959 -0.129136 -0.171299 -0.122535</velocity>
+          <acceleration>3.30138 2.37834 7.05061 -0.580688 -1.15334 -1.84145</acceleration>
+          <wrench>0.033014 0.023783 0.070506 0 -0 0</wrench>
+        </link>
+        <link name='RTseg8'>
+          <pose frame=''>0.531604 -0.056042 0.135893 -3.11964 -1.54535 -0.321813</pose>
+          <velocity>0.001723 0.00088 0.00561 -0.072403 0.002472 -0.115152</velocity>
+          <acceleration>2.96486 1.0729 10.0359 -3.07133 -0.596825 -0.244042</acceleration>
+          <wrench>0.029649 0.010729 0.100359 0 -0 0</wrench>
+        </link>
+        <link name='RTseg9'>
+          <pose frame=''>0.543543 -0.059733 0.135564 -3.12008 -1.5439 -0.321278</pose>
+          <velocity>0.001198 -0.000658 0.004315 -0.024778 0.15658 -0.089952</velocity>
+          <acceleration>2.45741 -0.320604 7.51967 0.130481 0.119146 0.373077</acceleration>
+          <wrench>0.024574 -0.003206 0.075197 0 -0 0</wrench>
+        </link>
+        <link name='base_link'>
+          <pose frame=''>-0 0 0 0 -0 0</pose>
+          <velocity>-0 0 0 5e-06 3e-06 -0</velocity>
+          <acceleration>-5.1e-05 1.4e-05 5.1e-05 0.003045 -0.001096 6.6e-05</acceleration>
+          <wrench>-0.000856 0.000232 0.000858 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='monkey_soft'>
+        <pose frame=''>-0.497622 -0.029559 0.043322 -0.603732 0.048613 -0.079889</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose frame=''>-0.497622 -0.029559 0.043322 -0.603732 0.048613 -0.079889</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -1.96 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='unit_box_soft'>
+        <pose frame=''>0.009897 -0.503439 0.077407 -3.1e-05 4.5e-05 -1.4e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0.009897 -0.503439 0.077407 -3.1e-05 4.5e-05 -1.4e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 9.1e-05</acceleration>
+          <wrench>0 0 -0.196 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='unit_cylinder_soft'>
+        <pose frame=''>0.05736 0.483282 0.125774 1e-06 -0 0.95281</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose frame=''>0.046983 0.468156 0.095013 1e-06 -0 0.953164</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -29.1609 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='unit_sphere_soft'>
+        <pose frame=''>-0.37253 0.329519 0.083261 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-0.37253 0.329519 0.083261 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>0.703169 1.94091 1.41817 0 0.54217 -1.90681</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <model name='unit_sphere_soft'>
+      <link name='link'>
+        <inertial>
+          <mass>0.002</mass>
+          <inertia>
+            <ixx>5.55e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.55e-06</iyy>
+            <iyz>0</iyz>
+            <izz>5.55e-06</izz>
+          </inertia>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <sphere>
+              <radius>0.0832608</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.083261</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>2000</mu>
+                <mu2>2000</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>0</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>2</soft_cfm>
+                <soft_erp>2.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>2</soft_cfm>
+                <soft_erp>2.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose frame=''>0.531944 0.069823 0.072246 0 -0 0</pose>
+    </model>
+    <model name='unit_box_soft'>
+      <link name='link'>
+        <inertial>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>6.545e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>6.894e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.449e-05</izz>
+          </inertia>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.131884 0.123693 0.154823</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+          </material>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.131884 0.123693 0.154823</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>2000</mu>
+                <mu2>2000</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>0</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>2</soft_cfm>
+                <soft_erp>2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>2</soft_cfm>
+                <soft_erp>2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose frame=''>1.13151 0.064041 0.077411 0 -4e-06 -9e-06</pose>
+    </model>
+    <model name='monkey_soft'>
+      <link name='link_0'>
+        <inertial>
+          <mass>0.2</mass>
+          <inertia>
+            <ixx>0.00166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.00166667</izz>
+          </inertia>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/home/ben/catkin_ws/src/version1_description/meshes/monkey.dae</uri>
+              <scale>0.08 0.08 0.08</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/home/ben/catkin_ws/src/version1_description/meshes/monkey.dae</uri>
+              <scale>0.08 0.08 0.08</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>2000</mu>
+                <mu2>2000</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>0</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>2</soft_cfm>
+                <soft_erp>2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>2</soft_cfm>
+                <soft_erp>2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose frame=''>-0.616962 0.050684 0.069199 -1.06852 0 0</pose>
+    </model>
+    <model name='unit_cylinder_soft'>
+      <link name='link_0'>
+        <inertial>
+          <mass>2.9756</mass>
+          <inertia>
+            <ixx>0.0118533</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0118533</iyy>
+            <iyz>0</iyz>
+            <izz>0.00579759</izz>
+          </inertia>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose frame=''>-0.018341 -0.000306 -0.030761 0 -0 0.000354</pose>
+        <gravity>1</gravity>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <enable_wind>0</enable_wind>
+        <visual name='visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0624239</radius>
+              <length>0.190031</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.062424</radius>
+              <length>0.190031</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>2000</mu>
+                <mu2>2000</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>2</soft_cfm>
+                <soft_erp>2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>2</soft_cfm>
+                <soft_erp>2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <plugin name='applied_force_fetcher' filename='libapplied_force_fetcher_plugin.so'>
+        <LinkName>link_0</LinkName>
+      </plugin>
+      <pose frame=''>0.49185 0.195261 0.126704 0.008393 -0.009049 1.01922</pose>
+    </model>
+    <model name='Design'>
+      <link name='base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0 0 0.019653 0 -0 0</pose>
+          <mass>16.831</mass>
+          <inertia>
+            <ixx>0.079936</ixx>
+            <ixy>0</ixy>
+            <ixz>-0</ixz>
+            <iyy>0.079936</iyy>
+            <iyz>0</iyz>
+            <izz>0.152021</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/base_link.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/base_link.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='world_joint' type='fixed'>
+        <child>base_link</child>
+        <parent>world</parent>
+      </joint>
+      <link name='Link1_1'>
+        <pose frame=''>0 0 0.05 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-1.2e-05 0.014425 0.020603 0 -0 0</pose>
+          <mass>0.917871</mass>
+          <inertia>
+            <ixx>0.002553</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.002018</iyy>
+            <iyz>-0.00035</iyz>
+            <izz>0.00387</izz>
+          </inertia>
+        </inertial>
+        <collision name='Link1_1_collision'>
+          <pose frame=''>-0 -0 -0.05 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/Link1_1.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Link1_1_visual'>
+          <pose frame=''>-0 -0 -0.05 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/Link1_1.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='Rev1' type='revolute'>
+        <child>Link1_1</child>
+        <parent>base_link</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='Link2_1'>
+        <pose frame=''>-4.2e-05 0.009807 0.1 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0 0.018054 0.186857 0 -0 0</pose>
+          <mass>0.712051</mass>
+          <inertia>
+            <ixx>0.008737</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.008392</iyy>
+            <iyz>-0.001509</iyz>
+            <izz>0.000705</izz>
+          </inertia>
+        </inertial>
+        <collision name='Link2_1_collision'>
+          <pose frame=''>4.2e-05 -0.009807 -0.1 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/Link2_1.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Link2_1_visual'>
+          <pose frame=''>4.2e-05 -0.009807 -0.1 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/Link2_1.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='Rev2' type='revolute'>
+        <child>Link2_1</child>
+        <parent>Link1_1</parent>
+        <axis>
+          <xyz>0 -1 0</xyz>
+          <limit>
+            <lower>-1.39626</lower>
+            <upper>1.39626</upper>
+            <effort>10000</effort>
+            <velocity>0.01</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='Link3_1'>
+        <pose frame=''>-4.2e-05 0.009807 0.4 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>3.9e-05 0.012744 0.14887 0 -0 0</pose>
+          <mass>0.535296</mass>
+          <inertia>
+            <ixx>0.004471</ixx>
+            <ixy>-0</ixy>
+            <ixz>-1e-06</ixz>
+            <iyy>0.004348</iyy>
+            <iyz>-0.000747</iyz>
+            <izz>0.000361</izz>
+          </inertia>
+        </inertial>
+        <collision name='Link3_1_collision'>
+          <pose frame=''>4.2e-05 -0.009807 -0.4 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/Link3_1.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Link3_1_visual'>
+          <pose frame=''>4.2e-05 -0.009807 -0.4 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/Link3_1.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='Rev3' type='revolute'>
+        <child>Link3_1</child>
+        <parent>Link2_1</parent>
+        <axis>
+          <xyz>0 -1 0</xyz>
+          <limit>
+            <lower>-2.79253</lower>
+            <upper>2.79253</upper>
+            <effort>10000</effort>
+            <velocity>0.01</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='Link4_1'>
+        <pose frame=''>2.4e-05 0.009807 0.65 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>-0 -0.00645 0.095158 0 -0 0</pose>
+          <mass>0.281689</mass>
+          <inertia>
+            <ixx>0.00191875</ixx>
+            <ixy>0.001</ixy>
+            <ixz>0.000999998</ixz>
+            <iyy>0.0019433</iyy>
+            <iyz>0.000945156</iyz>
+            <izz>0.00104945</izz>
+          </inertia>
+        </inertial>
+        <collision name='Link4_1_collision'>
+          <pose frame=''>-2.4e-05 -0.009807 -0.65 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/Link4_1.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='Link4_1_fixed_joint_lump__palm_collision_1'>
+          <pose frame=''>0 0 0.15 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.15 0.05 0.02</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>2000</mu>
+                <mu2>2000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='Link4_1_visual'>
+          <pose frame=''>-2.4e-05 -0.009807 -0.65 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>/home/ben/catkin_ws/src/Soft-Arm-Main/meshes/Link4_1.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='Link4_1_fixed_joint_lump__palm_visual_1'>
+          <pose frame=''>0 0 0.15 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.15 0.05 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='Rev4' type='revolute'>
+        <child>Link4_1</child>
+        <parent>Link3_1</parent>
+        <axis>
+          <xyz>0 -1 0</xyz>
+          <limit>
+            <lower>-2.61799</lower>
+            <upper>2.61799</upper>
+            <effort>10000</effort>
+            <velocity>0.01</velocity>
+          </limit>
+          <dynamics>
+            <damping>0</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='LBseg1'>
+        <pose frame=''>-0.039976 0.049807 0.83 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.63541e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.63541e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.66666e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg1_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg1_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg1_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg1_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='palm_LBseg1_joint' type='revolute'>
+        <child>LBseg1</child>
+        <parent>Link4_1</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-0</lower>
+            <upper>0</upper>
+            <effort>2</effort>
+            <velocity>0.0001</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg2'>
+        <pose frame=''>-0.039976 0.053501 0.841942 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.36342e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.36342e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.12268e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg2_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.019167 0.019167 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg2_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.019167 0.019167 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg2_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg2_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg1_LBseg2_joint' type='revolute'>
+        <child>LBseg2</child>
+        <parent>LBseg1</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg3'>
+        <pose frame=''>-0.039976 0.057195 0.853883 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.10301e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.10301e-07</iyy>
+            <iyz>0</iyz>
+            <izz>5.60185e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg3_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.018333 0.018333 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg3_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.018333 0.018333 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg3_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg3_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg2_LBseg3_joint' type='revolute'>
+        <child>LBseg3</child>
+        <parent>LBseg2</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg4'>
+        <pose frame=''>-0.039976 0.060889 0.865825 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.85417e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.85417e-07</iyy>
+            <iyz>0</iyz>
+            <izz>5.10416e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg4_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0175 0.0175 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg4_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0175 0.0175 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg4_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg4_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg3_LBseg4_joint' type='revolute'>
+        <child>LBseg4</child>
+        <parent>LBseg3</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg5'>
+        <pose frame=''>-0.039976 0.064583 0.877767 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.6169e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.6169e-07</iyy>
+            <iyz>0</iyz>
+            <izz>4.62963e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg5_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.016667 0.016667 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg5_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.016667 0.016667 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg5_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg5_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg4_LBseg5_joint' type='revolute'>
+        <child>LBseg5</child>
+        <parent>LBseg4</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg6'>
+        <pose frame=''>-0.039976 0.068277 0.889709 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.3912e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.3912e-07</iyy>
+            <iyz>0</iyz>
+            <izz>4.17824e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg6_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015833 0.015833 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg6_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015833 0.015833 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg6_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg6_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg5_LBseg6_joint' type='revolute'>
+        <child>LBseg6</child>
+        <parent>LBseg5</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg7'>
+        <pose frame=''>-0.039976 0.071971 0.90165 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.17708e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.17708e-07</iyy>
+            <iyz>0</iyz>
+            <izz>3.75e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg7_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015 0.015 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg7_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015 0.015 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg7_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg7_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg6_LBseg7_joint' type='revolute'>
+        <child>LBseg7</child>
+        <parent>LBseg6</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg8'>
+        <pose frame=''>-0.039976 0.075665 0.913592 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.97454e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.97454e-07</iyy>
+            <iyz>0</iyz>
+            <izz>3.34491e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg8_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.014167 0.014167 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg8_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.014167 0.014167 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg8_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg8_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg7_LBseg8_joint' type='revolute'>
+        <child>LBseg8</child>
+        <parent>LBseg7</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg9'>
+        <pose frame=''>-0.039976 0.079359 0.925534 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.78356e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.78356e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.96296e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg9_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.013333 0.013333 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg9_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.013333 0.013333 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg9_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg9_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg8_LBseg9_joint' type='revolute'>
+        <child>LBseg9</child>
+        <parent>LBseg8</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg10'>
+        <pose frame=''>-0.039976 0.083053 0.937475 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.60417e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.60417e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.60417e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg10_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0125 0.0125 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg10_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0125 0.0125 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg10_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg10_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg9_LBseg10_joint' type='revolute'>
+        <child>LBseg10</child>
+        <parent>LBseg9</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg11'>
+        <pose frame=''>-0.039976 0.086747 0.949417 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.43634e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.43634e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.26852e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg11_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.011667 0.011667 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg11_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.011667 0.011667 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg11_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg11_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg10_LBseg11_joint' type='revolute'>
+        <child>LBseg11</child>
+        <parent>LBseg10</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LBseg12'>
+        <pose frame=''>-0.039976 0.090441 0.961359 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.28009e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.28009e-07</iyy>
+            <iyz>0</iyz>
+            <izz>1.95602e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LBseg12_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.010833 0.010833 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LBseg12_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.010833 0.010833 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LBseg12_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LBseg12_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LBseg11_LBseg12_joint' type='revolute'>
+        <child>LBseg12</child>
+        <parent>LBseg11</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg1'>
+        <pose frame=''>0.040024 0.049807 0.83 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.63541e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.63541e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.66666e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg1_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg1_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg1_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg1_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='palm_LTseg1_joint' type='revolute'>
+        <child>LTseg1</child>
+        <parent>Link4_1</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-0</lower>
+            <upper>0</upper>
+            <effort>2</effort>
+            <velocity>0.0001</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg2'>
+        <pose frame=''>0.040024 0.053501 0.841942 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.36342e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.36342e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.12268e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg2_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.019167 0.019167 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg2_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.019167 0.019167 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg2_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg2_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg1_LTseg2_joint' type='revolute'>
+        <child>LTseg2</child>
+        <parent>LTseg1</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg3'>
+        <pose frame=''>0.040024 0.057195 0.853883 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.10301e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.10301e-07</iyy>
+            <iyz>0</iyz>
+            <izz>5.60185e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg3_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.018333 0.018333 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg3_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.018333 0.018333 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg3_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg3_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg2_LTseg3_joint' type='revolute'>
+        <child>LTseg3</child>
+        <parent>LTseg2</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg4'>
+        <pose frame=''>0.040024 0.060889 0.865825 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.85417e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.85417e-07</iyy>
+            <iyz>0</iyz>
+            <izz>5.10416e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg4_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0175 0.0175 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg4_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0175 0.0175 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg4_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg4_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg3_LTseg4_joint' type='revolute'>
+        <child>LTseg4</child>
+        <parent>LTseg3</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg5'>
+        <pose frame=''>0.040024 0.064583 0.877767 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.6169e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.6169e-07</iyy>
+            <iyz>0</iyz>
+            <izz>4.62963e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg5_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.016667 0.016667 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg5_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.016667 0.016667 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg5_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg5_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg4_LTseg5_joint' type='revolute'>
+        <child>LTseg5</child>
+        <parent>LTseg4</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg6'>
+        <pose frame=''>0.040024 0.068277 0.889709 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.3912e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.3912e-07</iyy>
+            <iyz>0</iyz>
+            <izz>4.17824e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg6_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015833 0.015833 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg6_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015833 0.015833 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg6_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg6_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg5_LTseg6_joint' type='revolute'>
+        <child>LTseg6</child>
+        <parent>LTseg5</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg7'>
+        <pose frame=''>0.040024 0.071971 0.90165 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.17708e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.17708e-07</iyy>
+            <iyz>0</iyz>
+            <izz>3.75e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg7_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015 0.015 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg7_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015 0.015 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg7_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg7_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg6_LTseg7_joint' type='revolute'>
+        <child>LTseg7</child>
+        <parent>LTseg6</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg8'>
+        <pose frame=''>0.040024 0.075665 0.913592 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.97454e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.97454e-07</iyy>
+            <iyz>0</iyz>
+            <izz>3.34491e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg8_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.014167 0.014167 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg8_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.014167 0.014167 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg8_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg8_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg7_LTseg8_joint' type='revolute'>
+        <child>LTseg8</child>
+        <parent>LTseg7</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg9'>
+        <pose frame=''>0.040024 0.079359 0.925534 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.78356e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.78356e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.96296e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg9_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.013333 0.013333 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg9_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.013333 0.013333 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg9_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg9_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg8_LTseg9_joint' type='revolute'>
+        <child>LTseg9</child>
+        <parent>LTseg8</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg10'>
+        <pose frame=''>0.040024 0.083053 0.937475 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.60417e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.60417e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.60417e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg10_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0125 0.0125 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg10_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0125 0.0125 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg10_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg10_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg9_LTseg10_joint' type='revolute'>
+        <child>LTseg10</child>
+        <parent>LTseg9</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg11'>
+        <pose frame=''>0.040024 0.086747 0.949417 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.43634e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.43634e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.26852e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg11_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.011667 0.011667 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg11_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.011667 0.011667 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg11_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg11_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg10_LTseg11_joint' type='revolute'>
+        <child>LTseg11</child>
+        <parent>LTseg10</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='LTseg12'>
+        <pose frame=''>0.040024 0.090441 0.961359 -0.3 0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.28009e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.28009e-07</iyy>
+            <iyz>0</iyz>
+            <izz>1.95602e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='LTseg12_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.010833 0.010833 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='LTseg12_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.010833 0.010833 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='LTseg12_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>LTseg12_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='LTseg11_LTseg12_joint' type='revolute'>
+        <child>LTseg12</child>
+        <parent>LTseg11</parent>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg1'>
+        <pose frame=''>-0.039976 -0.030193 0.83 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.63541e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.63541e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.66666e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg1_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg1_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg1_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg1_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='palm_RBseg1_joint' type='revolute'>
+        <child>RBseg1</child>
+        <parent>Link4_1</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-0</lower>
+            <upper>0</upper>
+            <effort>2</effort>
+            <velocity>0.0001</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg2'>
+        <pose frame=''>-0.039976 -0.033887 0.841942 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.36342e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.36342e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.12268e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg2_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.019167 0.019167 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg2_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.019167 0.019167 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg2_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg2_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg1_RBseg2_joint' type='revolute'>
+        <child>RBseg2</child>
+        <parent>RBseg1</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg3'>
+        <pose frame=''>-0.039976 -0.037581 0.853883 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.10301e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.10301e-07</iyy>
+            <iyz>0</iyz>
+            <izz>5.60185e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg3_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.018333 0.018333 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg3_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.018333 0.018333 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg3_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg3_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg2_RBseg3_joint' type='revolute'>
+        <child>RBseg3</child>
+        <parent>RBseg2</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg4'>
+        <pose frame=''>-0.039976 -0.041275 0.865825 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.85417e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.85417e-07</iyy>
+            <iyz>0</iyz>
+            <izz>5.10416e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg4_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0175 0.0175 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg4_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0175 0.0175 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg4_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg4_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg3_RBseg4_joint' type='revolute'>
+        <child>RBseg4</child>
+        <parent>RBseg3</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg5'>
+        <pose frame=''>-0.039976 -0.044969 0.877767 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.6169e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.6169e-07</iyy>
+            <iyz>0</iyz>
+            <izz>4.62963e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg5_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.016667 0.016667 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg5_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.016667 0.016667 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg5_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg5_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg4_RBseg5_joint' type='revolute'>
+        <child>RBseg5</child>
+        <parent>RBseg4</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg6'>
+        <pose frame=''>-0.039976 -0.048663 0.889709 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.3912e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.3912e-07</iyy>
+            <iyz>0</iyz>
+            <izz>4.17824e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg6_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015833 0.015833 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg6_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015833 0.015833 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg6_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg6_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg5_RBseg6_joint' type='revolute'>
+        <child>RBseg6</child>
+        <parent>RBseg5</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg7'>
+        <pose frame=''>-0.039976 -0.052357 0.90165 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.17708e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.17708e-07</iyy>
+            <iyz>0</iyz>
+            <izz>3.75e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg7_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015 0.015 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg7_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015 0.015 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg7_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg7_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg6_RBseg7_joint' type='revolute'>
+        <child>RBseg7</child>
+        <parent>RBseg6</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg8'>
+        <pose frame=''>-0.039976 -0.056051 0.913592 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.97454e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.97454e-07</iyy>
+            <iyz>0</iyz>
+            <izz>3.34491e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg8_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.014167 0.014167 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg8_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.014167 0.014167 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg8_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg8_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg7_RBseg8_joint' type='revolute'>
+        <child>RBseg8</child>
+        <parent>RBseg7</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg9'>
+        <pose frame=''>-0.039976 -0.059745 0.925534 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.78356e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.78356e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.96296e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg9_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.013333 0.013333 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg9_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.013333 0.013333 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg9_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg9_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg8_RBseg9_joint' type='revolute'>
+        <child>RBseg9</child>
+        <parent>RBseg8</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg10'>
+        <pose frame=''>-0.039976 -0.063439 0.937475 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.60417e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.60417e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.60417e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg10_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0125 0.0125 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg10_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0125 0.0125 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg10_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg10_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg9_RBseg10_joint' type='revolute'>
+        <child>RBseg10</child>
+        <parent>RBseg9</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg11'>
+        <pose frame=''>-0.039976 -0.067133 0.949417 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.43634e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.43634e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.26852e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg11_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.011667 0.011667 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg11_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.011667 0.011667 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg11_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg11_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg10_RBseg11_joint' type='revolute'>
+        <child>RBseg11</child>
+        <parent>RBseg10</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RBseg12'>
+        <pose frame=''>-0.039976 -0.070827 0.961359 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.28009e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.28009e-07</iyy>
+            <iyz>0</iyz>
+            <izz>1.95602e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RBseg12_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.010833 0.010833 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RBseg12_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.010833 0.010833 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RBseg12_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RBseg12_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RBseg11_RBseg12_joint' type='revolute'>
+        <child>RBseg12</child>
+        <parent>RBseg11</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg1'>
+        <pose frame=''>0.040024 -0.030193 0.83 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.63541e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.63541e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.66666e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg1_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg1_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg1_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg1_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='palm_RTseg1_joint' type='revolute'>
+        <child>RTseg1</child>
+        <parent>Link4_1</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-0</lower>
+            <upper>0</upper>
+            <effort>2</effort>
+            <velocity>0.0001</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg2'>
+        <pose frame=''>0.040024 -0.033887 0.841942 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.36342e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.36342e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.12268e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg2_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.019167 0.019167 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg2_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.019167 0.019167 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg2_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg2_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg1_RTseg2_joint' type='revolute'>
+        <child>RTseg2</child>
+        <parent>RTseg1</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg3'>
+        <pose frame=''>0.040024 -0.037581 0.853883 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>4.10301e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.10301e-07</iyy>
+            <iyz>0</iyz>
+            <izz>5.60185e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg3_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.018333 0.018333 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg3_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.018333 0.018333 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg3_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg3_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg2_RTseg3_joint' type='revolute'>
+        <child>RTseg3</child>
+        <parent>RTseg2</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg4'>
+        <pose frame=''>0.040024 -0.041275 0.865825 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.85417e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.85417e-07</iyy>
+            <iyz>0</iyz>
+            <izz>5.10416e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg4_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0175 0.0175 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg4_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0175 0.0175 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg4_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg4_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg3_RTseg4_joint' type='revolute'>
+        <child>RTseg4</child>
+        <parent>RTseg3</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg5'>
+        <pose frame=''>0.040024 -0.044969 0.877767 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.6169e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.6169e-07</iyy>
+            <iyz>0</iyz>
+            <izz>4.62963e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg5_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.016667 0.016667 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg5_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.016667 0.016667 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg5_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg5_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg4_RTseg5_joint' type='revolute'>
+        <child>RTseg5</child>
+        <parent>RTseg4</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg6'>
+        <pose frame=''>0.040024 -0.048663 0.889709 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.3912e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.3912e-07</iyy>
+            <iyz>0</iyz>
+            <izz>4.17824e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg6_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015833 0.015833 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg6_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015833 0.015833 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg6_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg6_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg5_RTseg6_joint' type='revolute'>
+        <child>RTseg6</child>
+        <parent>RTseg5</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg7'>
+        <pose frame=''>0.040024 -0.052357 0.90165 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>3.17708e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.17708e-07</iyy>
+            <iyz>0</iyz>
+            <izz>3.75e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg7_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015 0.015 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg7_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015 0.015 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg7_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg7_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg6_RTseg7_joint' type='revolute'>
+        <child>RTseg7</child>
+        <parent>RTseg6</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg8'>
+        <pose frame=''>0.040024 -0.056051 0.913592 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.97454e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.97454e-07</iyy>
+            <iyz>0</iyz>
+            <izz>3.34491e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg8_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.014167 0.014167 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg8_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.014167 0.014167 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg8_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg8_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg7_RTseg8_joint' type='revolute'>
+        <child>RTseg8</child>
+        <parent>RTseg7</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg9'>
+        <pose frame=''>0.040024 -0.059745 0.925534 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.78356e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.78356e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.96296e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg9_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.013333 0.013333 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg9_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.013333 0.013333 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg9_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg9_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg8_RTseg9_joint' type='revolute'>
+        <child>RTseg9</child>
+        <parent>RTseg8</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg10'>
+        <pose frame=''>0.040024 -0.063439 0.937475 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.60417e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.60417e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.60417e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg10_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0125 0.0125 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg10_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0125 0.0125 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg10_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg10_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg9_RTseg10_joint' type='revolute'>
+        <child>RTseg10</child>
+        <parent>RTseg9</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg11'>
+        <pose frame=''>0.040024 -0.067133 0.949417 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.43634e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.43634e-07</iyy>
+            <iyz>0</iyz>
+            <izz>2.26852e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg11_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.011667 0.011667 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg11_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.011667 0.011667 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg11_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg11_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg10_RTseg11_joint' type='revolute'>
+        <child>RTseg11</child>
+        <parent>RTseg10</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='RTseg12'>
+        <pose frame=''>0.040024 -0.070827 0.961359 -0.3 -0 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>2.28009e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.28009e-07</iyy>
+            <iyz>0</iyz>
+            <izz>1.95602e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='RTseg12_collision_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.010833 0.010833 0.0125</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>20000</mu>
+                <mu2>20000</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='RTseg12_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.010833 0.010833 0.0125</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>1</self_collide>
+        <gravity>1</gravity>
+        <sensor name='RTseg12_sensor' type='contact'>
+          <always_on>1</always_on>
+          <contact>
+            <collision>RTseg12_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <update_rate>30</update_rate>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='RTseg11_RTseg12_joint' type='revolute'>
+        <child>RTseg12</child>
+        <parent>RTseg11</parent>
+        <axis>
+          <xyz>-1 3e-06 0</xyz>
+          <limit>
+            <lower>-2</lower>
+            <upper>2</upper>
+            <effort>2</effort>
+            <velocity>0.001</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.02</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+        <physics>
+          <ode>
+            <implicit_spring_damper>1</implicit_spring_damper>
+            <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <static>0</static>
+      <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+        <robotNamespace/>
+      </plugin>
+      <plugin name='spring_joint_plugin' filename='libspring_joint_plugin.so'>
+        <kConstant>0.4</kConstant>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='joint_controller_plugin' filename='libjoint_controller_plugin.so'>
+        <jointNamesParam>arm_controller/</jointNamesParam>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='joint_force_visualier_plugin' filename='libjoint_force_visualiser_plugin.so'>
+        <robotNamespace/>
+      </plugin>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </model>
+  </world>
+</sdf>

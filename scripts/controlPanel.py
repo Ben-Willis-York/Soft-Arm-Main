@@ -264,13 +264,13 @@ class ControlPanel():
         
         for a in range(len(angles)):
             angles[a] = degrees(angles[a])
-        print(angles)
+        print("Start angnles degrees:", angles)
         #angles = [0, 0, 0, 0]
 
         self.controller.setSetpointsWithBase(angles)
         for i in range(len(angles)):
             self.controller.currentSetpoints[i] = angles[i]
-
+        
         self.controller.setJointStatesWithBase(angles)
         self.controller.update()
 
@@ -394,7 +394,7 @@ class ControlPanel():
         self.solver.draw(self.horizontalDisplay)
         self.preview.drawArm(self.horizontalDisplay, fill="red")
         self.horizontalDisplay.display()
-        self.sendGraspCommand()
+        #self.sendGraspCommand()
         
 
 

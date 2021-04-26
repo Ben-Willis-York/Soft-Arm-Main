@@ -283,7 +283,29 @@ class Finger(object):
         t = getTransform(tfBuffer, "palm", self.jointLinks[self.base].link).transform
         eulers = quaternionToEuler(t.rotation.x, t.rotation.y, t.rotation.z, t.rotation.w)
         self.sign = round(cos(eulers[2]),0)
-             
+
+    def getErrors(self):
+        errors = []
+        total = 0
+        totalSquared = 0
+
+        for joint in self.jointNames:
+            error = abs((self.predictedJoints[joint].pos - self.realJoints[joint].pos).Mag())
+            total += error
+            totalSquared += error*error
+            errors.append(error)
+        
+        mae = total/len(self.jointNames)
+        rmse = math.sqrt(totalSquared/len(self.jointNames))
+        return errors, mae, rmse
+
+    def getBendAngle(self):
+        v1 = self.predictedJoints[self.jointNames[0]].dir
+        v2 = self.predictedJoints[self.jointNames[-1]].dir
+        angle = math.pi - math.acos(v1.Dot(v2)/(v1.Mag()*v2.Mag()))
+
+        return math.degrees(angle)
+
     def getRadiusFromLengths(self, length1, length2): 
         if(length1 > length2):
             l1 = length1
@@ -337,9 +359,11 @@ class Finger(object):
             startTheta = baseJoint.perp.Angle()
             endTheta = theta - startTheta
 
-            interval = theta/10
 
-            for i in range(10):
+            res = 50
+            interval = theta/res
+
+            for i in range(res):
                 globalTheta = pi - interval*i + startTheta
                 path.append(center + Vector2(radius*cos(globalTheta), radius*sin(globalTheta)))
                 normalsPath.append((center-path[-1]).Normalise() * (radius/abs(radius)))
@@ -490,7 +514,6 @@ class Finger(object):
         col = (col[0]*255, col[1]*255, col[2]*255)
         return col
 
-
     def draw(self, dis, efforts, options):
         self.getPrediction(dis, options)
         self.getExpected(dis, efforts)
@@ -538,7 +561,6 @@ class Gripper(object):
         for j in range(len(self.jointNames)):
             self.springStates[self.jointNames[j]] = x.data[j]
 
-
     def storeJointStates(self, x):
         for i in range(len(x.name)):
             self.jointStates[x.name[i]] = x.effort[i]
@@ -550,6 +572,15 @@ class Gripper(object):
    
         for j in range(len(self.jointNames)):
             self.effortInputs[self.jointNames[j]] = x.data[j]
+
+    def getTipDistance(self):
+        p1 = self.fingers[0].predictedJoints[self.fingers[0].jointNames[-1]].pos
+        p2 = self.fingers[1].predictedJoints[self.fingers[1].jointNames[-1]].pos
+        return (p1 - p2).Mag()
+
+    def getBendAngle(self):
+        angle = self.fingers[0].getBendAngle()
+        print("Bend Angle: ", abs(angle))
 
     def setup(self):
         #Add joints with corrosponding links
@@ -570,17 +601,24 @@ class Gripper(object):
                 self.jointLinks[j].predictedPerp = self.jointLinks[j].perp
                 self.jointLinks[j].predictedPos = self.jointLinks[j].pos
 
-        for b in self.fingerBases:
+        for b in self.fingerBases[1:2]:
             self.fingers.append(Finger(b, self.jointLinks, self.tfBuffer))
 
         prefixes = ["LT", "LB", "RT", "RB"]
         prefixes = ["LT", "RT", "RB", "LB"]
         for p in prefixes:
             for f in self.fingers:
-                f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10, self.tfBuffer)
+                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10, self.tfBuffer)
                 f.addSensor("palm_%sseg1_joint" % (p), "%sseg7_%sseg8_joint" % (p,p) , 10, self.tfBuffer)
-                f.addSensor("palm_%sseg1_joint" % (p), "%sseg9_%sseg10_joint" % (p,p) , 10, self.tfBuffer)
+                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg8_%sseg9_joint" % (p,p) , 10, self.tfBuffer)
                 f.addSensor("palm_%sseg1_joint" % (p), "%sseg11_%sseg12_joint" % (p,p), 10, self.tfBuffer)
+
+    def getErrors(self):
+        for f in self.fingers:
+            errors, mae, rmse = f.getErrors()
+            print(f.base+" errors: ", errors)
+            print("MAE: ", mae)
+            print("RMSE: ", rmse)
 
     def getRadiusFromLengths(self, length1, length2): 
         if(length1 > length2):
@@ -632,7 +670,7 @@ class Gripper(object):
             endTheta = theta - startTheta
             interval = theta/10
 
-            for i in range(10):
+            for i in range(50):
                 globalTheta = pi - interval*i + startTheta
                 path.append(center + Vector2(radius*cos(globalTheta), radius*sin(globalTheta)))
 
@@ -857,9 +895,6 @@ def mapper(value, lower, upper, v1, v2):
 
 
 if __name__ == "__main__":
-
-    radi = 50
-    mouseX, mouseY = 0, 0    
     root = Tk()
     root.bind("<Motion>", setMouse)
     root.bind("<Button-4>", scrollerUp)
@@ -887,10 +922,6 @@ if __name__ == "__main__":
 
     rospy.init_node('gripperController', anonymous=True)
     rospy.logerr("controller starting")
-
-
-    #tfBuffer = tf2_ros.Buffer()
-    #listener = tf2_ros.TransformListener(tfBuffer)
 
     g = Gripper()
     g.setup()

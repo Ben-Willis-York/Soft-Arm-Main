@@ -222,7 +222,7 @@ target_link_libraries(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
    scripts/finger_converter.py scripts/description_logger.py scripts/controlPanel.py scripts/controller.py scripts/commander.py scripts/VectorClass.py scripts/simulator.py scripts/display.py scripts/robot.py scripts/tester.py
-   scripts/gripperVisualiser.py
+   scripts/gripperControlPanel.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
