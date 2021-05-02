@@ -63,11 +63,12 @@ class Controller():
         
     def setPath(self, path):
         #self.path = path
-        print(path)
         self.setSetpointsWithBase(path[1])
+        self.setJointStatesWithBase(path[1])
         self.path = path[1:]
 
     def setJointStatesWithBase(self,angles):
+        print("Sending angles: ", angles)
         pub = rospy.Publisher("arm_controller/command", Float64MultiArray, queue_size=10)
         armNames = rospy.get_param("/arm_controller/joints")
         data = rospy.wait_for_message("joint_states", JointState)
@@ -158,7 +159,6 @@ class Controller():
         for a in range(len(angles)):
             #arr[a] = -radians(((angles[a]+180)%360)-180)
             arr[a] = -radians(angles[a])
-        print "arr: ", arr
         packet = Float32MultiArray(data = arr)
         pub.publish(packet)
 
@@ -228,7 +228,8 @@ class Controller():
         #    s = radians(v)
 
         if(self.setpointReached() and len(self.path) > 0):
-            self.setSetpointsWithBase(self.path[0])
+            self.setJointStatesWithBase(self.path[0])
+            #self.setSetpointsWithBase(self.path[0])
             self.path = self.path[1:]
         #self.updateSteps()
         '''

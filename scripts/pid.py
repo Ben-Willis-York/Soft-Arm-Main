@@ -35,7 +35,7 @@ class PID:
         I = min(self.maxI, max(self.minI, I))
         
 
-        print(self.setpoint, self.input, self.error, P, I, D)
+        #print(self.setpoint, self.input, self.error, P, I, D)
         
         self.output = P + I + D
         self.output = min(self.maxOut, max(self.minOut, self.output))

@@ -17,7 +17,7 @@ import colorsys
 import roslib; roslib.load_manifest('urdfdom_py')
 from urdf_parser_py.urdf import URDF
 
-JOINT_RESOLUTION = 12
+JOINT_RESOLUTION = 13
 FINGER_LENGTH = 0.15*1000
 
 class Joint(object):
@@ -163,8 +163,9 @@ class JointImaginary(object):
             dis.drawLine(self.pos.x, self.pos.y, 
                     jointLinks[self.next].pos.x, jointLinks[self.next].pos.y, fill=fill)
         if options["showNormals"].get():
-            forceVec = self.perp * self.force * 200
+            forceVec = self.perp  * 20
             dis.drawLine(self.pos.x, self.pos.y, self.pos.x+forceVec.x, self.pos.y+forceVec.y)
+            
         dis.drawCircle(self.pos.x, self.pos.y, 1.5, fill=fill)
 
 
@@ -284,25 +285,33 @@ class Finger(object):
         eulers = quaternionToEuler(t.rotation.x, t.rotation.y, t.rotation.z, t.rotation.w)
         self.sign = round(cos(eulers[2]),0)
 
-    def getErrors(self):
-        errors = []
+    def getTipErrors(self):
+        joint = self.jointNames[-1]
+        error = (self.predictedJoints[joint].pos - self.realJoints[joint].pos).Mag()
+        return error
+   
+    def getForceErrors(self):
         total = 0
-        totalSquared = 0
+        for joint in self.jointNames[1:-1]:
+            error = abs(self.predictedJoints[joint].force - self.realJoints[joint].force)
+            total += error
+        return total/len(self.jointNames)
+
+    def getPoseErrors(self):
+        total = 0
 
         for joint in self.jointNames:
             error = abs((self.predictedJoints[joint].pos - self.realJoints[joint].pos).Mag())
             total += error
-            totalSquared += error*error
-            errors.append(error)
-        
+
         mae = total/len(self.jointNames)
-        rmse = math.sqrt(totalSquared/len(self.jointNames))
-        return errors, mae, rmse
+
+        return mae
 
     def getBendAngle(self):
         v1 = self.predictedJoints[self.jointNames[0]].dir
         v2 = self.predictedJoints[self.jointNames[-1]].dir
-        angle = math.pi - math.acos(v1.Dot(v2)/(v1.Mag()*v2.Mag()))
+        angle = math.acos(v1.Dot(v2)/(v1.Mag()*v2.Mag()))
 
         return math.degrees(angle)
 
@@ -368,7 +377,7 @@ class Finger(object):
                 path.append(center + Vector2(radius*cos(globalTheta), radius*sin(globalTheta)))
                 normalsPath.append((center-path[-1]).Normalise() * (radius/abs(radius)))
             path.append(end)
-            normalsPath.append((center-path[-1]).Normalise() * (radius/abs(radius)))
+            normalsPath.append(((center-path[-1]).Normalise() * (radius/abs(radius))).Normalise())
             
             endJoint.pos = end
             #endJoint.perp = (center-end).Normalise() * (radius/abs(radius))
@@ -384,12 +393,12 @@ class Finger(object):
             if options["showCircles"].get():
                 dis.drawCircle(center.x, center.y, radius)
         
-        for i in range(12, 40):
+        for i in range(res, res+res):
             globalTheta = pi - interval*i + startTheta
             path.append(center + Vector2(radius*cos(globalTheta), radius*sin(globalTheta)))
-            normalsPath.append((center-path[-1]).Normalise() * (radius/abs(radius)))
+            normalsPath.append(((center-path[-1]).Normalise() * (radius/abs(radius))).Normalise())
   
-        segLength = FINGER_LENGTH/JOINT_RESOLUTION
+        segLength = FINGER_LENGTH/(JOINT_RESOLUTION-1)
 
         for j in range(len(self.jointNames)):
             targetDist = segLength*j
@@ -399,25 +408,30 @@ class Finger(object):
                 dist += (path[n+1] - path[n]).Mag()
                 n+=1
             self.predictedJoints[self.jointNames[j]].pos = path[n]
-            self.predictedJoints[self.jointNames[j]].perp = normalsPath[n]
+            self.predictedJoints[self.jointNames[j]].perp = normalsPath[n].Normalise()
         for j in self.predictedJoints.values():
             if j.next != None:
                 j.dir = (self.predictedJoints[j.next].pos - j.pos).Normalise()
                 #j.perp = j.dir.Perpendicular()
-        
-        ''' END CASE '''
+         
+        '''END CASE '''
         targetDist = segLength*len(self.jointNames)
         dist = 0
         n = 0
         while abs(targetDist-dist) > 1 and targetDist > dist:
             dist += (path[n+1] - path[n]).Mag()
             n+=1
-        self.predictedJoints[self.jointNames[-1]].dir = (path[n] - self.predictedJoints[self.jointNames[-1]].pos).Normalise()
-        self.predictedJoints[self.jointNames[-1]].perp = normalsPath[n]
- 
+        self.predictedJoints[self.jointNames[-1]].dir = (path[n+1] - self.predictedJoints[self.jointNames[-1]].pos).Normalise()
+        #self.predictedJoints[self.jointNames[-1]].perp = normalsPath[n] * -1
+
+        for p in range(len(path)):
+            p1 = path[p]
+            p2 = path[p]+(normalsPath[p]*10)
+            #dis.drawLine(p1.x, p1.y, p2.x, p2.y)
+        
     def getExpected(self, dis, efforts):
         self.K = rospy.get_param("/Design/kConstant")
-        segLength = FINGER_LENGTH/JOINT_RESOLUTION
+        segLength = FINGER_LENGTH/(JOINT_RESOLUTION-1)
 
         #effort = efforts[0]
 
@@ -430,8 +444,8 @@ class Finger(object):
             expectedAngle =  prev.dir.Angle() + (effort/self.K) * self.sign
             
             expected.pos = prev.pos + prev.dir * segLength
-            expected.dir = Vector2(cos(expectedAngle), sin(expectedAngle))
-            expected.perp = Vector2(-expected.dir.y, expected.dir.x)
+            expected.dir = Vector2(cos(expectedAngle), sin(expectedAngle)).Normalise()
+            expected.perp = Vector2(-expected.dir.y, expected.dir.x).Normalise() * -1
             next = expected.next
 
     def update(self,tfBuffer, options):
@@ -498,7 +512,6 @@ class Finger(object):
         p1 = self.realJoints[self.base].pos
         p2 = self.realJoints[self.base].pos + totalForceVec * 50
         dis.drawLine(p1.x, p1.y, p2.x, p2.y)
-        #print 
         #print(maxSeen)
         #print(expectedAngles)
         #print(predictedAngles)
@@ -529,6 +542,7 @@ class Finger(object):
         if options["showPredicted"].get():
             for j in self.predictedJoints.values():
                 j.draw(dis, self.predictedJoints, options, fill="red")
+                
         if options["showForces"].get():
             self.drawForces(dis, options)
 
@@ -557,6 +571,8 @@ class Gripper(object):
         rospy.Subscriber("/joint_states", JointState, self.storeJointStates)
         rospy.Subscriber("/Design/spring_states", Float32MultiArray, self.storeSpringStates)
 
+
+
     def storeSpringStates(self, x):
         for j in range(len(self.jointNames)):
             self.springStates[self.jointNames[j]] = x.data[j]
@@ -580,7 +596,7 @@ class Gripper(object):
 
     def getBendAngle(self):
         angle = self.fingers[0].getBendAngle()
-        print("Bend Angle: ", abs(angle))
+        return angle
 
     def setup(self):
         #Add joints with corrosponding links
@@ -608,18 +624,25 @@ class Gripper(object):
         prefixes = ["LT", "RT", "RB", "LB"]
         for p in prefixes:
             for f in self.fingers:
-                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10, self.tfBuffer)
+                
+                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg5_%sseg6_joint" % (p,p) , 10, self.tfBuffer)
+                
+                
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10, self.tfBuffer)
                 f.addSensor("palm_%sseg1_joint" % (p), "%sseg7_%sseg8_joint" % (p,p) , 10, self.tfBuffer)
+                
+                
+                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg2_%sseg3_joint" % (p,p),  10, self.tfBuffer)
+                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg5_%sseg6_joint" % (p,p) , 10, self.tfBuffer)
                 #f.addSensor("palm_%sseg1_joint" % (p), "%sseg8_%sseg9_joint" % (p,p) , 10, self.tfBuffer)
+                
                 f.addSensor("palm_%sseg1_joint" % (p), "%sseg11_%sseg12_joint" % (p,p), 10, self.tfBuffer)
 
-    def getErrors(self):
-        for f in self.fingers:
-            errors, mae, rmse = f.getErrors()
-            print(f.base+" errors: ", errors)
-            print("MAE: ", mae)
-            print("RMSE: ", rmse)
 
+    def getErrors(self):
+        meanError = self.fingers[0].getTipErrors()
+        return meanError 
+        
     def getRadiusFromLengths(self, length1, length2): 
         if(length1 > length2):
             l1 = length1
@@ -828,6 +851,7 @@ class Gripper(object):
                     col = f.colors[n]
                     found = True
                 except KeyError:
+                    #print("Missing:", n)
                     pass
             if found:
                 for i in range(3):

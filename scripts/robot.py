@@ -2,6 +2,8 @@
 from math import *
 from VectorClass import Vector2, Vector3
 import time
+from std_msgs.msg import Float64
+import rospy
 
 class Link(object):
     def __init__(self, length, parent):
@@ -107,17 +109,27 @@ class Robot(object):
             l2.end.y = l2.pos.y + (cos(totalAngle) * l2.length)
             l2.angle = atan2((l2.end - l2.pos).y, (l2.end - l2.pos).x)
 
-    def ccd(self, x, y, display):
-        searchDepth = 50
-        tolerance = 5
+    def ccd(self, worldTarget):
 
-        self.joints[0].setAngle(radians(0))
-        self.joints[1].setAngle(radians(0))
-        self.joints[2].setAngle(radians(0))
+        target = Vector2(Vector2(worldTarget.x, worldTarget.y).Mag(), worldTarget.z)
+        x = target.x
+        y = target.y
+
+        originalAngles = []
+        for j in self.joints:
+            originalAngles.append(j.angle)
+
+        searchDepth = 500
+        tolerance = 0.1
+
+        #self.joints[0].setAngle(radians(0))
+        #self.joints[1].setAngle(radians(0))
+        #self.joints[2].setAngle(radians(0))
         self.update()
 
         target = Vector2(x,y)
-        effectorTarget = Vector2(target.x - self.links[-1].length, target.y)
+        effectorTarget = Vector2(target.x - self.links[-1].length * cos(self.effectorAngle),
+                                 target.y - self.links[-1].length * sin(self.effectorAngle))  # EffectorTarget
 
         end = self.links[-1].end
 
@@ -127,7 +139,7 @@ class Robot(object):
 
         while dist > tolerance and n < searchDepth:
             n += 1
-            n += 1
+            print(n)
             for j in range(len(self.joints)-1, -1, -1):
                 joint = self.joints[j]
                 link = joint.child
@@ -139,7 +151,13 @@ class Robot(object):
                 #display.drawLine(link.pos.x, link.pos.y, link.pos.x + Ve.x, link.pos.y + Ve.y, fill="green")
 
                 theta = acos(Vt.Normalise().Dot(Ve.Normalise()))
-                joint.setAngle(joint.angle + theta)
+
+                theta = Vt.Angle() - Ve.Angle()
+
+                joint.setAngle(joint.angle - theta)
+                self.update()
+
+                self.joints[2].setAngle(-(self.effectorAngle - self.links[-2].angle))
                 self.update()
 
                 #display.drawCircle(target.x, target.y, 10)
@@ -254,7 +272,9 @@ class Robot(object):
         #Check its falls between limits
         if(target.x > self.minBounds[-1].x or target.x < self.minBounds[0].x):
             if(target.x > self.maxBounds[-1].x or target.x < self.maxBounds[0].x):
+                
                 print("Beyond X")
+                print(target.x)
                 return True
 
         #Find where it falls between min bounds
@@ -292,6 +312,7 @@ class Robot(object):
     def solveForTarget2(self, worldTarget):
         target = Vector2(Vector2(worldTarget.x, worldTarget.y).Mag(), worldTarget.z)  # TargetVector
         self.target = target
+        print("TARGET: ", target.x, target.y)
 
         originalAngles = [self.baseAngle]
         for j in self.joints:
@@ -300,7 +321,6 @@ class Robot(object):
 
         #Check its within limits
         if(self.isOutsideLimits(target)):
-            print("Original Angles = ", originalAngles)
             print("Out of bounds")
             return originalAngles
 
@@ -334,7 +354,6 @@ class Robot(object):
         dist = difference.Mag()
 
         if (dist > 100):
-            print("out of range")
             self.baseAngle = originalAngles[0]
             for j in range(1,len(originalAngles)):
                 self.joints[j].setAngle(originalAngles[j])
@@ -343,9 +362,10 @@ class Robot(object):
         state = [degrees(self.baseAngle)]
         for j in self.joints:
             state.append(degrees(j.angle))
+
         return state
 
-    def getPathToTarget(self, worldTarget, steps = 50):
+    def getPathToTarget(self, worldTarget, dis, steps = 50):
 
         self.update()
 
@@ -357,7 +377,6 @@ class Robot(object):
         targetAngle = atan2(worldTarget.y, worldTarget.x)
         mag = Vector2(p2.x, p2.y).Mag()
 
-        print(targetAngle)
         p3 = Vector3(mag*cos(targetAngle), mag*sin(targetAngle), 450)
 
         p4 = worldTarget
@@ -367,19 +386,66 @@ class Robot(object):
         t1 = degrees(targetAngle) % 360
         t2 = degrees(self.baseAngle) % 360 
 
-
         if( abs(t1-t2) > 10):
             points = [p1,p2,p3,p4]
 
         else:
             points = [p1, p4]
 
-        
+        '''Timing Tests'''
+        '''
+        originalAngles = []
+        for a in range(len(self.joints)):
+            originalAngles.append(self.joints[a].angle)
+
+        startTime = time.time()
+        self.ccd(points[-1])
+        ccdTime = time.time() - startTime
+        print("CCD Time: ", ccdTime)
+
+        with open("CCDtimes.txt", "a") as f:
+            f.write(str(ccdTime) + ", ")
+
+
+        self.drawArm(dis)
+        ccdAngles = []
+        differences = []
+        total = 0
+        for a in range(len(self.joints)):
+            differences.append(self.joints[a].angle - originalAngles[a])
+            ccdAngles.append(self.joints[a].angle)
+            total += differences[-1]
+            self.joints[a].angle = originalAngles[a]
+        self.update()
+        print("CCD Differences: ", differences)
+
+        startTime = time.time()
+        self.solveForTarget2(points[-1])
+        triTime = time.time() - startTime
+        print("TRI Time: ", triTime)
+
+        with open("TRItimes.txt", "a") as f:
+            f.write(str(triTime) + ", " )
+
+        differences = []
+        total = 0
+        for a in range(len(self.joints)):
+            differences.append(self.joints[a].angle - originalAngles[a])
+            total += differences[-1]
+            self.joints[a].angle = originalAngles[a]
+        self.update()
+        print("Tri Differences: ", differences)
+
+        '''
+
+
         #points = [p1,p2,p3,p4]
         path = []
         for p in points:
             path.append(self.solveForTarget2(p))
         return path
+
+        '''
 
         for a in self.interpolateMovement(self.solveForTarget2(points[0]), self.solveForTarget2(points[1]), steps = 1):
             path.append(a)
@@ -417,8 +483,11 @@ class Robot(object):
 
         #self.setJointState(endAngles)
         #self.update()
-
+        for a in ccdAngles:
+            self.joints[a].angle = ccdAngles[a]
+        self.update()
         return path
+        '''
 
     def interpolateMovement(self, startAngles, endAngles, steps = 20):
         path = []
@@ -714,6 +783,11 @@ class Robot(object):
     def drawArm(self, dis, fill="black"):
         for l in self.links:
             dis.drawLine(l.pos.x, l.pos.y, l.end.x, l.end.y, fill=fill)
+
+        pub = rospy.Publisher("gripper/angle", Float64, queue_size=10)
+        data = Float64(self.links[-1].angle)
+        pub.publish(data)
+
 
     def draw(self, dis):
         vertexArray = []

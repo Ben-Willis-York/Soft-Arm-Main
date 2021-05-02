@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import display, robot, math, time, VectorClass, simulator, controller
+import display, robot, math, time, VectorClass, simulator, controller, random
 from Tkinter import *
 from math import *
 import tf2_py
@@ -174,7 +174,7 @@ class CoordinateControls(object):
             self.targets[i] = self.lowers[i]
         elif(self.targets[i] > self.uppers[i]):
             self.targets[i] = self.uppers[i]
-        self.controller.setSetpointsWithBase(self.getTargets())
+        self.controller.setJointStatesWithBase(self.getTargets())
 
     def setTargets(self, angles):
         for i in range(len(angles)):
@@ -231,6 +231,8 @@ class ControlPanel():
 
         self.graspControl = None
 
+        self.n = 0
+
     def goToClick(self, e):
         horizontal, vertical = self.horizontalDisplay.pixelToCoord(e.x, e.y)
 
@@ -241,7 +243,7 @@ class ControlPanel():
         y = sin(self.solver.baseAngle)*horizontal
         z = vertical
         print(x, y, z)
-        path = self.solver.getPathToTarget(VectorClass.Vector3(x, y, z))
+        path = self.solver.getPathToTarget(VectorClass.Vector3(x, y, z), self.horizontalDisplay)
         self.controller.setPath(path)
 
         #print("PATH: ", path)
@@ -294,7 +296,7 @@ class ControlPanel():
         self.solver.setEffectorAngle(0)
 
         #self.controller.setJointStatesWithBase([0,0,0,0])
-        
+      
     def sendGraspCommand(self):
         self.controller.setGrasp(self.graspControl.get())
 
@@ -390,6 +392,11 @@ class ControlPanel():
 
         self.preview.setJointState(self.controller.getJointStatesWithBase())
         self.preview.update()
+
+        #if(self.n < 100):
+        #    try:
+        #        self.solver.getPathToTarget(VectorClass.Vector3(random.randint(200,500), 0, random.randint(10,300)), self.horizontalDisplay)
+        #        self.n += 1
 
         self.solver.draw(self.horizontalDisplay)
         self.preview.drawArm(self.horizontalDisplay, fill="red")

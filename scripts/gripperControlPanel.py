@@ -28,13 +28,22 @@ class GripperControlPanel:
         self.display.scale = 1.8
         self.display.setScreenOrigin(0.5,0.8)
 
+        self.graspInput = None
         self.options = {}
         self.setup()
 
         self.gripperSolver = gripperVisualiser.Gripper()
         self.gripperSolver.setup()
 
+       
         self.gripperPID = pid.PID(-0.0002, -0.00003, d= 0.00004)
+
+        self.testing = False
+        self.testIteration = 0
+        self.sampleIteration = 0
+        self.previousSize = 100
+        self.previousMAE = [0 for i in range(self.previousSize)]
+        self.iterationErrors = []
 
     def setup(self):
         #options = {}
@@ -55,30 +64,78 @@ class GripperControlPanel:
         Checkbutton(self.root, text="Show Forces", variable=self.options["showForces"]).place(x = 10, y = 160)
         Checkbutton(self.root, text="Show Real", variable=self.options["showReal"]).place(x = 10, y=190)
 
-        Checkbutton(self.root, text="Log Error", variable=self.options["logError"]).place(x=10, y=220)
+        Checkbutton(self.root, text="Log Error", variable=self.options["logError"], command=self.toggleLogging).place(x=10, y=220)
 
         Checkbutton(self.root, text="Use PID", variable=self.options["usePID"], command=self.changeControlType).place(x=300, y=20)
 
         #self.graspControl = Scale(self.root, from_=-1, to=1, resolution=0.01, label = "Grasp")
         #self.graspControl.place(x=500, y=20)
 
-        self.graspInput = Scale(self.root, label = "Input Pressure", from_= -0.1, to = 0.1, resolution=0.01, command=lambda x: self.updatePID(x))
+        self.graspInput = Scale(self.root, label = "Input Pressure", from_= -0.15, to = 0.15, resolution=0.01, command=lambda x: self.updatePID(x))
         self.graspInput.place(x=350,y=20)
         
     def changeControlType(self):
         if(self.options["usePID"].get()):
-            self.graspInput.configure(from_=20)
-            self.graspInput.configure(to=300)
+            self.graspInput.configure(from_=1)
+            self.graspInput.configure(to=100)
             self.graspInput.configure(label="Tip Position")
-            dist = self.gripperSolver.getTipDistance()
+            dist = self.gripperSolver.getBendAngle()
             print("Dist = ", dist)
             self.updatePID(dist)
             self.graspInput.set(dist)
         else:
-            self.graspInput.configure(from_=-0.1)
-            self.graspInput.configure(to=0.1)
+            self.graspInput.configure(from_=-0.15)
+            self.graspInput.configure(to=0.15)
             self.graspInput.set(self.gripperPID.output)
             self.graspInput.configure(label="Input Pressure")
+
+    def toggleLogging(self):
+        if(self.options["logError"].get()):
+            self.testing = True
+            self.testIteration = 0
+            self.sampleIteration = 0
+            self.previousMAE = [0 for i in range(self.previousSize)]
+            print("Starting tests")
+        else:
+            self.testing = False
+            self.testIteration = 0
+            self.sampleIteration = 0
+            self.previousMAE = [0 for i in range(self.previousSize)]
+            print("Ending tests")
+
+    def logErrors(self):
+        if self.testing:
+            if self.sampleIteration >= self.previousSize:
+                mean = 0
+                for s in self.previousMAE:
+                    mean += s
+                mean /= self.previousSize
+                self.iterationErrors.append(mean)
+                print(self.testIteration, ": ", mean)
+
+                self.testIteration+= 0.01
+                if(self.testIteration > 0.15):
+                    self.options["logError"].set(False)
+                    print(self.iterationErrors)
+                self.sampleIteration = 0
+                self.previousMAE = [0 for i in range(self.previousSize)]
+                self.sendGraspCommand(self.testIteration)
+                self.graspInput.set(self.testIteration)
+                time.sleep(1)
+            else:
+                
+                self.previousMAE[self.sampleIteration] = self.gripperSolver.getErrors()
+                self.sampleIteration+=1
+            
+    def logErrorsCircular(self):
+        for i in range(self.previousSize-1):
+            self.previousMAE[i] = self.previousMAE[i+1]
+        self.previousMAE[-1] = self.gripperSolver.getErrors()
+
+        total = 0
+        for i in self.previousMAE:
+            total += i
+        print("Avg Error: ", total/self.previousSize)
 
     def sendGraspCommand(self, val):
         fingerNames = rospy.get_param("/hand_controller/joints")
@@ -95,23 +152,31 @@ class GripperControlPanel:
     def updatePID(self, x):
         self.gripperPID.updateSetpoint(float(x))
 
-
     def update(self):
         self.display.clear()
         self.gripperSolver.update(self.options)
         self.gripperSolver.draw(self.display, self.options)
 
         if(self.options["usePID"].get()):
-            dist = self.gripperSolver.getTipDistance()
-            strength = self.gripperPID.update(dist)
+            angle = self.gripperSolver.getBendAngle()
+            #dist = self.gripperSolver.getTipDistance()
+            
+            strength = self.gripperPID.update(angle)
+            self.sendGraspCommand(strength)
+            if(self.options["logError"].get()):
+                #self.logErrors()
+                self.logErrorsCircular()
+                print("Bend Angle: ", angle)
+
         else:
             strength = self.graspInput.get()
+            self.sendGraspCommand(strength)
 
-        if(self.options["logError"].get()):
-            self.gripperSolver.getErrors()
-            self.gripperSolver.getBendAngle()
+        #if(self.options["logError"].get()):
+        #    self.gripperSolver.getErrors()
+        #self.gripperSolver.getBendAngle()
 
-        self.sendGraspCommand(strength)
+        
         self.display.display()
 
 

@@ -7,7 +7,7 @@
   <param command="$(find xacro)/xacro $(find main_description)/urdf/output.xacro" name="robot_description"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value = "$(find main_description)/worlds/free-bending.world"/>
+    <arg name="world_name" value = "$(find main_description)/worlds/monkey-grasping.world"/>
     <arg name="paused" value="true"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
@@ -60,7 +60,7 @@
   <node name="base_joint_controller_spawner" pkg="controller_manager" type="spawner"
   args="joint_state_controller
         hand_controller
-        arm_controller
+        
               --shutdown-timeout 3" />
 
 </launch>
