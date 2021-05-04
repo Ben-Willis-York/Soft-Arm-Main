@@ -174,7 +174,7 @@ class CoordinateControls(object):
             self.targets[i] = self.lowers[i]
         elif(self.targets[i] > self.uppers[i]):
             self.targets[i] = self.uppers[i]
-        self.controller.setJointStatesWithBase(self.getTargets())
+        self.controller.setPath([self.getTargets(), self.getTargets()])
 
     def setTargets(self, angles):
         for i in range(len(angles)):
@@ -246,6 +246,7 @@ class ControlPanel():
         path = self.solver.getPathToTarget(VectorClass.Vector3(x, y, z), self.horizontalDisplay)
         self.controller.setPath(path)
 
+
         #print("PATH: ", path)
 
         self.solver.setJointState(angles)
@@ -287,8 +288,8 @@ class ControlPanel():
 
         self.angleControl = RadialDisplay(self.root, self.solver, self.controller, VectorClass.Vector2(300,10))
 
-        self.graspControl = Scale(self.root, from_=-1, to=1, resolution=0.01, label = "Grasp")
-        self.graspControl.place(x=500, y=20)
+        #self.graspControl = Scale(self.root, from_=-1, to=1, resolution=0.01, label = "Grasp")
+        #self.graspControl.place(x=500, y=20)
 
         for l in linksNoBase:
             self.solver.addLink(l[0], l[1])
@@ -392,11 +393,6 @@ class ControlPanel():
 
         self.preview.setJointState(self.controller.getJointStatesWithBase())
         self.preview.update()
-
-        #if(self.n < 100):
-        #    try:
-        #        self.solver.getPathToTarget(VectorClass.Vector3(random.randint(200,500), 0, random.randint(10,300)), self.horizontalDisplay)
-        #        self.n += 1
 
         self.solver.draw(self.horizontalDisplay)
         self.preview.drawArm(self.horizontalDisplay, fill="red")

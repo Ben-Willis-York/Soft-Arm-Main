@@ -10,6 +10,7 @@ import tf2_ros
 import roslib
 import rospy, os, time, math
 from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Float64
 from std_msgs.msg import Float64MultiArray
 from sensor_msgs.msg import JointState
 import geometry_msgs.msg
@@ -66,7 +67,7 @@ class GripperControlPanel:
 
         Checkbutton(self.root, text="Log Error", variable=self.options["logError"], command=self.toggleLogging).place(x=10, y=220)
 
-        Checkbutton(self.root, text="Use PID", variable=self.options["usePID"], command=self.changeControlType).place(x=300, y=20)
+        Checkbutton(self.root, text="Use PID", variable=self.options["usePID"], command=self.changeControlType).place(x=270, y=20)
 
         #self.graspControl = Scale(self.root, from_=-1, to=1, resolution=0.01, label = "Grasp")
         #self.graspControl.place(x=500, y=20)
@@ -158,15 +159,22 @@ class GripperControlPanel:
         self.gripperSolver.draw(self.display, self.options)
 
         if(self.options["usePID"].get()):
-            angle = self.gripperSolver.getBendAngle()
-            #dist = self.gripperSolver.getTipDistance()
+            #angle = self.gripperSolver.getBendAngle()
+            dist = self.gripperSolver.getTipDistance()
             
-            strength = self.gripperPID.update(angle)
+            pub = rospy.Publisher("gripper/tipDistance", Float64, queue_size=10)
+            data = Float64(dist)
+            pub.publish(data)
+
+            pub = rospy.Publisher("gripper/tipDistanceSetpoint", Float64, queue_size=10)
+            data = Float64(self.graspInput.get())
+            pub.publish(data)
+
+            strength = self.gripperPID.update(dist)
             self.sendGraspCommand(strength)
             if(self.options["logError"].get()):
                 #self.logErrors()
                 self.logErrorsCircular()
-                print("Bend Angle: ", angle)
 
         else:
             strength = self.graspInput.get()

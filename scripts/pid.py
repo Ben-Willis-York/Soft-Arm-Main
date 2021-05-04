@@ -18,7 +18,7 @@ class PID:
     
     def updateSetpoint(self, sp):
         self.setpoint = sp
-        self.integral = 0
+        #self.integral = 0
 
     def update(self, input):
         self.input = input

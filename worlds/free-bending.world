@@ -5450,7 +5450,10 @@
         <kConstant>0.4</kConstant>
         <robotNamespace>/</robotNamespace>
       </plugin>
-      
+      <plugin name='joint_controller_plugin' filename='libjoint_controller_plugin.so'>
+        <jointNamesParam>arm_controller/</jointNamesParam>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
       <plugin name='joint_force_visualier_plugin' filename='libjoint_force_visualiser_plugin.so'>
         <robotNamespace/>
       </plugin>

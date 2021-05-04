@@ -617,7 +617,7 @@ class Gripper(object):
                 self.jointLinks[j].predictedPerp = self.jointLinks[j].perp
                 self.jointLinks[j].predictedPos = self.jointLinks[j].pos
 
-        for b in self.fingerBases[1:2]:
+        for b in self.fingerBases:
             self.fingers.append(Finger(b, self.jointLinks, self.tfBuffer))
 
         prefixes = ["LT", "LB", "RT", "RB"]
@@ -628,13 +628,13 @@ class Gripper(object):
                 #f.addSensor("palm_%sseg1_joint" % (p), "%sseg5_%sseg6_joint" % (p,p) , 10, self.tfBuffer)
                 
                 
-                f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10, self.tfBuffer)
-                f.addSensor("palm_%sseg1_joint" % (p), "%sseg7_%sseg8_joint" % (p,p) , 10, self.tfBuffer)
+                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg3_%sseg4_joint" % (p,p),  10, self.tfBuffer)
+                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg7_%sseg8_joint" % (p,p) , 10, self.tfBuffer)
                 
                 
-                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg2_%sseg3_joint" % (p,p),  10, self.tfBuffer)
-                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg5_%sseg6_joint" % (p,p) , 10, self.tfBuffer)
-                #f.addSensor("palm_%sseg1_joint" % (p), "%sseg8_%sseg9_joint" % (p,p) , 10, self.tfBuffer)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg2_%sseg3_joint" % (p,p),  10, self.tfBuffer)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg5_%sseg6_joint" % (p,p) , 10, self.tfBuffer)
+                f.addSensor("palm_%sseg1_joint" % (p), "%sseg8_%sseg9_joint" % (p,p) , 10, self.tfBuffer)
                 
                 f.addSensor("palm_%sseg1_joint" % (p), "%sseg11_%sseg12_joint" % (p,p), 10, self.tfBuffer)
 

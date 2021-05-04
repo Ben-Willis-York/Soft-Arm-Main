@@ -60,7 +60,6 @@
   <node name="base_joint_controller_spawner" pkg="controller_manager" type="spawner"
   args="joint_state_controller
         hand_controller
-        arm_controller
               --shutdown-timeout 3" />
 
 </launch>

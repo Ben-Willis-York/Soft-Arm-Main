@@ -64,7 +64,6 @@ class Controller():
     def setPath(self, path):
         #self.path = path
         self.setSetpointsWithBase(path[1])
-        self.setJointStatesWithBase(path[1])
         self.path = path[1:]
 
     def setJointStatesWithBase(self,angles):
@@ -228,8 +227,7 @@ class Controller():
         #    s = radians(v)
 
         if(self.setpointReached() and len(self.path) > 0):
-            self.setJointStatesWithBase(self.path[0])
-            #self.setSetpointsWithBase(self.path[0])
+            self.setSetpointsWithBase(self.path[0])
             self.path = self.path[1:]
         #self.updateSteps()
         '''
